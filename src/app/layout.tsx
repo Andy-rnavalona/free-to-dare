@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Hanken_Grotesk } from "next/font/google";
+import { Archivo_Black, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -13,6 +14,12 @@ const archivoBlack = Archivo_Black({
   subsets: ["latin"],
 });
 
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Lisbon Aerial Escape",
   description:
@@ -23,9 +30,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${hankenGrotesk.variable} ${archivoBlack.variable} h-full antialiased`}
+      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   );
 }

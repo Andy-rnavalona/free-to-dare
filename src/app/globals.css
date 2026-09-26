@@ -8,9 +8,12 @@
   --color-muted: #5b625c;
   --color-line: #cdc8bb;
   --color-sand: #d9a57b;
+  --color-night: #111a29;
+  --color-sun: #f6d736;
 
   --font-sans: var(--font-hanken-grotesk);
   --font-display: var(--font-archivo-black);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
