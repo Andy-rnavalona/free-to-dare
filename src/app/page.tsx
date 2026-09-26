@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { InstructorSection } from "@/components/instructor-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
 
 const highlights = [
@@ -129,6 +130,7 @@ export default function Home() {
       </div>
 
       <ExperienceSection />
+      <InstructorSection />
     </main>
   );
 }
