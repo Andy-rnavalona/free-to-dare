@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Only on devices with a real pointer: touch screens always see the full content */
+@custom-variant can-hover {
+  @media (hover: hover) {
+    @slot;
+  }
+}
+
 @theme inline {
   --color-paper: #f1ece1;
   --color-card: #f8f5ee;
@@ -10,6 +17,8 @@
   --color-sand: #d9a57b;
   --color-night: #111a29;
   --color-sun: #f6d736;
+  --color-forest: #1d4a20;
+  --color-lime: #d4ea6a;
 
   --font-sans: var(--font-hanken-grotesk);
   --font-display: var(--font-archivo-black);
