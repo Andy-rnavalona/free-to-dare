@@ -1,69 +1,125 @@
 import Image from "next/image";
+import { HeroCarousel } from "@/components/hero-carousel";
+import { CheckIcon, SparkleIcon } from "@/components/icons";
+
+const highlights = ["City exploration", "Jacaranda season", "Shared experiences"];
+
+const tripDetails = [
+  { label: "Where", value: "Lisbon, Portugal" },
+  { label: "When", value: "[Start date] – 11 June 2027" },
+  { label: "For whom", value: "For curious travelers" },
+  { label: "Group size", value: "Maximum 16 people" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="mx-auto w-full max-w-[2400px] flex-1 px-5 pb-12 sm:px-10 lg:px-14">
+      <header className="flex items-center justify-between gap-4 border-b border-line py-6 text-[11px] font-bold uppercase tracking-[0.16em] text-ink sm:py-8 sm:text-xs">
+        <span>Lisbon Aerial Escape</span>
+        <span className="hidden md:inline">38.7223° N / 9.1393° W</span>
+        <span>City Escape / 2027</span>
+      </header>
+
+      <div className="grid gap-12 pt-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
+        {/* Intro */}
+        <section className="flex flex-col lg:pt-4">
+          <div>
+            <p className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.16em]">
+              <SparkleIcon className="size-4 text-sand" />
+              Lisbon / Portugal
+            </p>
+            <p className="mt-2 pl-7 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+              Curated city escape
+            </p>
+          </div>
+
+          <h1 className="mt-14 font-display text-[clamp(3.5rem,14vw,6rem)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20 lg:text-[clamp(3.5rem,5.4vw,9rem)]">
+            <span className="block">Discover</span>
+            <span className="block text-sage">Lisbon</span>
+            <span className="block">From</span>
+            <span className="block">Above</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+          <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-[0.06em]">
+            {highlights.map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <CheckIcon className="size-4" />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 max-w-xl space-y-7 text-lg leading-relaxed text-muted">
+            <p>
+              Spend a few days discovering Lisbon at the most beautiful time of
+              the year — when jacarandas bloom, rooftops glow in the evening
+              light and every street invites you to slow down.
+            </p>
+            <p>
+              Explore the city from unexpected perspectives, share
+              unforgettable moments and meet curious travelers who love
+              discovering cities as much as you do.
+            </p>
+          </div>
+        </section>
+
+        {/* Visual */}
+        <HeroCarousel />
+
+        {/* Details */}
+        <aside className="flex flex-col gap-12 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-10 xl:col-span-1 xl:flex xl:gap-12 xl:pt-4">
+          <dl>
+            {tripDetails.map(({ label, value }) => (
+              <div
+                key={label}
+                className="flex items-baseline justify-between gap-6 border-b border-line py-7 first:pt-4 lg:py-9"
+              >
+                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                  {label}
+                </dt>
+                <dd className="text-right text-lg font-semibold">{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <article className="relative mt-auto overflow-hidden rounded-[2.5rem] bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-28 -top-28 size-64 rounded-full border border-line"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+            <div className="relative flex items-center justify-between">
+              <div className="relative size-16 overflow-hidden rounded-full ring-4 ring-white">
+                <Image
+                  src="/images/lisbon-tram.jpg"
+                  alt=""
+                  fill
+                  sizes="64px"
+                  className="object-cover"
+                />
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em]">
+                16 travelers max
+              </span>
+            </div>
+
+            <blockquote className="relative mt-16 space-y-10 text-[clamp(1.5rem,1.75vw,2.4rem)] font-medium leading-[1.2] tracking-tight">
+              <p>It started with a love for discovering cities.</p>
+              <p className="pr-8">
+                Now it’s about sharing those moments with people who see travel
+                the same way.
+              </p>
+              <SparkleIcon className="absolute right-0 top-1/2 size-4 text-muted/60" />
+            </blockquote>
+
+            <p className="mt-12 leading-relaxed text-muted">
+              Walk the streets, discover hidden corners, watch the city change
+              in the evening light and share the experience with a small group
+              of curious travelers.
+            </p>
+          </article>
+        </aside>
+      </div>
+    </main>
   );
 }
