@@ -38,7 +38,7 @@ export function HeroCarousel() {
     setIndex((i) => (i + step + slides.length) % slides.length);
 
   return (
-    <figure className="flex flex-col">
+    <figure data-reveal className="flex flex-col">
       <div
         className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-ink sm:aspect-[2/3]"
         role="region"

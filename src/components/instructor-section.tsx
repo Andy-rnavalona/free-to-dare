@@ -41,11 +41,12 @@ export function InstructorSection() {
   return (
     <section
       id="instructors"
+      data-reveal-group
       aria-labelledby="instructors-title"
       className="bg-white"
     >
       <div className="mx-auto grid w-full max-w-[2400px] gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 lg:pb-32 lg:pt-8">
-        <div className="lg:sticky lg:top-32 lg:self-start">
+        <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
           <a
             href="https://www.instagram.com/pamela_aerialist/"
             target="_blank"
@@ -73,13 +74,17 @@ export function InstructorSection() {
         </div>
 
         <div className="lg:pt-2">
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em]">
+          <p
+            data-reveal
+            className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em]"
+          >
             <SparkleIcon className="size-3.5 text-[#a3bf37]" />
             Instructors
           </p>
 
           <h2
             id="instructors-title"
+            data-reveal
             className="mt-8 text-[clamp(2.5rem,4.4vw,4.75rem)] font-medium leading-[1.05] tracking-tight"
           >
             <span className="block">Meet Pamela</span>
@@ -91,7 +96,9 @@ export function InstructorSection() {
 
           <div className="mt-10 max-w-2xl space-y-6 text-lg leading-relaxed text-muted">
             {bio.map((paragraph) => (
-              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+              <p key={paragraph.slice(0, 32)} data-reveal>
+                {paragraph}
+              </p>
             ))}
           </div>
 
@@ -99,6 +106,7 @@ export function InstructorSection() {
             {classes.map((item) => (
               <li
                 key={item}
+                data-reveal
                 className="border-t border-line pt-5 text-xl font-bold tracking-tight"
               >
                 {item}

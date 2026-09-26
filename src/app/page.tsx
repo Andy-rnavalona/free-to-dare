@@ -20,8 +20,14 @@ const tripDetails = [
 export default function Home() {
   return (
     <main className="w-full flex-1">
-      <div className="mx-auto w-full max-w-[2400px] px-5 pb-24 sm:px-10 lg:px-14">
-        <header className="flex items-center justify-between gap-4 border-b border-line py-6 text-[11px] font-bold uppercase tracking-[0.16em] text-ink sm:py-8 sm:text-xs">
+      <div
+        data-reveal-group
+        className="mx-auto w-full max-w-[2400px] px-5 pb-24 sm:px-10 lg:px-14"
+      >
+        <header
+          data-reveal
+          className="flex items-center justify-between gap-4 border-b border-line py-6 text-[11px] font-bold uppercase tracking-[0.16em] text-ink sm:py-8 sm:text-xs"
+        >
           <span>Lisbon Aerial Escape</span>
           <span className="hidden md:inline">38.7223° N / 9.1393° W</span>
           <span>City Escape / 2027</span>
@@ -30,7 +36,7 @@ export default function Home() {
         <div className="grid gap-12 pt-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
           {/* Intro */}
           <section className="flex flex-col lg:pt-4">
-            <div>
+            <div data-reveal>
               <p className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.16em]">
                 <SparkleIcon className="size-4 text-sand" />
                 Lisbon / Portugal
@@ -41,13 +47,24 @@ export default function Home() {
             </div>
 
             <h1 className="mt-14 font-display text-[clamp(3.5rem,14vw,6rem)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20 lg:text-[clamp(3.5rem,5.4vw,9rem)]">
-              <span className="block">Discover</span>
-              <span className="block text-sage">Lisbon</span>
-              <span className="block">From</span>
-              <span className="block">Above</span>
+              <span data-reveal className="block">
+                Discover
+              </span>
+              <span data-reveal className="block text-sage">
+                Lisbon
+              </span>
+              <span data-reveal className="block">
+                From
+              </span>
+              <span data-reveal className="block">
+                Above
+              </span>
             </h1>
 
-            <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-[0.06em]">
+            <ul
+              data-reveal
+              className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-[0.06em]"
+            >
               {highlights.map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <CheckIcon className="size-4" />
@@ -57,12 +74,12 @@ export default function Home() {
             </ul>
 
             <div className="mt-10 max-w-xl space-y-7 text-lg leading-relaxed text-muted">
-              <p>
+              <p data-reveal>
                 Spend a few days discovering Lisbon at the most beautiful time
                 of the year — when jacarandas bloom, rooftops glow in the
                 evening light and every street invites you to slow down.
               </p>
-              <p>
+              <p data-reveal>
                 Explore the city from unexpected perspectives, share
                 unforgettable moments and meet curious travelers who love
                 discovering cities as much as you do.
@@ -79,6 +96,7 @@ export default function Home() {
               {tripDetails.map(({ label, value }) => (
                 <div
                   key={label}
+                  data-reveal
                   className="flex items-baseline justify-between gap-6 border-b border-line py-7 first:pt-4 lg:py-9"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
@@ -89,7 +107,10 @@ export default function Home() {
               ))}
             </dl>
 
-            <article className="relative mt-auto overflow-hidden rounded-[2.5rem] bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11">
+            <article
+              data-reveal
+              className="relative mt-auto overflow-hidden rounded-[2.5rem] bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11"
+            >
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-28 -top-28 size-64 rounded-full border border-line"

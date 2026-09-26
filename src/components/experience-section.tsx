@@ -60,33 +60,41 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
+      data-reveal-group
       aria-labelledby="experience-title"
       className="bg-white"
     >
       <div className="mx-auto w-full max-w-[2400px] px-5 py-24 sm:px-10 lg:px-14 lg:py-32">
         <div className="flex flex-col gap-8 border-b border-line pb-10 lg:flex-row lg:items-end lg:justify-between lg:pb-12">
           <div>
-            <p className="flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.12em] text-forest">
+            <p
+              data-reveal
+              className="flex items-center gap-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.12em] text-forest"
+            >
               Lisboa
               <span aria-hidden="true" className="h-px w-8 bg-forest" />
               Spring / Early summer
             </p>
             <h2
               id="experience-title"
+              data-reveal
               className="mt-4 font-display text-[clamp(2.75rem,6vw,7.5rem)] leading-[0.95] tracking-[-0.01em] lg:whitespace-nowrap"
             >
               <span className="block">Catch the Lisbon</span>
               <span className="block text-forest">experience</span>
             </h2>
           </div>
-          <p className="max-w-sm text-lg leading-relaxed text-muted lg:mb-4">
+          <p
+            data-reveal
+            className="max-w-sm text-lg leading-relaxed text-muted lg:mb-4"
+          >
             Move, explore, create and connect — all in one unforgettable week.
           </p>
         </div>
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 xl:grid-cols-4">
           {experiences.map((exp, i) => (
-            <li key={exp.title}>
+            <li key={exp.title} data-reveal>
               <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-line/70 bg-[#fdfcf9] can-hover:grid can-hover:aspect-[3/4] can-hover:h-auto can-hover:grid-rows-[minmax(0,1fr)_auto]">
                 <div className="relative aspect-[4/3] overflow-hidden can-hover:aspect-auto">
                   <Image
