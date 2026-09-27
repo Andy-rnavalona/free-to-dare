@@ -16,7 +16,7 @@ export function TrainingSpaceSection() {
       data-reveal-group
       className="mx-auto w-full max-w-[2400px] px-5 py-24 sm:px-10 lg:px-14 lg:py-32"
     >
-      <div className="grid gap-8  pt-10 lg:grid-cols-2 lg:items-end lg:gap-16">
+      <div className="grid gap-8   lg:grid-cols-2 lg:items-end lg:gap-16">
         <h2
           id="training-space-title"
           data-reveal
