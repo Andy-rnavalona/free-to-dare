@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   PauseIcon,
@@ -9,166 +8,77 @@ import {
   VolumeOnIcon,
 } from "@/components/icons";
 
-const VIDEO_ID = "Jr1KOf0caZw";
 const VIDEO_TITLE = "“Spinning the world” | Lyra at Jaya";
-const EMBED_URL = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?${new URLSearchParams(
-  {
-    autoplay: "1",
-    mute: "1", // browsers only allow autoplay without sound
-    loop: "1",
-    playlist: VIDEO_ID, // required for loop to work on a single video
-    controls: "0",
-    disablekb: "1",
-    playsinline: "1",
-    rel: "0",
-    iv_load_policy: "3",
-    enablejsapi: "1",
-  },
-)}`;
-
-type PlayerCommand = "playVideo" | "pauseVideo" | "mute" | "unMute";
 
 /**
- * Muted, looping YouTube background video with custom play/pause and sound
- * buttons. The player is only loaded once the card scrolls into view, and it
- * pauses again when it leaves. Talks to the player through the IFrame API's
- * postMessage protocol, so no extra script is loaded.
+ * Muted, looping studio video with custom play/pause and sound buttons.
+ * Nothing is downloaded until the card nears the screen; it plays while
+ * visible and pauses when it scrolls away (unless paused by the visitor).
  */
 export function StudioVideo() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const pausedByUser = useRef(false);
-  const wantMuted = useRef(true);
-  const [mounted, setMounted] = useState(false);
-  const [showPoster, setShowPoster] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
 
-  const send = (func: PlayerCommand) =>
-    iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: "command", func, args: [] }),
-      "*",
-    );
-
-  // Load on first view, then pause/resume as the card leaves/enters the screen
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)")
-      .matches;
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!autoplay || pausedByUser.current) return;
-          setMounted(true);
-          send("playVideo");
-          setPlaying(true);
+          if (!pausedByUser.current) video.play().catch(() => {});
         } else {
-          send("pauseVideo");
-          setPlaying(false);
+          video.pause();
         }
       },
       { threshold: 0.35 },
     );
-    observer.observe(el);
+    observer.observe(video);
     return () => observer.disconnect();
   }, []);
 
-  // Player events: sync state once ready, reveal the video when it really plays
-  useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.source !== iframeRef.current?.contentWindow) return;
-      let data: { event?: string; info?: { playerState?: number } };
-      try {
-        data = JSON.parse(event.data);
-      } catch {
-        return;
-      }
-      if (data.event === "onReady") {
-        send(wantMuted.current ? "mute" : "unMute");
-        send(pausedByUser.current ? "pauseVideo" : "playVideo");
-      }
-      const state = data.info?.playerState;
-      if (state === 1) {
-        // Keep the poster up while YouTube shows its start-up overlays
-        window.setTimeout(() => setShowPoster(false), 4000);
-        setPlaying(true);
-      } else if (state === 2) {
-        setPlaying(false);
-      }
-    };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, []);
-
-  const handleIframeLoad = () => {
-    // Ask the player to start posting its events to this window
-    iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: "listening", id: VIDEO_ID, channel: "widget" }),
-      "*",
-    );
-    // Fallback in case player events never arrive
-    window.setTimeout(() => setShowPoster(false), 8000);
-  };
-
   const togglePlay = () => {
-    if (!mounted) {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
       pausedByUser.current = false;
-      setMounted(true);
-      setPlaying(true);
-      return;
-    }
-    if (playing) {
-      pausedByUser.current = true;
-      send("pauseVideo");
-      setPlaying(false);
+      video.play().catch(() => {});
     } else {
-      pausedByUser.current = false;
-      send("playVideo");
-      setPlaying(true);
+      pausedByUser.current = true;
+      video.pause();
     }
   };
 
   const toggleSound = () => {
-    wantMuted.current = !muted;
-    setMuted(!muted);
-    if (!mounted) {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+    // Turning the sound on is an explicit request to watch
+    if (!video.muted && video.paused) {
       pausedByUser.current = false;
-      setMounted(true);
-      setPlaying(true);
-      return;
+      video.play().catch(() => {});
     }
-    send(muted ? "unMute" : "mute");
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-[0_32px_64px_-32px_rgb(22_35_26/0.45)] lg:aspect-square"
-    >
-      {mounted && (
-        <iframe
-          ref={iframeRef}
-          src={EMBED_URL}
-          title={VIDEO_TITLE}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          referrerPolicy="strict-origin-when-cross-origin"
-          tabIndex={-1}
-          onLoad={handleIframeLoad}
-          // 16:9 player scaled to cover the frame, like object-fit: cover
-          className="pointer-events-none absolute left-1/2 top-1/2 aspect-video h-full w-auto min-w-full -translate-x-1/2 -translate-y-1/2"
-        />
-      )}
-
-      <Image
-        src="/images/studio-video-poster.jpg"
-        alt=""
-        fill
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        className={`object-cover transition-opacity duration-700 ${
-          showPoster ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
+    <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-[0_32px_64px_-32px_rgb(22_35_26/0.45)] lg:aspect-square">
+      <video
+        ref={videoRef}
+        src="/videos/studio-lyra.mp4"
+        poster="/videos/studio-lyra.jpg"
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-label={VIDEO_TITLE}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
+        className="size-full object-cover"
       />
 
       <span className="pointer-events-none absolute left-5 top-5 rounded-full bg-paper/90 px-4 py-2 text-xs font-bold uppercase tracking-[0.08em] text-ink sm:left-6 sm:top-6">
