@@ -33,9 +33,31 @@ const experiences: Experience[] = [
     ],
   },
   {
+    tag: "Community",
+    title: "Good people, good nights",
+    photos: [],
+    video: {
+      av1: "/videos/experience-social.av1.mp4",
+      mp4: "/videos/experience-social.mp4",
+      poster: "/videos/experience-social.jpg",
+      label: "The group sharing dinner at long tables under a pergola",
+    },
+    items: [
+      "Rooftop dinner with the group",
+      "Social evenings",
+      "Shared experiences",
+      "Time to connect and make new friends",
+    ],
+  },
+  {
     tag: "Ocean",
     title: "Golden Hour Sunset Boat Cruise & Wine",
     photos: [
+      {
+        src: "/images/experiences/golden-hour/03.webp",
+        alt: "Friends smiling on the deck of a sailboat out at sea",
+        position: "object-[50%_70%]",
+      },
       {
         src: "/images/experiences/golden-hour/01.avif",
         alt: "Sun setting behind the 25 de Abril bridge over the Tagus",
@@ -43,11 +65,6 @@ const experiences: Experience[] = [
       {
         src: "/images/experiences/golden-hour/02.avif",
         alt: "Sailboat on the Tagus with the 25 de Abril bridge behind",
-      },
-      {
-        src: "/images/experiences/golden-hour/03.webp",
-        alt: "Friends smiling on the deck of a sailboat out at sea",
-        position: "object-[50%_70%]",
       },
     ],
     items: [
@@ -82,23 +99,6 @@ const experiences: Experience[] = [
     ],
   },
   {
-    tag: "Community",
-    title: "Good people, good nights",
-    photos: [],
-    video: {
-      av1: "/videos/experience-social.av1.mp4",
-      mp4: "/videos/experience-social.mp4",
-      poster: "/videos/experience-social.jpg",
-      label: "The group sharing dinner at long tables under a pergola",
-    },
-    items: [
-      "Rooftop dinner with the group",
-      "Social evenings",
-      "Shared experiences",
-      "Time to connect and make new friends",
-    ],
-  },
-  {
     tag: "Beach",
     title: "Surf & Beach Day",
     photos: [
@@ -108,8 +108,11 @@ const experiences: Experience[] = [
         position: "object-[50%_55%]",
       },
     ],
-    description:
-      "Enjoy a fun surf session at Carcavelos Beach, followed by time to unwind, swim, grab a drink and soak up the laid-back Portuguese beach atmosphere.",
+    items: [
+      "Enjoy a fun surf session at Carcavelos Beach",
+      "Followed by time to unwind, swim",
+      "Grab a drink and soak up the laid-back Portuguese beach atmosphere",
+    ],
   },
 ];
 
