@@ -9,19 +9,19 @@ const reels = [
     src: "/videos/aerial-silks-beach.mp4",
     poster: "/videos/aerial-silks-beach.jpg",
     label: "Pamela climbing white aerial silks by the sea",
-    tilt: "-rotate-3 lg:translate-y-4",
+    tilt: "sm:-rotate-3 lg:translate-y-4",
   },
   {
     src: "/videos/aerial-hoop-stage.mp4",
     poster: "/videos/aerial-hoop-stage.jpg",
     label: "Pamela spinning on an aerial hoop on an open-air stage",
-    tilt: "rotate-2 lg:-translate-y-2",
+    tilt: "sm:rotate-2 lg:-translate-y-2",
   },
   {
     src: "/videos/aerial-hoop-sunset.mp4",
     poster: "/videos/aerial-hoop-sunset.jpg",
     label: "Pamela holding a split on an aerial hoop at sunset",
-    tilt: "-rotate-2 lg:translate-y-3",
+    tilt: "sm:-rotate-2 lg:translate-y-3",
   },
 ];
 
@@ -66,7 +66,7 @@ function ReelCard({ reel }: { reel: Reel }) {
 
   return (
     <div
-      className={`relative aspect-[9/16] w-[15rem] overflow-hidden rounded-3xl bg-ink shadow-[0_24px_48px_-28px_rgb(22_35_26/0.55)] transition-[rotate,translate,scale] duration-500 ease-out sm:w-[16.5rem] can-hover:hover:rotate-0 can-hover:hover:translate-y-0 can-hover:hover:scale-[1.02] ${reel.tilt}`}
+      className={`relative aspect-[9/16] w-[18rem] max-w-full overflow-hidden rounded-2xl bg-ink shadow-[0_24px_48px_-28px_rgb(22_35_26/0.55)] transition-[rotate,translate,scale] duration-500 ease-out sm:w-[16.5rem] can-hover:hover:rotate-0 can-hover:hover:translate-y-0 can-hover:hover:scale-[1.02] ${reel.tilt}`}
     >
       <video
         ref={videoRef}
@@ -118,9 +118,9 @@ export function InstructorReels() {
       data-reveal-group
       className="bg-white pb-24 lg:pb-32"
     >
-      <ul className="mx-auto flex w-full max-w-[2400px] snap-x snap-mandatory gap-6 overflow-x-auto px-5 py-8 sm:gap-8 sm:px-10 lg:justify-center lg:gap-12 lg:overflow-visible lg:px-14">
+      <ul className="mx-auto flex w-full max-w-[2400px] flex-col items-center gap-10 px-5 py-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-14 sm:px-10 lg:gap-12 lg:px-14">
         {reels.map((reel) => (
-          <li key={reel.src} data-reveal className="shrink-0 snap-center">
+          <li key={reel.src} data-reveal className="max-w-full">
             <ReelCard reel={reel} />
           </li>
         ))}
