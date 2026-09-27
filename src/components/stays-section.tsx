@@ -208,11 +208,11 @@ export function StaysSection() {
         >
           <div className="relative mx-auto aspect-[9/13] w-full max-w-60 shrink-0 overflow-hidden rounded-lg lg:mx-0 lg:h-72 lg:w-auto">
             <Image
-              src="/images/experience-aerial.jpg"
-              alt="Aerial hoop artist balancing inside a ring in a sunny park"
+              src="/images/experiences/golden-hour/03.webp"
+              alt="The group smiling together on the deck of a sailboat"
               fill
               sizes="15rem"
-              className="object-cover object-[50%_40%]"
+              className="object-cover object-[50%_60%]"
             />
           </div>
 

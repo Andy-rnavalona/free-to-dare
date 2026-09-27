@@ -7,7 +7,9 @@ import { StayGallery, type Photo } from "@/components/stay-gallery";
 type Experience = {
   tag: string;
   title: string;
-  items: string[];
+  /** Short bullet list, or a sentence in `description` */
+  items?: string[];
+  description?: string;
   photos: Photo[];
   video?: { av1: string; mp4: string; poster: string; label: string };
 };
@@ -41,6 +43,11 @@ const experiences: Experience[] = [
       {
         src: "/images/experiences/golden-hour/02.avif",
         alt: "Sailboat on the Tagus with the 25 de Abril bridge behind",
+      },
+      {
+        src: "/images/experiences/golden-hour/03.webp",
+        alt: "Friends smiling on the deck of a sailboat out at sea",
+        position: "object-[50%_70%]",
       },
     ],
     items: [
@@ -77,13 +84,13 @@ const experiences: Experience[] = [
   {
     tag: "Community",
     title: "Good people, good nights",
-    photos: [
-      {
-        src: "/images/experience-rooftop.jpg",
-        alt: "Rooftop terrace overlooking the rooftops of Lisbon",
-        position: "object-[35%_50%]",
-      },
-    ],
+    photos: [],
+    video: {
+      av1: "/videos/experience-social.av1.mp4",
+      mp4: "/videos/experience-social.mp4",
+      poster: "/videos/experience-social.jpg",
+      label: "The group sharing dinner at long tables under a pergola",
+    },
     items: [
       "Rooftop dinner with the group",
       "Social evenings",
@@ -91,16 +98,26 @@ const experiences: Experience[] = [
       "Time to connect and make new friends",
     ],
   },
-];
-
-// TEMP: cards duplicated to preview the carousel with more than 4 items.
-// Remove this and map over `experiences` once the real cards exist.
-const previewExperiences = [
-  ...experiences,
-  ...experiences.map((exp) => ({ ...exp, title: `${exp.title} (copy)` })),
+  {
+    tag: "Beach",
+    title: "Surf & Beach Day",
+    photos: [
+      {
+        src: "/images/experiences/surf/01.webp",
+        alt: "The group in wetsuits holding blue surfboards by a stone wall",
+        position: "object-[50%_55%]",
+      },
+    ],
+    description:
+      "Enjoy a fun surf session at Carcavelos Beach, followed by time to unwind, swim, grab a drink and soak up the laid-back Portuguese beach atmosphere.",
+  },
 ];
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+// Hidden under the title until the card is hovered (always shown on touch)
+const details =
+  "mt-4 text-sm leading-relaxed text-muted transition-[opacity,filter,translate] duration-700 ease-out can-hover:translate-y-3 can-hover:opacity-0 can-hover:blur-sm can-hover:group-hover:translate-y-0 can-hover:group-hover:opacity-100 can-hover:group-hover:blur-none can-hover:group-hover:delay-150";
 
 export function ExperienceSection() {
   return (
@@ -140,7 +157,7 @@ export function ExperienceSection() {
 
         <div data-reveal className="mt-10 lg:mt-12">
           <CardCarousel label="Retreat experiences">
-            {previewExperiences.map((exp, i) => (
+            {experiences.map((exp, i) => (
               <li
                 key={exp.title}
                 // Shows 1, 2 or 3 cards with the next one peeking in
@@ -192,11 +209,15 @@ export function ExperienceSection() {
                           aria-hidden="true"
                           className="mt-4 block h-px origin-left bg-line transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] can-hover:scale-x-0 can-hover:group-hover:scale-x-100 can-hover:group-hover:delay-100"
                         />
-                        <ul className="mt-4 text-sm leading-relaxed text-muted transition-[opacity,filter,translate] duration-700 ease-out can-hover:translate-y-3 can-hover:opacity-0 can-hover:blur-sm can-hover:group-hover:translate-y-0 can-hover:group-hover:opacity-100 can-hover:group-hover:blur-none can-hover:group-hover:delay-150">
-                          {exp.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
+                        {exp.description ? (
+                          <p className={details}>{exp.description}</p>
+                        ) : (
+                          <ul className={details}>
+                            {exp.items?.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </div>
