@@ -3,6 +3,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
+import { TrainingSpaceSection } from "@/components/training-space-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
 
 const highlights = [
@@ -154,6 +155,7 @@ export default function Home() {
       <ExperienceSection />
       <InstructorSection />
       <InstructorReels />
+      <TrainingSpaceSection />
     </main>
   );
 }
