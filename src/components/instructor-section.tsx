@@ -7,8 +7,6 @@ const bio = [
   "Pamela started dancing at the age of six and discovered aerial arts at sixteen. Since then, aerial dance has become the centre of her artistic journey, taking her from teaching and performing to appearing on Italian national television, Rai 1.",
   "During our Lisbon Retreat, Pamela will guide our Aerial Hoop & Silks classes, with a special focus on learning how to truly dance in the air.",
   "Rather than simply learning individual tricks, we will explore transitions, fluid movement and combinations on both hoop and silks, learning how to connect different elements naturally and transform them into beautiful sequences.",
-  "Step by step, we’ll bring these movements together into longer combos and choreography, working with music, flow and personal expression.",
-  "The goal is to leave the retreat not only with new aerial skills, but with the ability to connect them, move between them and create an actual dance in the air.",
 ];
 
 const classes = ["3 Aerial Silks Classes", "3 Aerial Hoop Classes"];

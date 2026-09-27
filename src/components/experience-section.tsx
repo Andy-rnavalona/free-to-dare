@@ -131,7 +131,7 @@ export function ExperienceSection() {
       className="bg-white"
     >
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 xl:px-0 lg:py-32">
-        <div className="flex flex-col gap-8 border-b border-line pb-10 lg:flex-row lg:items-end lg:justify-between lg:pb-12">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p
               data-reveal
@@ -159,12 +159,12 @@ export function ExperienceSection() {
         </div>
 
         <div data-reveal className="mt-10 lg:mt-12">
-          <CardCarousel label="Retreat experiences">
+          <CardCarousel label="Retreat experiences" speed={80}>
             {experiences.map((exp, i) => (
               <li
                 key={exp.title}
                 // Shows 1, 2 or 3 cards with the next one peeking in
-                className="shrink-0 basis-[90%] snap-start sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
+                className="shrink-0 basis-[90%] sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
               >
                 <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line/70 bg-[#fdfcf9] can-hover:grid can-hover:aspect-[3/4] can-hover:h-auto can-hover:grid-rows-[minmax(0,1fr)_auto]">
                   <div className="relative aspect-[4/3] overflow-hidden can-hover:aspect-auto">
