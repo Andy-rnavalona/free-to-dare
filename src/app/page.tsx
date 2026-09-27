@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
-import { HeroCarousel } from "@/components/hero-carousel";
 import { HeroSection } from "@/components/hero-section";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
+import { ReelCard } from "@/components/reel-card";
 import { SecretMomentSection } from "@/components/secret-moment-section";
 import { StaysSection } from "@/components/stays-section";
 import { TrainingSpaceSection } from "@/components/training-space-section";
@@ -41,7 +41,7 @@ export default function Home() {
 
         <div className="grid gap-12 pt-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
           {/* Intro */}
-          <section className="flex flex-col lg:pt-4">
+          <section className="@container flex flex-col lg:pt-4">
             <div data-reveal>
               <p className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.16em]">
                 <SparkleIcon className="size-4 text-sand" />
@@ -52,18 +52,19 @@ export default function Home() {
               </p>
             </div>
 
-            <h1 className="mt-14 font-display text-[clamp(3.5rem,14vw,6rem)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20 lg:text-[clamp(3.5rem,5.4vw,9rem)] xl:text-[3.75rem]">
+            {/* Sized from the column width so the longest word ("COMMUNITY", ~7em wide) always fits */}
+            <h1 className="mt-14 font-display text-[min(6rem,14cqi)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20">
               <span data-reveal className="block">
-                Discover
+                HOOP
               </span>
               <span data-reveal className="block text-sage">
-                Lisbon
+                SILKS
               </span>
               <span data-reveal className="block">
-                From
+                LISBON
               </span>
               <span data-reveal className="block">
-                Above
+                COMMUNITY
               </span>
             </h1>
 
@@ -81,20 +82,21 @@ export default function Home() {
 
             <div className="mt-10 max-w-xl space-y-7 text-lg leading-relaxed text-muted">
               <p data-reveal>
-                Spend a few days discovering Lisbon at the most beautiful time
-                of the year — when jacarandas bloom, rooftops glow in the
-                evening light and every street invites you to slow down.
+                Your itinerary brings together 6 aerial training sessions,
+                Lisbon experiences and time to explore at your own pace, with
+                the practical details organized in advance.
               </p>
               <p data-reveal>
-                Explore the city from unexpected perspectives, share
-                unforgettable moments and meet curious travelers who love
-                discovering cities as much as you do.
+                That means no searching for classes, deciding what to do each
+                day or coordinating plans with the group. You can focus on what
+                you came for: training, discovering the city and spending time
+                with people who share the same passion.
               </p>
             </div>
           </section>
 
           {/* Visual */}
-          <HeroCarousel />
+          <ReelCard />
 
           {/* Details */}
           <aside className="flex flex-col gap-12 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-10 xl:col-span-1 xl:flex xl:gap-12 xl:pt-4">
@@ -125,8 +127,8 @@ export default function Home() {
               <div className="relative flex items-center justify-between">
                 <div className="relative size-16 overflow-hidden rounded-full ring-4 ring-white">
                   <Image
-                    src="/images/lisbon-tram.jpg"
-                    alt=""
+                    src="/images/owner-avatar.webp"
+                    alt="Portrait of the retreat host"
                     fill
                     sizes="64px"
                     className="object-cover"
@@ -161,7 +163,7 @@ export default function Home() {
       <InstructorReels />
       <TrainingSpaceSection />
       <StaysSection />
-      <SecretMomentSection />
+      {/* <SecretMomentSection /> */}
     </main>
   );
 }

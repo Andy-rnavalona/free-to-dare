@@ -80,6 +80,16 @@ html[data-reveal]:not([data-reveal-ready]) [data-reveal] {
   }
 }
 
+@keyframes slow-zoom {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.12;
+  }
+}
+
 @theme {
   --animate-floating: floating 2.4s ease-in-out infinite;
+  --animate-slow-zoom: slow-zoom 18s ease-in-out infinite alternate;
 }
