@@ -70,8 +70,20 @@ function NavLink({
   );
 }
 
+const SOLID_AFTER_PX = 80;
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Transparent over the hero video, solid once the page has scrolled
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SOLID_AFTER_PX);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const solid = scrolled || open;
 
   useEffect(() => {
     if (!open) return;
@@ -89,17 +101,29 @@ export function SiteHeader() {
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-night shadow-[0_24px_40px_-12px_rgb(17_26_41/0.35)]">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        solid
+          ? "shadow-[0_24px_40px_-12px_rgb(17_26_41/0.35)] backdrop-blur-sm"
+          : ""
+      }`}
+    >
       {/* Ambient glows */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden bg-[linear-gradient(90deg,#111a29_0%,#1b1c1d_35%,#1e1b1f_70%,#111a29_100%)]"
+        className={`pointer-events-none absolute inset-0 overflow-hidden bg-[linear-gradient(90deg,#111a29_0%,#1b1c1d_35%,#1e1b1f_70%,#111a29_100%)] transition-opacity duration-500 ${
+          solid ? "opacity-95" : "opacity-0"
+        }`}
       >
         <div className="absolute -top-16 left-[18%] h-48 w-72 rounded-full bg-[#3d4128]/50 blur-3xl" />
         <div className="absolute -top-16 left-[62%] h-48 w-80 rounded-full bg-[#2d2328]/60 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex h-18 max-w-6xl items-center gap-6 px-5 sm:px-10 lg:h-[6.25rem] lg:px-14 xl:px-0">
+      <div
+        className={`relative mx-auto flex h-18 max-w-6xl items-center gap-6 px-5 sm:px-10 transition-[height] duration-500 lg:px-14 xl:px-0 ${
+          solid ? "lg:h-20" : "lg:h-[6.25rem]"
+        }`}
+      >
         <Logo />
 
         {/* Desktop navigation */}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { HeroSection } from "@/components/hero-section";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
 import { StaysSection } from "@/components/stays-section";
@@ -23,6 +24,7 @@ const tripDetails = [
 export default function Home() {
   return (
     <main className="w-full flex-1">
+      <HeroSection />
       <div
         data-reveal-group
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-10 lg:px-14 xl:px-0"

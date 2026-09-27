@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   Archivo_Black,
   Caveat,
+  Cormorant_Garamond,
   Hanken_Grotesk,
   Space_Mono,
 } from "next/font/google";
@@ -25,6 +26,13 @@ const caveat = Caveat({
   subsets: ["latin"],
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  weight: ["400", "500"],
+  style: ["italic"],
+  subsets: ["latin"],
+});
+
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   weight: ["400", "700"],
@@ -41,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} ${caveat.variable} h-full antialiased`}
+      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

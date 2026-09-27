@@ -24,6 +24,12 @@
   --font-display: var(--font-archivo-black);
   --font-mono: var(--font-space-mono);
   --font-script: var(--font-caveat);
+  --font-serif: var(--font-cormorant);
+}
+
+html {
+  /* Keeps anchored sections clear of the fixed header */
+  scroll-padding-top: 6.25rem;
 }
 
 body {
@@ -62,4 +68,18 @@ html[data-reveal]:not([data-reveal-ready]) [data-reveal] {
     opacity: 1;
     transform: none;
   }
+}
+
+@keyframes floating {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: -0.35rem 0;
+  }
+}
+
+@theme {
+  --animate-floating: floating 2.4s ease-in-out infinite;
 }
