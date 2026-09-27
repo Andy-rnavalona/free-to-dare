@@ -203,9 +203,9 @@ export function ExperienceSection() {
 
                   {/* Fixed card height: as the details unfold, the photo row shrinks and the title rises */}
                   <div className="p-5 sm:p-6">
-                    <h3 className="font-display text-[1.35rem] leading-[1.1]">
+                    <span className="text-[1.1rem] leading-[1.1]">
                       {exp.title}
-                    </h3>
+                    </span>
                     <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] can-hover:grid-rows-[0fr] can-hover:group-hover:grid-rows-[1fr]">
                       <div className="overflow-hidden">
                         <span

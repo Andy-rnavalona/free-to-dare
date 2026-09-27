@@ -52,8 +52,8 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Sized from the column width so the longest word ("COMMUNITY", ~7em wide) always fits */}
-              <h1 className="mt-14 font-display text-[min(6rem,14cqi)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20">
+              {/* Sized from the column width so the longest word ("COMMUNITY", ~6.4em wide) always fits */}
+              <h1 className="mt-14 font-display text-[min(6rem,15cqi)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20">
                 <span data-reveal className="block">
                   HOOP
                 </span>
@@ -142,7 +142,7 @@ export default function Home() {
                 </div>
                 <SparkleIcon className="absolute right-0 top-1/2 size-4 text-muted/60 -translate-x-5" />
                 <p className="mt-12 leading-relaxed text-muted">
-                  I’m Verolina, the organiser of this retreat. I first
+                  Hey, I’m Verolina, the organiser of this retreat. I first
                   discovered Lisbon during jacaranda season and completely fell
                   in love with its flowers, light and special atmosphere. I
                   created this retreat so you can combine your passion for

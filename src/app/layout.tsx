@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
 import {
-  Archivo_Black,
   Caveat,
   Cormorant_Garamond,
-  Hanken_Grotesk,
+  Inter,
   Space_Mono,
+  Work_Sans,
 } from "next/font/google";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const hankenGrotesk = Hanken_Grotesk({
-  variable: "--font-hanken-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const archivoBlack = Archivo_Black({
-  variable: "--font-archivo-black",
-  weight: "400",
+// Headings use Work Sans Black only, so `font-display` renders at 900
+// whatever the element's font-weight (like the reference site)
+const workSansBlack = Work_Sans({
+  variable: "--font-work-sans-black",
+  weight: "900",
   subsets: ["latin"],
 });
 
@@ -49,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${inter.variable} ${workSansBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
