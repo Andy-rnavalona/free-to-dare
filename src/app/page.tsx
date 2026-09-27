@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
 
@@ -152,6 +153,7 @@ export default function Home() {
 
       <ExperienceSection />
       <InstructorSection />
+      <InstructorReels />
     </main>
   );
 }

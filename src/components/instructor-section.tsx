@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { InstagramIcon, SparkleIcon } from "@/components/icons";
+import { SparkleIcon } from "@/components/icons";
+import { InstagramBadge, PAMELA_INSTAGRAM } from "@/components/instagram-badge";
 
 const bio = [
   "Coming from Italy, Pamela Mariotto is an aerial dancer, performer and certified aerial instructor whose background combines dance, aerial technique and artistic expression.",
@@ -48,11 +49,11 @@ export function InstructorSection() {
       <div className="mx-auto grid w-full max-w-[2400px] gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 lg:pb-32 lg:pt-8">
         <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
           <a
-            href="https://www.instagram.com/pamela_aerialist/"
+            href={PAMELA_INSTAGRAM.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-            className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
+            className="group group/ig relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
           >
             <Image
               src="/images/pamela-aerial-silks.jpg"
@@ -61,14 +62,8 @@ export function InstructorSection() {
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover object-[50%_45%] transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            {/* Instagram badge: the handle slides out to the left of the icon on hover */}
-            <span className="absolute right-6 top-6 flex items-center rounded-full p-1 transition-colors duration-500 ease-out group-hover:bg-ink/40 group-hover:backdrop-blur-md group-focus-visible:bg-ink/40 group-focus-visible:backdrop-blur-md sm:right-8 sm:top-8">
-              <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold text-white opacity-0 transition-all duration-500 ease-out group-hover:mx-3 group-hover:max-w-40 group-hover:opacity-100 group-focus-visible:mx-3 group-focus-visible:max-w-40 group-focus-visible:opacity-100">
-                @pamela_aerialist
-              </span>
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-forest shadow-sm">
-                <InstagramIcon className="size-5" />
-              </span>
+            <span className="absolute right-6 top-6 sm:right-8 sm:top-8">
+              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} />
             </span>
           </a>
         </div>
