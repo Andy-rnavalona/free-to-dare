@@ -46,7 +46,7 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-[2400px] gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 lg:pb-32 lg:pt-8">
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 xl:px-0 lg:pb-32 lg:pt-8">
         <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
           <a
             href={PAMELA_INSTAGRAM.url}
@@ -80,7 +80,7 @@ export function InstructorSection() {
           <h2
             id="instructors-title"
             data-reveal
-            className="mt-8 text-[clamp(2.5rem,4.4vw,4.75rem)] font-medium leading-[1.05] tracking-tight"
+            className="mt-8 text-[clamp(2.5rem,4.4vw,4.75rem)] xl:text-[3.5rem] font-medium leading-[1.05] tracking-tight"
           >
             <span className="block">Meet Pamela</span>
             <span className="block text-ink/45">

@@ -14,13 +14,13 @@ export function TrainingSpaceSection() {
       id="training-space"
       aria-labelledby="training-space-title"
       data-reveal-group
-      className="mx-auto w-full max-w-[2400px] px-5 py-24 sm:px-10 lg:px-14 lg:py-32"
+      className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 xl:px-0 lg:py-32"
     >
       <div className="grid gap-8   lg:grid-cols-2 lg:items-end lg:gap-16">
         <h2
           id="training-space-title"
           data-reveal
-          className="font-display text-[clamp(2.25rem,4.2vw,5.5rem)] uppercase leading-[0.92] tracking-[-0.01em] text-forest lg:whitespace-nowrap"
+          className="font-display text-[clamp(2.25rem,4.2vw,5.5rem)] uppercase xl:text-[3.5rem] leading-[0.92] tracking-[-0.01em] text-forest lg:whitespace-nowrap"
         >
           <span className="block">Here is your</span>
           <span className="block text-sage">Training space</span>
@@ -41,7 +41,7 @@ export function TrainingSpaceSection() {
         <div>
           <h3
             data-reveal
-            className="text-[clamp(1.6rem,2.3vw,2.4rem)] font-extrabold uppercase leading-tight tracking-tight text-forest"
+            className="text-[clamp(1.6rem,2.3vw,2.4rem)] xl:text-[1.85rem] font-extrabold uppercase leading-tight tracking-tight text-forest"
           >
             Everything you need to train
           </h3>
@@ -77,7 +77,7 @@ export function TrainingSpaceSection() {
               <p className="text-xs font-semibold uppercase tracking-[0.08em] text-muted">
                 Outside the studio
               </p>
-              <h3 className="mt-2 text-[clamp(1.4rem,1.8vw,1.9rem)] font-extrabold uppercase leading-tight tracking-tight text-forest">
+              <h3 className="mt-2 text-[clamp(1.4rem,1.8vw,1.9rem)] xl:text-[1.45rem] font-extrabold uppercase leading-tight tracking-tight text-forest">
                 Garden, patio &amp; bar
               </h3>
               <p className="mt-3 max-w-md leading-relaxed text-muted">

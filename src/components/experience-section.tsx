@@ -64,7 +64,7 @@ export function ExperienceSection() {
       aria-labelledby="experience-title"
       className="bg-white"
     >
-      <div className="mx-auto w-full max-w-[2400px] px-5 py-24 sm:px-10 lg:px-14 lg:py-32">
+      <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 xl:px-0 lg:py-32">
         <div className="flex flex-col gap-8 border-b border-line pb-10 lg:flex-row lg:items-end lg:justify-between lg:pb-12">
           <div>
             <p
@@ -78,7 +78,7 @@ export function ExperienceSection() {
             <h2
               id="experience-title"
               data-reveal
-              className="mt-4 font-display text-[clamp(2.75rem,6vw,7.5rem)] leading-[0.95] tracking-[-0.01em] lg:whitespace-nowrap"
+              className="mt-4 font-display text-[clamp(2.75rem,6vw,7.5rem)] xl:text-[4.75rem] leading-[0.95] tracking-[-0.01em] lg:whitespace-nowrap"
             >
               <span className="block">Catch the Lisbon</span>
               <span className="block text-forest">experience</span>

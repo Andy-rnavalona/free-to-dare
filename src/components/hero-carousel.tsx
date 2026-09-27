@@ -90,7 +90,7 @@ export function HeroCarousel() {
           className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-10 2xl:p-12"
           aria-live="polite"
         >
-          <h2 className="max-w-[30rem] text-[clamp(2.25rem,3.1vw,4.5rem)] font-medium leading-[0.98] tracking-tight">
+          <h2 className="max-w-[30rem] text-[clamp(2.25rem,3.1vw,4.5rem)] xl:text-[2.5rem] font-medium leading-[0.98] tracking-tight">
             {current.title}
           </h2>
           <div className="mt-6 flex items-end justify-between gap-4">

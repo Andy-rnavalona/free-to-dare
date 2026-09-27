@@ -63,9 +63,7 @@ function NavLink({
         aria-hidden="true"
         className={`size-1 rounded-full bg-sun transition-opacity ${
           inline ? "size-1.5" : "absolute -top-1 left-1/2 -translate-x-1/2"
-        } ${
-          active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-        }`}
+        } ${active ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
       />
       {label}
     </Link>
@@ -101,7 +99,7 @@ export function SiteHeader() {
         <div className="absolute -top-16 left-[62%] h-48 w-80 rounded-full bg-[#2d2328]/60 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex h-18 max-w-[2400px] items-center gap-6 px-5 sm:px-10 lg:h-[6.25rem] lg:px-[6%]">
+      <div className="relative mx-auto flex h-18 max-w-6xl items-center gap-6 px-5 sm:px-10 lg:h-[6.25rem] lg:px-14 xl:px-0">
         <Logo />
 
         {/* Desktop navigation */}

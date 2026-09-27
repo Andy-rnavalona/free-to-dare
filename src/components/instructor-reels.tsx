@@ -118,7 +118,7 @@ export function InstructorReels() {
       data-reveal-group
       className="bg-white pb-24 lg:pb-32"
     >
-      <ul className="mx-auto flex w-full max-w-[2400px] flex-col items-center gap-10 px-5 py-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-14 sm:px-10 lg:gap-12 lg:px-14">
+      <ul className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 px-5 py-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-14 sm:px-10 lg:gap-12 lg:px-14 xl:px-0">
         {reels.map((reel) => (
           <li key={reel.src} data-reveal className="max-w-full">
             <ReelCard reel={reel} />

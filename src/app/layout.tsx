@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import {
+  Archivo_Black,
+  Caveat,
+  Hanken_Grotesk,
+  Space_Mono,
+} from "next/font/google";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -12,6 +17,11 @@ const hankenGrotesk = Hanken_Grotesk({
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black",
   weight: "400",
+  subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
 });
 
@@ -31,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${hankenGrotesk.variable} ${archivoBlack.variable} ${spaceMono.variable} ${caveat.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

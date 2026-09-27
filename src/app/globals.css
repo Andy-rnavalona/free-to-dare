@@ -23,6 +23,7 @@
   --font-sans: var(--font-hanken-grotesk);
   --font-display: var(--font-archivo-black);
   --font-mono: var(--font-space-mono);
+  --font-script: var(--font-caveat);
 }
 
 body {

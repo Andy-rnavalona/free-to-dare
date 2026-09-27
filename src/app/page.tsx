@@ -3,6 +3,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
+import { StaysSection } from "@/components/stays-section";
 import { TrainingSpaceSection } from "@/components/training-space-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
 
@@ -24,7 +25,7 @@ export default function Home() {
     <main className="w-full flex-1">
       <div
         data-reveal-group
-        className="mx-auto w-full max-w-[2400px] px-5 pb-24 sm:px-10 lg:px-14"
+        className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-10 lg:px-14 xl:px-0"
       >
         <header
           data-reveal
@@ -48,7 +49,7 @@ export default function Home() {
               </p>
             </div>
 
-            <h1 className="mt-14 font-display text-[clamp(3.5rem,14vw,6rem)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20 lg:text-[clamp(3.5rem,5.4vw,9rem)]">
+            <h1 className="mt-14 font-display text-[clamp(3.5rem,14vw,6rem)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20 lg:text-[clamp(3.5rem,5.4vw,9rem)] xl:text-[3.75rem]">
               <span data-reveal className="block">
                 Discover
               </span>
@@ -133,7 +134,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <blockquote className="relative mt-16 space-y-10 text-[clamp(1.5rem,1.75vw,2.4rem)] font-medium leading-[1.2] tracking-tight">
+              <blockquote className="relative mt-16 space-y-10 text-[clamp(1.5rem,1.75vw,2.4rem)] xl:text-[1.5rem] font-medium leading-[1.2] tracking-tight">
                 <p>It started with a love for discovering cities.</p>
                 <p className="pr-8">
                   Now it’s about sharing those moments with people who see
@@ -156,6 +157,7 @@ export default function Home() {
       <InstructorSection />
       <InstructorReels />
       <TrainingSpaceSection />
+      <StaysSection />
     </main>
   );
 }
