@@ -146,7 +146,7 @@ export function ExperienceSection() {
               data-reveal
               className="mt-4 font-display text-[clamp(2.75rem,6vw,7.5rem)] xl:text-[4.75rem] leading-[0.95] tracking-[-0.01em] lg:whitespace-nowrap"
             >
-              <span className="block">Catch the Lisbon</span>
+              <span className="block text-forest">Catch the Lisbon</span>
               <span className="block text-forest">experience</span>
             </h2>
           </div>

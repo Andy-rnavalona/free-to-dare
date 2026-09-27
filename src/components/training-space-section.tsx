@@ -25,7 +25,7 @@ export function TrainingSpaceSection() {
             className="font-display text-[clamp(2.25rem,4.2vw,5.5rem)] uppercase xl:text-[3.5rem] leading-[0.92] tracking-[-0.01em] text-forest lg:whitespace-nowrap"
           >
             <span className="block">Here is your</span>
-            <span className="block text-sage">Training space</span>
+            <span className="block">Training space</span>
           </h2>
           <p
             data-reveal

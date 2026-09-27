@@ -45,7 +45,7 @@ export default function Home() {
                 <span data-reveal className="block">
                   HOOP
                 </span>
-                <span data-reveal className="block text-sage">
+                <span data-reveal className="block text-forest">
                   SILKS
                 </span>
                 <span data-reveal className="block">

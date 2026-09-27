@@ -64,6 +64,9 @@ export function StudioVideo() {
     }
   };
 
+  const control =
+    "grid size-9 cursor-pointer place-items-center rounded-full bg-ink/45 text-white backdrop-blur-md transition hover:bg-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-[0_32px_64px_-32px_rgb(22_35_26/0.45)] lg:aspect-square">
       <video
@@ -85,29 +88,30 @@ export function StudioVideo() {
         The studio
       </span>
 
-      <div className="absolute bottom-5 right-5 flex items-center gap-3 sm:bottom-6 sm:right-6">
-        <button
-          type="button"
-          onClick={toggleSound}
-          aria-label={muted ? "Turn sound on" : "Turn sound off"}
-          className="grid size-12 cursor-pointer place-items-center rounded-full bg-ink/45 text-white backdrop-blur-md transition hover:bg-ink/65 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
-        >
-          {muted ? (
-            <VolumeOffIcon className="size-5" />
-          ) : (
-            <VolumeOnIcon className="size-5" />
-          )}
-        </button>
+      {/* Same controls as the other video cards: pause then sound, bottom-left */}
+      <div className="absolute bottom-3 left-3 z-10 flex gap-2">
         <button
           type="button"
           onClick={togglePlay}
           aria-label={`${playing ? "Pause" : "Play"} video: ${VIDEO_TITLE}`}
-          className="grid size-14 cursor-pointer place-items-center rounded-full bg-lime text-ink shadow-lg transition-transform duration-300 ease-out hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime sm:size-16"
+          className={control}
         >
           {playing ? (
-            <PauseIcon className="size-6" />
+            <PauseIcon className="size-3.5" />
           ) : (
-            <PlayIcon className="ml-1 size-6" />
+            <PlayIcon className="ml-0.5 size-3.5" />
+          )}
+        </button>
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={muted ? "Turn sound on" : "Turn sound off"}
+          className={control}
+        >
+          {muted ? (
+            <VolumeOffIcon className="size-4" />
+          ) : (
+            <VolumeOnIcon className="size-4" />
           )}
         </button>
       </div>

@@ -44,7 +44,7 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0 lg:pb-32 lg:pt-8">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0 lg:pb-32">
         {/* On desktop the photo stretches to the height of the text column */}
         <div data-reveal className="lg:h-full">
           <a
@@ -81,8 +81,8 @@ export function InstructorSection() {
             data-reveal
             className="mt-8 font-display text-[clamp(2.5rem,4.4vw,4.75rem)] leading-[0.95] tracking-[-0.01em] xl:text-[3.5rem]"
           >
-            <span className="block">Meet Pamela</span>
-            <span className="block">
+            <span className="block text-forest">Meet Pamela</span>
+            <span className="block text-forest">
               Mariotto
               <ItalianFlag />
             </span>

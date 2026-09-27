@@ -83,38 +83,40 @@ export function StaysSection() {
       id="stays"
       aria-labelledby="stays-title"
       data-reveal-group
-      className="bg-[#faf8f1]"
+      className="bg-white"
     >
       <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 lg:py-32 min-[88rem]:px-0">
         {/* Heading */}
         <div className="relative">
           <p
             data-reveal
-            className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-forest/80"
+            className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-forest"
           >
             <span aria-hidden="true" className="h-px w-10 bg-sand" />
             Your home in Lisbon
           </p>
-          <h2
-            id="stays-title"
-            data-reveal
-            className="mt-5 max-w-3xl font-display text-[clamp(2.5rem,5.5vw,4.25rem)] uppercase leading-[0.95] tracking-[-0.02em] text-forest"
-          >
-            Choose your way <br className="hidden sm:inline" />
-            to stay
-          </h2>
+          {/* inline-block so the note can sit right after "Choose your way" */}
+          <div data-reveal className="relative mt-5 inline-block">
+            <h2
+              id="stays-title"
+              className="max-w-3xl font-display text-[clamp(2.5rem,5.5vw,4.25rem)] uppercase leading-[0.95] tracking-[-0.02em] text-forest"
+            >
+              Choose your way <br className="hidden sm:inline" />
+              to stay
+            </h2>
+            <p
+              aria-hidden="true"
+              className="absolute left-full top-1 ml-6 hidden -rotate-6 whitespace-nowrap font-script text-xl text-forest sm:block"
+            >
+              your Lisbon home →
+            </p>
+          </div>
           <p
             data-reveal
-            className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-forest/80"
+            className="mt-6 max-w-xl text-sm leading-relaxed text-muted"
           >
             Stay with the group or organise your own accommodation — the retreat
             experience stays the same.
-          </p>
-          <p
-            aria-hidden="true"
-            className="absolute top-0 hidden -rotate-6 font-script text-xl text-sage lg:right-[20%] lg:block"
-          >
-            your Lisbon home →
           </p>
         </div>
 
@@ -125,7 +127,7 @@ export function StaysSection() {
               <li
                 key={option.title}
                 data-reveal
-                className="rounded-2xl border border-line bg-[#fdfcf8] p-6"
+                className="rounded-2xl shadow-sm bg-white p-6"
               >
                 <div className="flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted">
                   <span>{option.kicker}</span>
@@ -143,17 +145,17 @@ export function StaysSection() {
                     <span className="text-sm text-muted"> / person</span>
                   </p>
                 </div>
-                <p className="mt-2 text-sm text-forest/80">
+                <p className="mt-2 text-sm text-muted">
                   {option.description}
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-                  <span className="bg-[#f3e2ad] px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest">
+                  <span className="bg-sun px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest">
                     €500 deposit to reserve
                   </span>
                   <a
                     href={RESERVE_URL}
-                    className="inline-flex items-center gap-3 rounded-full bg-forest px-5 py-3 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
+                    className="inline-flex items-center gap-3 rounded-full bg-forest px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
                   >
                     Reserve your spot
                     <ArrowRightIcon className="size-3.5" />
@@ -201,9 +203,9 @@ export function StaysSection() {
                 href={HOSTEL_INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest/80 transition hover:text-forest"
+                className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest transition hover:text-forest"
               >
-                See more of the hostel on Instagram ↗
+                Their Instagram
               </a>
             </div>
           </div>
@@ -212,7 +214,7 @@ export function StaysSection() {
         {/* Payment reassurance */}
         <ul
           data-reveal
-          className="mt-12 flex flex-col gap-4 rounded-2xl border border-line bg-[#f1ebdc] px-6 py-6 sm:flex-row sm:flex-wrap sm:justify-around lg:mt-10"
+          className="mt-12 flex flex-col gap-4 rounded-2xl shadown-sm bg-[#f1ebdc] px-6 py-6 sm:flex-row sm:flex-wrap sm:justify-around lg:mt-10"
         >
           {reassurances.map((item) => (
             <li
