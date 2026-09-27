@@ -95,7 +95,7 @@ export function ExperienceSection() {
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 xl:grid-cols-4">
           {experiences.map((exp, i) => (
             <li key={exp.title} data-reveal>
-              <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-line/70 bg-[#fdfcf9] can-hover:grid can-hover:aspect-[3/4] can-hover:h-auto can-hover:grid-rows-[minmax(0,1fr)_auto]">
+              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line/70 bg-[#fdfcf9] can-hover:grid can-hover:aspect-[3/4] can-hover:h-auto can-hover:grid-rows-[minmax(0,1fr)_auto]">
                 <div className="relative aspect-[4/3] overflow-hidden can-hover:aspect-auto">
                   <Image
                     src={exp.image}

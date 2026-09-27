@@ -40,7 +40,7 @@ export function HeroCarousel() {
   return (
     <figure data-reveal className="flex flex-col">
       <div
-        className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-ink sm:aspect-[2/3]"
+        className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-ink sm:aspect-[2/3]"
         role="region"
         aria-roledescription="carousel"
         aria-label="Trip highlights"

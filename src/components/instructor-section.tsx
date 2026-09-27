@@ -52,7 +52,7 @@ export function InstructorSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-            className="group relative block aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-ink outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
+            className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
           >
             <Image
               src="/images/pamela-aerial-silks.jpg"

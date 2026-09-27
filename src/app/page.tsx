@@ -109,7 +109,7 @@ export default function Home() {
 
             <article
               data-reveal
-              className="relative mt-auto overflow-hidden rounded-[2.5rem] bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11"
+              className="relative mt-auto overflow-hidden rounded-3xl bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11"
             >
               <div
                 aria-hidden="true"
