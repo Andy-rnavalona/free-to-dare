@@ -120,7 +120,7 @@ export function SiteHeader() {
       </div>
 
       <div
-        className={`relative mx-auto flex h-18 max-w-6xl items-center gap-6 px-5 sm:px-10 transition-[height] duration-500 lg:px-14 xl:px-0 ${
+        className={`relative mx-auto flex h-18 max-w-7xl items-center gap-6 px-5 sm:px-10 transition-[height] duration-500 lg:px-14 min-[88rem]:px-0 ${
           solid ? "lg:h-20" : "lg:h-[6.25rem]"
         }`}
       >

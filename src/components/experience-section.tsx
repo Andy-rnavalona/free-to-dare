@@ -130,7 +130,7 @@ export function ExperienceSection() {
       aria-labelledby="experience-title"
       className="bg-white"
     >
-      <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 xl:px-0 lg:py-32">
+      <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 min-[88rem]:px-0 lg:py-32">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p
@@ -152,14 +152,14 @@ export function ExperienceSection() {
           </div>
           <p
             data-reveal
-            className="max-w-sm text-lg leading-relaxed text-muted lg:mb-4"
+            className="max-w-sm text-sm leading-relaxed text-muted lg:mb-4"
           >
             Move, explore, create and connect — all in one unforgettable week.
           </p>
         </div>
 
         <div data-reveal className="mt-10 lg:mt-12">
-          <CardCarousel label="Retreat experiences" speed={80}>
+          <CardCarousel label="Retreat experiences" speed={20}>
             {experiences.map((exp, i) => (
               <li
                 key={exp.title}
@@ -203,7 +203,7 @@ export function ExperienceSection() {
 
                   {/* Fixed card height: as the details unfold, the photo row shrinks and the title rises */}
                   <div className="p-5 sm:p-6">
-                    <span className="text-[1.1rem] leading-[1.1]">
+                    <span className="text-[1rem] leading-[1.1]">
                       {exp.title}
                     </span>
                     <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] can-hover:grid-rows-[0fr] can-hover:group-hover:grid-rows-[1fr]">

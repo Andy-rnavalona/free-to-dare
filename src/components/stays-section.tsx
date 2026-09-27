@@ -182,7 +182,7 @@ export function StaysSection() {
       data-reveal-group
       className="bg-white"
     >
-      <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 xl:px-0 lg:py-32">
+      <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 min-[88rem]:px-0 lg:py-32">
         <p
           data-reveal
           className="flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.06em] text-forest"
@@ -197,7 +197,7 @@ export function StaysSection() {
         >
           Three ways to stay
         </h2>
-        <p data-reveal className="mt-5 text-lg text-forest/80">
+        <p data-reveal className="mt-5 text-sm text-forest/80">
           All within a 15-minute drive — pick whichever calls to you most.
         </p>
 

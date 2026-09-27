@@ -17,7 +17,7 @@ export function TrainingSpaceSection() {
       className="bg-white"
     >
       {/* No vertical padding: the white sections above and below already space it */}
-      <div className="mx-auto w-full max-w-6xl px-5 sm:px-10 lg:px-14 xl:px-0">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="grid gap-8   lg:grid-cols-2 lg:items-end lg:gap-16">
           <h2
             id="training-space-title"
@@ -29,7 +29,7 @@ export function TrainingSpaceSection() {
           </h2>
           <p
             data-reveal
-            className="max-w-md text-lg leading-relaxed text-muted lg:pb-2"
+            className="max-w-md text-sm leading-relaxed text-muted lg:pb-2"
           >
             A dedicated space to move, train and enjoy the retreat together.
           </p>
@@ -49,25 +49,18 @@ export function TrainingSpaceSection() {
             </h3>
             <p
               data-reveal
-              className="mt-4 max-w-xl text-lg leading-relaxed text-muted"
+              className="mt-4 max-w-xl text-sm leading-relaxed text-muted"
             >
               You’ll have your own dedicated training space at Jaya, with
               everything you need for the retreat sessions and plenty of room to
               relax between classes.
-            </p>
-
-            <p
-              data-reveal
-              className="mt-10 border-b border-lime pb-3 text-xs font-bold uppercase tracking-[0.08em] text-forest"
-            >
-              Included in your retreat
             </p>
             <ul>
               {included.map((item) => (
                 <li
                   key={item}
                   data-reveal
-                  className="border-b border-line py-5 text-lg font-semibold text-forest"
+                  className="border-b border-line py-3 text-lg font-semibold text-forest"
                 >
                   {item}
                 </li>
@@ -82,7 +75,7 @@ export function TrainingSpaceSection() {
                 <h3 className="mt-2 text-[clamp(1.4rem,1.8vw,1.9rem)] xl:text-[1.45rem] font-extrabold uppercase leading-tight tracking-tight text-forest">
                   Garden, patio &amp; bar
                 </h3>
-                <p className="mt-3 max-w-md leading-relaxed text-muted">
+                <p className="mt-3 max-w-md leading-relaxed text-muted text-sm">
                   Jaya also has a lovely outdoor garden and patio area, plus a
                   bar area with tables — perfect for relaxing, chatting and
                   spending time together between sessions.

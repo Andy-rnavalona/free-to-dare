@@ -9,7 +9,7 @@ export function SecretMomentSection() {
     <section
       aria-labelledby="secret-moment-title"
       data-reveal-group
-      className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-10 lg:px-14 lg:py-32 xl:px-0"
+      className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 lg:py-32 min-[88rem]:px-0"
     >
       <div className="mx-auto grid max-w-[53rem] gap-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:gap-7">
         <article

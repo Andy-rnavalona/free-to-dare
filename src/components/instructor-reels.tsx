@@ -4,30 +4,31 @@ import { useEffect, useRef, useState } from "react";
 import { PauseIcon, PlayIcon } from "@/components/icons";
 import { InstagramBadge, PAMELA_INSTAGRAM } from "@/components/instagram-badge";
 
+// The grid gets one column per reel (up to 4), so adding a video is enough
 const reels = [
   {
     src: "/videos/aerial-silks-beach.mp4",
     poster: "/videos/aerial-silks-beach.jpg",
     label: "Pamela climbing white aerial silks by the sea",
-    tilt: "sm:-rotate-3 lg:translate-y-4",
   },
   {
     src: "/videos/aerial-hoop-stage.mp4",
     poster: "/videos/aerial-hoop-stage.jpg",
     label: "Pamela spinning on an aerial hoop on an open-air stage",
-    tilt: "sm:rotate-2 lg:-translate-y-2",
   },
   {
     src: "/videos/aerial-hoop-sunset.mp4",
     poster: "/videos/aerial-hoop-sunset.jpg",
     label: "Pamela holding a split on an aerial hoop at sunset",
-    tilt: "sm:-rotate-2 lg:translate-y-3",
   },
 ];
 
+// Alternating tilts, like prints scattered on a table
+const tilts = ["sm:-rotate-2", "sm:rotate-2", "sm:-rotate-1", "sm:rotate-2"];
+
 type Reel = (typeof reels)[number];
 
-function ReelCard({ reel }: { reel: Reel }) {
+function ReelCard({ reel, tilt }: { reel: Reel; tilt: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const pausedByUser = useRef(false);
   const [playing, setPlaying] = useState(false);
@@ -66,7 +67,7 @@ function ReelCard({ reel }: { reel: Reel }) {
 
   return (
     <div
-      className={`relative aspect-[9/16] w-[18rem] max-w-full overflow-hidden rounded-2xl bg-ink shadow-[0_24px_48px_-28px_rgb(22_35_26/0.55)] transition-[rotate,translate,scale] duration-500 ease-out sm:w-[16.5rem] can-hover:hover:rotate-0 can-hover:hover:translate-y-0 can-hover:hover:scale-[1.02] ${reel.tilt}`}
+      className={`relative aspect-[5/8] w-full overflow-hidden rounded-xl bg-ink shadow-[0_24px_48px_-24px_rgb(22_35_26/0.5)] transition-[rotate,scale] duration-500 ease-out sm:scale-95 can-hover:hover:rotate-0 can-hover:hover:scale-100 ${tilt}`}
     >
       <video
         ref={videoRef}
@@ -81,14 +82,19 @@ function ReelCard({ reel }: { reel: Reel }) {
         className="size-full object-cover"
       />
 
-      {/* The whole video toggles playback */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent"
+      />
+
+      {/* The whole video toggles playback; the button sits bottom-left */}
       <button
         type="button"
         onClick={toggle}
         aria-label={`${playing ? "Pause" : "Play"} video: ${reel.label}`}
-        className="group absolute inset-0 flex cursor-pointer items-end p-4 outline-offset-[-4px] focus-visible:outline-2 focus-visible:outline-white"
+        className="group absolute inset-0 flex cursor-pointer items-end p-4 text-left outline-offset-[-4px] focus-visible:outline-2 focus-visible:outline-white"
       >
-        <span className="grid size-10 place-items-center rounded-full bg-ink/45 text-white backdrop-blur-md transition group-hover:bg-ink/65">
+        <span className="grid size-9 place-items-center rounded-full bg-ink/45 text-white backdrop-blur-md transition group-hover:bg-ink/65">
           {playing ? (
             <PauseIcon className="size-4" />
           ) : (
@@ -118,13 +124,25 @@ export function InstructorReels() {
       data-reveal-group
       className="bg-white pb-24 lg:pb-32"
     >
-      <ul className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 px-5 py-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-14 sm:px-10 lg:gap-12 lg:px-14 xl:px-0">
-        {reels.map((reel) => (
-          <li key={reel.src} data-reveal className="max-w-full">
-            <ReelCard reel={reel} />
-          </li>
-        ))}
-      </ul>
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
+        <ul
+          style={
+            { "--reels": Math.min(reels.length, 4) } as React.CSSProperties
+          }
+          // ~20rem per card, so 3 reels sit centred at the same size as 4
+          className="mx-auto grid max-w-[calc(var(--reels)*20rem+(var(--reels)-1)*1.5rem)] gap-8 py-8 sm:grid-cols-[repeat(var(--reels),minmax(0,1fr))] sm:gap-6"
+        >
+          {reels.map((reel, i) => (
+            <li
+              key={reel.src}
+              data-reveal
+              className="mx-auto w-full max-w-80 sm:max-w-none"
+            >
+              <ReelCard reel={reel} tilt={tilts[i % tilts.length]} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

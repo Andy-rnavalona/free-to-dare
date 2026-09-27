@@ -44,14 +44,15 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 xl:px-0 lg:pb-32 lg:pt-8">
-        <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0 lg:pb-32 lg:pt-8">
+        {/* On desktop the photo stretches to the height of the text column */}
+        <div data-reveal className="lg:h-full">
           <a
             href={PAMELA_INSTAGRAM.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-            className="group group/ig relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
+            className="group group/ig relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink lg:aspect-auto lg:h-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
           >
             <Image
               src="/images/pamela-aerial-silks.jpg"
@@ -69,7 +70,7 @@ export function InstructorSection() {
         <div className="lg:pt-2">
           <p
             data-reveal
-            className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em]"
+            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em]"
           >
             <SparkleIcon className="size-3.5 text-[#a3bf37]" />
             Instructors
@@ -78,20 +79,20 @@ export function InstructorSection() {
           <h2
             id="instructors-title"
             data-reveal
-            className="mt-8 text-[clamp(2.5rem,4.4vw,4.75rem)] xl:text-[3.5rem] font-medium leading-[1.05] tracking-tight"
+            className="mt-8 font-display text-[clamp(2.5rem,4.4vw,4.75rem)] leading-[0.95] tracking-[-0.01em] xl:text-[3.5rem]"
           >
             <span className="block">Meet Pamela</span>
-            <span className="block text-ink/45">
+            <span className="block">
               Mariotto
               <ItalianFlag />
             </span>
           </h2>
 
-          <div className="mt-10 max-w-2xl space-y-6 text-lg leading-relaxed text-muted">
+          <div className="mt-10 max-w-2xl space-y-3 text-sm leading-relaxed text-muted flex flex-col">
             {bio.map((paragraph) => (
-              <p key={paragraph.slice(0, 32)} data-reveal>
+              <span key={paragraph.slice(0, 32)} data-reveal>
                 {paragraph}
-              </p>
+              </span>
             ))}
           </div>
 
@@ -100,7 +101,7 @@ export function InstructorSection() {
               <li
                 key={item}
                 data-reveal
-                className="border-t border-line pt-5 text-xl font-bold tracking-tight"
+                className="border-t border-line pt-5 text-lg font-bold tracking-tight"
               >
                 {item}
               </li>

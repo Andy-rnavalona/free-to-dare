@@ -118,7 +118,7 @@ export function HeroSection() {
         <span aria-hidden="true" className="h-6 w-px bg-white" />
       </div>
 
-      <div className="relative mx-auto flex min-h-svh w-full max-w-6xl flex-col justify-center px-5 pb-16 pt-28 sm:px-10 md:pb-24 lg:px-14 xl:px-0">
+      <div className="relative mx-auto flex min-h-svh w-full max-w-7xl flex-col justify-center px-5 pb-16 pt-28 sm:px-10 md:pb-24 lg:px-14 min-[88rem]:px-0">
         <p
           data-reveal
           className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-white/70"

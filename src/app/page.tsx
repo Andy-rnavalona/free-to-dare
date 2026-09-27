@@ -28,17 +28,8 @@ export default function Home() {
       <div className="bg-white">
         <div
           data-reveal-group
-          className="mx-auto w-full max-w-6xl px-5 sm:px-10 lg:px-14 xl:px-0"
+          className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0"
         >
-          <header
-            data-reveal
-            className="flex items-center justify-between gap-4 border-b border-line py-6 text-[11px] font-bold uppercase tracking-[0.16em] text-ink sm:py-8 sm:text-xs"
-          >
-            <span>Lisbon Aerial Escape</span>
-            <span className="hidden md:inline">38.7223° N / 9.1393° W</span>
-            <span>City Escape / 2027</span>
-          </header>
-
           <div className="grid gap-12 pt-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
             {/* Intro */}
             <section className="@container flex flex-col lg:pt-4">
@@ -47,13 +38,10 @@ export default function Home() {
                   <SparkleIcon className="size-4 text-sand" />
                   Lisbon / Portugal
                 </p>
-                <p className="mt-2 pl-7 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                  Curated city escape
-                </p>
               </div>
 
               {/* Sized from the column width so the longest word ("COMMUNITY", ~6.4em wide) always fits */}
-              <h1 className="mt-14 font-display text-[min(6rem,15cqi)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-20">
+              <h1 className="mt-8 font-display text-[min(6rem,15cqi)] uppercase leading-[0.86] tracking-[-0.01em] lg:mt-8">
                 <span data-reveal className="block">
                   HOOP
                 </span>
@@ -80,7 +68,7 @@ export default function Home() {
                 ))}
               </ul>
 
-              <div className="mt-10 max-w-xl space-y-7 text-lg leading-relaxed text-muted">
+              <div className="mt-10 max-w-xl space-y-7 text-sm leading-relaxed text-muted">
                 <p data-reveal>
                   Join us for an aerial retreat in Lisbon: train every day,
                   enjoy the city at the magical time when the jacaranda trees
@@ -99,18 +87,18 @@ export default function Home() {
             <ReelCard />
 
             {/* Details */}
-            <aside className="flex flex-col gap-12 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-10 xl:col-span-1 xl:flex xl:gap-12 xl:pt-4">
+            <aside className="flex flex-col gap-5 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-5 xl:col-span-1 xl:flex xl:gap-5 xl:pt-4">
               <dl>
                 {tripDetails.map(({ label, value }) => (
                   <div
                     key={label}
                     data-reveal
-                    className="flex items-baseline justify-between gap-6 border-b border-line py-7 first:pt-4 lg:py-9"
+                    className="flex items-baseline justify-between gap-5 border-b border-line py-2 first:pt-4 lg:py-3"
                   >
                     <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                       {label}
                     </dt>
-                    <dd className="text-right text-lg font-semibold">
+                    <dd className="text-right text-sm font-medium">
                       {value}
                     </dd>
                   </div>
@@ -141,7 +129,7 @@ export default function Home() {
                   </span>
                 </div>
                 <SparkleIcon className="absolute right-0 top-1/2 size-4 text-muted/60 -translate-x-5" />
-                <p className="mt-12 leading-relaxed text-muted">
+                <p className="mt-12 text-sm leading-relaxed text-muted">
                   Hey, I’m Verolina, the organiser of this retreat. I first
                   discovered Lisbon during jacaranda season and completely fell
                   in love with its flowers, light and special atmosphere. I
