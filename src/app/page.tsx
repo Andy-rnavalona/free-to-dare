@@ -34,7 +34,7 @@ export default function Home() {
             {/* Intro */}
             <section className="@container flex flex-col lg:pt-4">
               <div data-reveal>
-                <p className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.16em]">
+                <p className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em]">
                   <SparkleIcon className="size-4 text-sand" />
                   Lisbon / Portugal
                 </p>
@@ -87,7 +87,7 @@ export default function Home() {
             <ReelCard />
 
             {/* Details */}
-            <aside className="flex flex-col gap-5 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-5 xl:col-span-1 xl:flex xl:gap-5 xl:pt-4">
+            <aside className="flex flex-col gap-5 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-5 xl:col-span-1 xl:flex xl:gap-5">
               <dl>
                 {tripDetails.map(({ label, value }) => (
                   <div
@@ -107,7 +107,7 @@ export default function Home() {
 
               <article
                 data-reveal
-                className="relative mt-auto overflow-hidden rounded-3xl bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)] sm:p-11"
+                className="relative overflow-hidden rounded-3xl bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)]sm:p-11"
               >
                 <div
                   aria-hidden="true"
@@ -125,7 +125,7 @@ export default function Home() {
                     />
                   </div>
                   <span className="text-[11px] font-bold uppercase tracking-[0.16em]">
-                    16 travelers max
+                    Note from the organiser
                   </span>
                 </div>
                 <SparkleIcon className="absolute right-0 top-1/2 size-4 text-muted/60 -translate-x-5" />
