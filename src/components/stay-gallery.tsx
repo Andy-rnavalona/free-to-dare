@@ -3,32 +3,39 @@
 import Image from "next/image";
 import { useState } from "react";
 
-type Photo = { src: string; alt: string; position?: string };
+export type Photo = { src: string; alt: string; position?: string };
 
 export function StayGallery({
   photos,
   soldOut = false,
+  className = "aspect-[4/3]",
+  sizes = "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw",
+  imageClassName = "",
 }: {
   photos: Photo[];
   soldOut?: boolean;
+  /** Sizing of the frame; defaults to a 4:3 box */
+  className?: string;
+  sizes?: string;
+  imageClassName?: string;
 }) {
   const [index, setIndex] = useState(0);
   const go = (step: number) =>
     setIndex((i) => (i + step + photos.length) % photos.length);
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden bg-ink">
+    <div className={`relative overflow-hidden bg-ink ${className}`}>
       {photos.map((photo, i) => (
         <Image
           key={photo.src}
           src={photo.src}
           alt={photo.alt}
           fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          sizes={sizes}
           aria-hidden={i !== index}
-          className={`object-cover transition-opacity duration-500 ease-out ${
+          className={`object-cover transition-[opacity,scale] duration-500 ease-out ${
             photo.position ?? ""
-          } ${i === index ? "opacity-100" : "opacity-0"}`}
+          } ${imageClassName} ${i === index ? "opacity-100" : "opacity-0"}`}
         />
       ))}
 
