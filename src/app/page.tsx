@@ -4,6 +4,7 @@ import { HeroCarousel } from "@/components/hero-carousel";
 import { HeroSection } from "@/components/hero-section";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
+import { SecretMomentSection } from "@/components/secret-moment-section";
 import { StaysSection } from "@/components/stays-section";
 import { TrainingSpaceSection } from "@/components/training-space-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
@@ -160,6 +161,7 @@ export default function Home() {
       <InstructorReels />
       <TrainingSpaceSection />
       <StaysSection />
+      <SecretMomentSection />
     </main>
   );
 }
