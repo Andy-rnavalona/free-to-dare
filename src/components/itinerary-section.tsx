@@ -28,6 +28,8 @@ type Activity = {
   title: string;
   description: string;
   icon: Icon;
+  /** Adds the “return group transfer included” line */
+  transfer?: boolean;
 };
 
 type Photo = {
@@ -84,6 +86,7 @@ const days: Day[] = [
         description:
           "Our first evening is all about meeting each other. We’ll gather for a relaxed community dinner in Lisbon and officially begin our Urban Escape together.",
         icon: UtensilsIcon,
+        transfer: true,
       },
       {
         kind: "City",
@@ -91,6 +94,7 @@ const days: Day[] = [
         description:
           "After dinner, those who wish can join a relaxed walk through central Lisbon and enjoy the atmosphere of the city at night.",
         icon: FootprintsIcon,
+        transfer: true,
       },
     ],
     overnight: true,
@@ -120,6 +124,7 @@ const days: Day[] = [
         description:
           "Our first 90-minute aerial hoop training takes place at JAYA Aerial Lab – Studio 1.",
         icon: SparklesIcon,
+        transfer: true,
       },
       {
         kind: "Free time",
@@ -134,6 +139,7 @@ const days: Day[] = [
         description:
           "In the evening, we head to the Tagus River for a sunset sailing experience. See Lisbon from the water as the city turns golden and sail past some of its iconic riverside landmarks.",
         icon: SailboatIcon,
+        transfer: true,
       },
     ],
     overnight: true,
@@ -161,6 +167,7 @@ const days: Day[] = [
         description:
           "Explore Lisbon with a local guide through historic neighbourhoods, colourful streets, viewpoints and hidden corners — focused on the atmosphere and stories of the city rather than a traditional sightseeing tour.",
         icon: FootprintsIcon,
+        transfer: true,
       },
       {
         kind: "Social",
@@ -172,8 +179,9 @@ const days: Day[] = [
         kind: "Aerial training",
         title: "Aerial Hoop Class #2",
         description:
-          "Return to JAYA Aerial Lab for another 90-minute aerial hoop session.",
+          "Return to JAYA Aerial Lab for another 90-minute training session.",
         icon: SparklesIcon,
+        transfer: true,
       },
     ],
     overnight: true,
@@ -202,6 +210,7 @@ const days: Day[] = [
         description:
           "Explore some of Lisbon’s most photogenic locations during our urban photoshoot. Think colourful façades, azulejos, yellow trams, narrow streets, viewpoints and cinematic city moments.",
         icon: CameraIcon,
+        transfer: true,
       },
       {
         kind: "Free time",
@@ -215,6 +224,7 @@ const days: Day[] = [
         description:
           "Continue our aerial journey with the third 90-minute hoop class at JAYA.",
         icon: SparklesIcon,
+        transfer: true,
       },
     ],
     overnight: true,
@@ -250,6 +260,7 @@ const days: Day[] = [
         description:
           "Today we transform the studio into our creative playground for a dedicated aerial hoop photoshoot. Participants will have the opportunity to capture beautiful images on the hoop.",
         icon: CameraIcon,
+        transfer: true,
       },
       {
         kind: "Aerial training",
@@ -257,6 +268,7 @@ const days: Day[] = [
         description:
           "Continue directly with our fourth 90-minute aerial hoop training.",
         icon: SparklesIcon,
+        transfer: true,
       },
       {
         kind: "Free time",
@@ -292,6 +304,7 @@ const days: Day[] = [
         description:
           "Begin the day with our fifth and final 90-minute aerial hoop session at JAYA Aerial Lab.",
         icon: SparklesIcon,
+        transfer: true,
       },
       {
         kind: "Evening",
@@ -299,6 +312,7 @@ const days: Day[] = [
         description:
           "After training, we leave Lisbon and travel towards Carcavelos Beach.",
         icon: MoonIcon,
+        transfer: true,
       },
       {
         kind: "Ocean",
@@ -306,6 +320,7 @@ const days: Day[] = [
         description:
           "Swap the hoop for a surfboard and experience Portugal from the water. The surf session is designed to be accessible and fun, including instruction and equipment.",
         icon: WavesIcon,
+        transfer: true,
       },
       {
         kind: "Evening",
@@ -313,12 +328,14 @@ const days: Day[] = [
         description:
           "After surfing, enjoy time by the ocean to relax, have a drink and soak up the Portuguese coastline before returning to Lisbon.",
         icon: MoonIcon,
+        transfer: true,
       },
       {
         kind: "Social",
         title: "Farewell Evening",
         description: "Celebrate our final evening together in Lisbon.",
         icon: UtensilsIcon,
+        transfer: true,
       },
     ],
     overnight: true,
@@ -331,8 +348,9 @@ const days: Day[] = [
     activities: [
       {
         kind: "Travel",
-        title: "Departure",
-        description: "Individual departures from Lisbon.",
+        title: "GROUP TRANSFER TO THE AIRPORT",
+        description:
+          "We organise group transfers based on participants’ flight departure times.",
         icon: PlaneIcon,
       },
     ],
@@ -342,7 +360,7 @@ const days: Day[] = [
 const summary = [
   "5–11 June 2027",
   `${NIGHTS} nights`,
-  "5 × 90 min aerial classes",
+  "6 × 90 min aerial classes",
   "Lisbon",
 ];
 
@@ -389,24 +407,34 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
       <p className="text-sm leading-relaxed text-muted">{day.intro}</p>
 
       <ul className="mt-4 divide-y divide-line/60">
-        {day.activities.map(({ kind, title, description, icon: Icon }) => (
-          <li key={title} className="py-3.5 first:pt-0 last:pb-0">
-            <div className="flex min-w-0 items-start gap-3">
-              <Icon className="mt-0.5 size-5 shrink-0 text-forest" />
-              <div className="min-w-0">
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-                  {kind}
-                </p>
-                <h3 className="mt-1.5 font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
-                  {title}
-                </h3>
+        {day.activities.map(
+          ({ kind, title, description, icon: Icon, transfer }) => (
+            <li key={title} className="py-3.5 first:pt-0 last:pb-0">
+              <div className="flex min-w-0 items-start gap-3">
+                <Icon className="mt-0.5 size-5 shrink-0 text-forest" />
+                <div className="min-w-0">
+                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+                    {kind}
+                  </p>
+                  <h3 className="mt-1.5 font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
+                    {title}
+                  </h3>
+                </div>
               </div>
-            </div>
-            <p className="mt-2 pl-8 text-sm leading-relaxed text-muted">
-              {description}
-            </p>
-          </li>
-        ))}
+              <p className="mt-2 pl-8 text-sm leading-relaxed text-muted">
+                {description}
+                {transfer && (
+                  <>
+                    {" "}
+                    <strong className="font-bold text-forest">
+                      Return group transfer is included.
+                    </strong>
+                  </>
+                )}
+              </p>
+            </li>
+          ),
+        )}
       </ul>
 
       {day.overnight && (
@@ -461,7 +489,12 @@ export function ItinerarySection() {
               >
                 A day-by-day look at the week. Open any day to see the
                 experiences planned, from studio sessions to sunsets on the
-                water.
+                water.{" "}
+                <strong className="font-bold text-forest">
+                  TRANSPORT INCLUDED · Group airport transfers · Lisbon
+                  transport pass · Transport to scheduled classes &amp;
+                  activities
+                </strong>
               </p>
               <p
                 data-reveal
@@ -540,7 +573,7 @@ export function ItinerarySection() {
                 Flexible payment options available
               </p>
               <p className="mt-5 border-t border-line pt-4 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-                5 × 90 min aerial hoop classes
+                6 × 90 min aerial hoop classes
               </p>
             </div>
           </aside>
