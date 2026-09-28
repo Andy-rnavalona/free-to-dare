@@ -55,7 +55,7 @@ const pillText = "text-sm font-light leading-none tracking-wide text-white/85";
 
 const facts = [
   {
-    label: "5 – 11 September 2027",
+    label: "5 – 11 June 2027",
     icon: (
       <>
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -141,7 +141,7 @@ export function HeroSection() {
             className="hidden h-24 w-px shrink-0 bg-sun sm:block"
           />
           <p className="max-w-2xl font-serif text-xl italic leading-tight tracking-tight text-white/85 md:text-2xl lg:text-[1.75rem]">
-       Learn to build and dance your own aerial hoop choreography, combining daily training with a real holiday in Lisbon. Explore the city, live new experiences and share it all with people who love aerial as much as you do.
+       Learn to build and dance your own aerial hoop & silks choreography, combining daily training with a real holiday in Lisbon. Explore the city, live new experiences, and share it all with people who love aerial as much as you do.
           </p>
         </div>
 

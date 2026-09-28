@@ -130,7 +130,7 @@ export function ExperienceSection() {
       aria-labelledby="experience-title"
       className="bg-white"
     >
-      <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 min-[88rem]:px-0 lg:py-32">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p

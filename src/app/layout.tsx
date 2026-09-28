@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  Barlow_Condensed,
   Caveat,
   Cormorant_Garamond,
   Inter,
@@ -35,6 +36,13 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
 });
 
+// Itinerary headings (condensed, like the itinerary reference design)
+const barlowCondensed = Barlow_Condensed({
+  variable: "--font-barlow-condensed",
+  weight: ["600", "700", "800"],
+  subsets: ["latin"],
+});
+
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   weight: ["400", "700"],
@@ -51,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${workSansBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${inter.variable} ${workSansBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} ${barlowCondensed.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -44,7 +44,7 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-24 pt-4 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0 lg:pb-32">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0">
         {/* On desktop the photo stretches to the height of the text column */}
         <div data-reveal className="lg:h-full">
           <a

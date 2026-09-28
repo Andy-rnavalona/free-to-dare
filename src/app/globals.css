@@ -17,6 +17,7 @@
   --color-sand: #d9a57b;
   --color-night: #111a29;
   --color-sun: #f6d736;
+  --color-sun-soft: oklch(95% 0.07 98);
   --color-forest: #1d4a20;
   --color-lime: #d4ea6a;
 
@@ -25,6 +26,28 @@
   --font-mono: var(--font-space-mono);
   --font-script: var(--font-caveat);
   --font-serif: var(--font-cormorant);
+  --font-condensed: var(--font-barlow-condensed);
+}
+
+/* The one vertical space between page sections (see .section-stack) */
+:root {
+  --section-gap: 4rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --section-gap: 6rem;
+  }
+}
+
+/* Sections are spaced only by the parent's gap: their own outer children
+   must not add margins on top of it */
+.section-stack > * > :first-child {
+  margin-top: 0;
+}
+
+.section-stack > * > :last-child {
+  margin-bottom: 0;
 }
 
 html {

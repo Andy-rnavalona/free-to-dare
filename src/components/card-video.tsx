@@ -11,16 +11,19 @@ import {
 /**
  * Card video: muted loop that plays while on screen, with play/pause and
  * sound buttons. Nothing downloads until the card nears the viewport.
+ * The sound button only shows for videos that have an audio track.
  */
 export function CardVideo({
   sources,
   poster,
   label,
+  hasAudio = true,
   className = "",
 }: {
   sources: { src: string; type: string }[];
   poster: string;
   label: string;
+  hasAudio?: boolean;
   className?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -106,18 +109,20 @@ export function CardVideo({
             <PlayIcon className="ml-0.5 size-3.5" />
           )}
         </button>
-        <button
-          type="button"
-          onClick={toggleSound}
-          aria-label={muted ? "Turn sound on" : "Turn sound off"}
-          className={control}
-        >
-          {muted ? (
-            <VolumeOffIcon className="size-4" />
-          ) : (
-            <VolumeOnIcon className="size-4" />
-          )}
-        </button>
+        {hasAudio && (
+          <button
+            type="button"
+            onClick={toggleSound}
+            aria-label={muted ? "Turn sound on" : "Turn sound off"}
+            className={control}
+          >
+            {muted ? (
+              <VolumeOffIcon className="size-4" />
+            ) : (
+              <VolumeOnIcon className="size-4" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

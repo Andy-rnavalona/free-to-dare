@@ -85,7 +85,7 @@ export function StaysSection() {
       data-reveal-group
       className="bg-white"
     >
-      <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-10 lg:px-14 lg:py-32 min-[88rem]:px-0">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         {/* Heading */}
         <div className="relative">
           <p

@@ -122,7 +122,7 @@ export function InstructorReels() {
     <section
       aria-label="Pamela in motion"
       data-reveal-group
-      className="bg-white pb-24 lg:pb-32"
+      className="bg-white"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <ul
@@ -130,7 +130,7 @@ export function InstructorReels() {
             { "--reels": Math.min(reels.length, 4) } as React.CSSProperties
           }
           // ~20rem per card, so 3 reels sit centred at the same size as 4
-          className="mx-auto grid max-w-[calc(var(--reels)*20rem+(var(--reels)-1)*1.5rem)] gap-8 py-8 sm:grid-cols-[repeat(var(--reels),minmax(0,1fr))] sm:gap-6"
+          className="mx-auto grid max-w-[calc(var(--reels)*20rem+(var(--reels)-1)*1.5rem)] gap-8 sm:grid-cols-[repeat(var(--reels),minmax(0,1fr))] sm:gap-6"
         >
           {reels.map((reel, i) => (
             <li

@@ -3,6 +3,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { HeroSection } from "@/components/hero-section";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
+import { ItinerarySection } from "@/components/itinerary-section";
 import { ReelCard } from "@/components/reel-card";
 import { SecretMomentSection } from "@/components/secret-moment-section";
 import { StaysSection } from "@/components/stays-section";
@@ -23,14 +24,14 @@ const tripDetails = [
 
 export default function Home() {
   return (
-    <main className="w-full flex-1 bg-white">
+    <main className="section-stack flex w-full flex-1 flex-col gap-(--section-gap) bg-white pb-(--section-gap)">
       <HeroSection />
-      <div className="mt-30">
+      <div>
         <div
           data-reveal-group
           className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0"
         >
-          <div className="grid gap-12 pt-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-14">
             {/* Intro */}
             <section className="@container flex flex-col lg:pt-4">
               <div data-reveal>
@@ -144,6 +145,7 @@ export default function Home() {
       <InstructorSection />
       <InstructorReels />
       <TrainingSpaceSection />
+      <ItinerarySection />
       <StaysSection />
       {/* <SecretMomentSection /> */}
     </main>

@@ -16,7 +16,6 @@ export function TrainingSpaceSection() {
       data-reveal-group
       className="bg-white"
     >
-      {/* No vertical padding: the white sections above and below already space it */}
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="grid gap-8   lg:grid-cols-2 lg:items-end lg:gap-16">
           <h2
