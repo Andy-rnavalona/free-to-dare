@@ -26,7 +26,6 @@
   --font-mono: var(--font-space-mono);
   --font-script: var(--font-caveat);
   --font-serif: var(--font-cormorant);
-  --font-condensed: var(--font-barlow-condensed);
 }
 
 /* The one vertical space between page sections (see .section-stack) */

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ComponentType, SVGProps } from "react";
 import {
+  ArrowRightIcon,
   BedDoubleIcon,
   CameraIcon,
   FootprintsIcon,
@@ -393,10 +394,10 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
             <div className="flex min-w-0 items-start gap-3">
               <Icon className="mt-0.5 size-5 shrink-0 text-forest" />
               <div className="min-w-0">
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-muted">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
                   {kind}
                 </p>
-                <h3 className="mt-2 font-condensed text-lg font-bold uppercase leading-tight text-forest">
+                <h3 className="mt-1.5 font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
                   {title}
                 </h3>
               </div>
@@ -413,11 +414,11 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
             <div className="flex min-w-0 items-center gap-3">
               <BedDoubleIcon className="size-5 shrink-0 text-forest" />
-              <h3 className="truncate font-condensed text-xl font-bold uppercase text-forest">
+              <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
                 {HOSTEL}
               </h3>
             </div>
-            <span className="shrink-0 bg-sun px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-forest">
+            <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
               Night {index + 1}/{NIGHTS}
             </span>
           </div>
@@ -439,24 +440,24 @@ export function ItinerarySection() {
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-14">
           <div className="min-w-0">
-            <header className="mb-6">
+            <header className="mb-12 lg:mb-14">
               <p
                 data-reveal
-                className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-muted"
+                className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-forest"
               >
-                <span className="mr-2 inline-block size-2 rounded-full bg-sun align-middle" />
+                <span aria-hidden="true" className="h-px w-10 bg-sand" />
                 The week
               </p>
               <h2
                 id="itinerary-title"
                 data-reveal
-                className="mt-3 font-condensed text-5xl font-extrabold uppercase leading-[0.9] tracking-tight text-forest sm:text-6xl"
+                className="mt-5 max-w-3xl font-display text-[clamp(2.5rem,5.5vw,4.25rem)] uppercase leading-[0.95] tracking-[-0.02em] text-forest"
               >
                 Your Lisbon adventure
               </h2>
               <p
                 data-reveal
-                className="mt-3 max-w-2xl text-sm leading-relaxed text-muted"
+                className="mt-6 max-w-xl text-sm leading-relaxed text-muted"
               >
                 A day-by-day look at the week. Open any day to see the
                 experiences planned, from studio sessions to sunsets on the
@@ -464,7 +465,7 @@ export function ItinerarySection() {
               </p>
               <p
                 data-reveal
-                className="mt-3 text-[0.7rem] font-bold uppercase leading-loose tracking-[0.22em] text-forest/80 sm:text-xs"
+                className="mt-4 font-mono text-[0.7rem] uppercase leading-loose tracking-[0.2em] text-forest"
               >
                 {summary.map((item, i) => (
                   <span key={item}>
@@ -497,7 +498,7 @@ export function ItinerarySection() {
 
             <p
               data-reveal
-              className="mt-8 rounded-2xl border border-line/60 bg-white p-5 text-sm leading-relaxed text-muted"
+              className="mt-8 rounded-xl bg-white p-5 text-sm leading-relaxed text-muted shadow-sm"
             >
               The activity order is indicative. The final schedule may be
               adjusted according to local conditions, weather and operational
@@ -508,37 +509,37 @@ export function ItinerarySection() {
 
           {/* Booking card, follows the scroll on desktop */}
           <aside className="hidden lg:sticky lg:top-32 lg:block lg:self-start">
-            <div className="rounded-[1.75rem] border border-line/60 bg-white p-7">
-              <p className="font-condensed text-2xl font-extrabold uppercase leading-none text-forest">
+            <div className="rounded-xl bg-white p-7 shadow-sm">
+              <p className="font-display text-xl uppercase leading-tight tracking-[-0.01em] text-forest">
                 Lisbon Aerial Urban Escape
               </p>
-              <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-muted">
+              <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                 5–11 June 2027
               </p>
-              <div className="mt-6 border-t border-line/60 pt-5">
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-muted">
+              <div className="mt-6 border-t border-line pt-5">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
                   From
                 </p>
-                <p className="mt-1 font-condensed text-5xl font-extrabold leading-none text-forest">
+                <p className="mt-1 font-display text-4xl leading-none text-forest">
                   {PRICE_FROM}
                 </p>
-                <p className="mt-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-forest">
-                  <span className="rounded-full bg-sun-soft px-2 py-0.5">
-                    €500 deposit
-                  </span>{" "}
-                  to reserve
+                <p className="mt-3">
+                  <span className="inline-block bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
+                    €500 deposit to reserve
+                  </span>
                 </p>
               </div>
               <a
                 href={RESERVE_URL}
-                className="mt-6 flex w-full items-center justify-center rounded-full bg-sun px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-forest transition-transform hover:-translate-y-0.5"
+                className="mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-forest px-5 py-3.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
               >
                 Book your spot
+                <ArrowRightIcon className="size-3.5" />
               </a>
               <p className="mt-3 text-center text-xs text-muted">
                 Flexible payment options available
               </p>
-              <p className="mt-5 border-t border-line/60 pt-4 text-center text-[0.68rem] font-bold uppercase tracking-[0.2em] text-muted">
+              <p className="mt-5 border-t border-line pt-4 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
                 5 × 90 min aerial hoop classes
               </p>
             </div>
@@ -550,18 +551,19 @@ export function ItinerarySection() {
       <div className="sticky bottom-0 z-40 border-t border-line/60 bg-white px-4 py-3 lg:hidden">
         <div className="mx-auto flex max-w-xl items-center justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-muted">
+            <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
               From
             </p>
-            <p className="font-condensed text-2xl font-extrabold leading-none text-forest">
+            <p className="font-display text-2xl leading-none text-forest">
               {PRICE_FROM}
             </p>
           </div>
           <a
             href={RESERVE_URL}
-            className="shrink-0 rounded-full bg-sun px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-forest"
+            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-forest px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
           >
             Book your spot
+            <ArrowRightIcon className="size-3.5" />
           </a>
         </div>
       </div>

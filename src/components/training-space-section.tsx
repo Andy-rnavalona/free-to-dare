@@ -59,7 +59,7 @@ export function TrainingSpaceSection() {
                 <li
                   key={item}
                   data-reveal
-                  className="border-b border-line py-3 text-lg font-semibold text-forest"
+                  className="border-b border-line py-3 text-md font-semibold text-forest"
                 >
                   {item}
                 </li>

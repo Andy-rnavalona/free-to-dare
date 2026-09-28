@@ -25,10 +25,8 @@ export function ItineraryDay({
 
   return (
     <article
-      className={`overflow-hidden rounded-xl shadow-sm bg-white transition-all duration-300 ${
-        open
-          ? "border-forest/30"
-          : "border-line/60 hover:-translate-y-0.5 hover:border-forest/40 hover:bg-sun-soft/30"
+      className={`overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 ${
+        open ? "" : "hover:-translate-y-0.5 hover:bg-sun-soft/30"
       }`}
     >
       <button
@@ -38,16 +36,16 @@ export function ItineraryDay({
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:gap-5 sm:px-7 sm:py-5"
       >
-        <span className="inline-flex shrink-0 items-center justify-center bg-sun px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest/80">
+        <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest">
           Day {day}
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-condensed text-2xl font-bold uppercase leading-[0.95] tracking-tight text-forest sm:text-[1.75rem]">
+          <span className="block font-display text-xl uppercase leading-tight tracking-[-0.01em] text-forest sm:text-2xl">
             {title}
           </span>
           <span className="mt-1 block text-sm text-muted">{date}</span>
         </span>
-        <span className="inline-flex shrink-0 items-center gap-3 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-forest">
+        <span className="inline-flex shrink-0 items-center gap-3 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
           <span className="hidden sm:inline">
             {open ? "Hide day" : "View day"}
           </span>
