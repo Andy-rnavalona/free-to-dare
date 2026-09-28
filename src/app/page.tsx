@@ -23,9 +23,9 @@ const tripDetails = [
 
 export default function Home() {
   return (
-    <main className="w-full flex-1">
+    <main className="w-full flex-1 bg-white">
       <HeroSection />
-      <div className="bg-white">
+      <div className="mt-30">
         <div
           data-reveal-group
           className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0"
@@ -109,11 +109,6 @@ export default function Home() {
                 data-reveal
                 className="relative overflow-hidden rounded-3xl bg-card p-8 shadow-[0_1px_0_rgb(22_35_26/0.04)]sm:p-11"
               >
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-28 -top-28 size-64 rounded-full border border-line"
-                />
-
                 <div className="relative flex items-center justify-between">
                   <div className="relative size-16 overflow-hidden rounded-full ring-4 ring-white">
                     <Image
@@ -128,8 +123,7 @@ export default function Home() {
                     Note from the organiser
                   </span>
                 </div>
-                <SparkleIcon className="absolute right-0 top-1/2 size-4 text-muted/60 -translate-x-5" />
-                <p className="mt-12 text-sm leading-relaxed text-muted">
+                <p className="mt-5 text-sm leading-relaxed text-muted">
                   Hey, I’m Verolina, the organiser of this retreat. I first
                   discovered Lisbon during jacaranda season and completely fell
                   in love with its flowers, light and special atmosphere. I
