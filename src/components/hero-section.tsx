@@ -19,12 +19,12 @@ function PillIcon({ children }: { children: ReactNode }) {
   );
 }
 
-function FrenchFlag() {
+function ItalianFlag() {
   return (
     <svg viewBox="0 0 3 2" aria-hidden="true" className="size-full">
-      <rect width="1" height="2" fill="#002654" />
+      <rect width="1" height="2" fill="#009246" />
       <rect x="1" width="1" height="2" fill="#fff" />
-      <rect x="2" width="1" height="2" fill="#ce1126" />
+      <rect x="2" width="1" height="2" fill="#ce2b37" />
     </svg>
   );
 }
@@ -55,7 +55,7 @@ const pillText = "text-sm font-light leading-none tracking-wide text-white/85";
 
 const facts = [
   {
-    label: "26 September – 2 October 2027",
+    label: "5 – 11 September 2027",
     icon: (
       <>
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -100,13 +100,13 @@ export function HeroSection() {
       className="relative min-h-svh w-full overflow-hidden bg-ink text-white"
     >
       <BackgroundVideo
-        poster="/videos/hero-poster.jpg"
+        poster="/videos/hero-section-poster.jpg"
         sources={[
           {
-            src: "/videos/hero.av1.mp4",
+            src: "/videos/hero-section.av1.mp4",
             type: 'video/mp4; codecs="av01.0.08M.08"',
           },
-          { src: "/videos/hero.mp4", type: "video/mp4" },
+          { src: "/videos/hero-section.mp4", type: "video/mp4" },
         ]}
         className="absolute inset-0 size-full object-cover brightness-50 grayscale-50"
       />
@@ -141,9 +141,7 @@ export function HeroSection() {
             className="hidden h-24 w-px shrink-0 bg-sun sm:block"
           />
           <p className="max-w-2xl font-serif text-xl italic leading-tight tracking-tight text-white/85 md:text-2xl lg:text-[1.75rem]">
-            Learn to dance in the air above Lisbon. Aerial hoop &amp; silks
-            classes, a sunset cruise on the Tagus, rooftop dinners and hidden
-            viewpoints — one unforgettable week.
+       Learn to build and dance your own aerial hoop choreography, combining daily training with a real holiday in Lisbon. Explore the city, live new experiences and share it all with people who love aerial as much as you do.
           </p>
         </div>
 
@@ -160,14 +158,14 @@ export function HeroSection() {
           <li className={`group ${pill}`}>
             <span className="flex shrink-0 items-center">
               <span className="relative z-10 h-4 w-6 -rotate-6 overflow-hidden rounded-[3px] shadow-md ring-1 ring-white/40 transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:-rotate-12">
-                <FrenchFlag />
+                <ItalianFlag />
               </span>
               <span className="-ml-3 h-4 w-6 rotate-6 overflow-hidden rounded-[3px] shadow-md ring-1 ring-white/40 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:rotate-12">
                 <UkFlag />
               </span>
             </span>
             <span className={pillText}>
-              French &amp; English speaking hosts
+              Italian &amp; English speaking hosts
             </span>
           </li>
         </ul>
