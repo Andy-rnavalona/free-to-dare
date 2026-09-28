@@ -86,8 +86,8 @@ export function TrainingSpaceSection() {
                 className="relative aspect-square w-full overflow-hidden rounded-2xl sm:w-60 xl:w-64"
               >
                 <Image
-                  src="/images/garden-patio.jpg"
-                  alt="Leafy garden patio with tables at the entrance of a café"
+                  src="/images/garden-patio.webp"
+                  alt="Guests chatting at wooden tables in the bamboo-lined courtyard patio"
                   fill
                   sizes="(min-width: 640px) 16rem, 100vw"
                   className="object-cover"
