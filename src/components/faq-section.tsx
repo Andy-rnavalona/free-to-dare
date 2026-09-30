@@ -13,7 +13,7 @@ const questions: { question: string; answers: string[] }[] = [
     question: "What is included in the retreat price?",
     answers: [
       "Your retreat price covers much more than accommodation and classes — it’s a fully organised experience, so you don’t have to spend hours figuring out what to book, where to train, how to get around or how to organise activities.",
-      "You’ll enjoy 6 group aerial trainings with two experienced teachers, in a studio carefully selected by us, plus 6 nights’ accommodation, daily breakfast, a rooftop welcome dinner, group airport transfers, transfers to classes and selected activities, and a Lisbon transport pass for the week.",
+      "You’ll enjoy 5 group aerial trainings with two experienced teachers, in a studio carefully selected by us, plus 6 nights’ accommodation, daily breakfast, a rooftop welcome dinner, group airport transfers, transfers to classes and selected activities, and a Lisbon transport pass for the week.",
       "We also organise the experiences: a boat trip, surf class, two photoshoots and activities with local guides.",
       "You’ll stay together with the teachers and other participants, creating a real community where you can connect, exchange, ask questions and share the week with people who have the same passion.",
       "We choose, book and coordinate everything for you — you just come to Lisbon, train, explore and enjoy.",

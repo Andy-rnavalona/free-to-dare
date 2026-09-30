@@ -365,7 +365,7 @@ const days: Day[] = [
 const summary = [
   "5–11 June 2027",
   `${NIGHTS} nights`,
-  "6 × 90 min aerial classes",
+  "5 × 90 min aerial classes",
   "Lisbon",
 ];
 
@@ -587,7 +587,7 @@ export function ItinerarySection() {
                 Flexible payment options available
               </p>
               <p className="mt-5 border-t border-line pt-4 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-                6 × 90 min aerial hoop classes
+                5 × 90 min aerial hoop classes
               </p>
             </div>
           </aside>

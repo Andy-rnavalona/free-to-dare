@@ -26,7 +26,7 @@ const options: {
     description: "Share a twin room with one other participant.",
     ticket: "Retreat ticket + 6 nights shared room",
     includes: [
-      "6 aerial classes",
+      "5 aerial classes",
       "Activities",
       "Daily breakfast",
       "Welcome dinner",
@@ -40,7 +40,7 @@ const options: {
     description: "Your own room for more privacy and personal space.",
     ticket: "Retreat ticket + 6 nights private room",
     includes: [
-      "6 aerial classes",
+      "5 aerial classes",
       "Activities",
       "Daily breakfast",
       "Welcome dinner",
