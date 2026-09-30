@@ -7,6 +7,7 @@ import {
   VolumeOffIcon,
   VolumeOnIcon,
 } from "@/components/icons";
+import { withBasePath } from "@/lib/base-path";
 
 const VIDEO_TITLE = "“Spinning the world” | Lyra at Jaya";
 
@@ -71,8 +72,8 @@ export function StudioVideo() {
     <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-[0_32px_64px_-32px_rgb(22_35_26/0.45)] lg:aspect-square">
       <video
         ref={videoRef}
-        src="/videos/studio-lyra.mp4"
-        poster="/videos/studio-lyra.jpg"
+        src={withBasePath("/videos/studio-lyra.mp4")}
+        poster={withBasePath("/videos/studio-lyra.jpg")}
         muted
         loop
         playsInline

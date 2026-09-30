@@ -1,6 +1,7 @@
 import { CardCarousel } from "@/components/card-carousel";
 import { CardVideo } from "@/components/card-video";
 import { StayGallery, type Photo } from "@/components/stay-gallery";
+import { withBasePath } from "@/lib/base-path";
 
 // A card shows its video if it has one, otherwise its photos
 // (several photos become a small carousel).
@@ -20,9 +21,9 @@ const experiences: Experience[] = [
     title: "Aerial Training & Professional Photoshoot",
     photos: [],
     video: {
-      av1: "/videos/experience-aerial.av1.mp4",
-      mp4: "/videos/experience-aerial.mp4",
-      poster: "/videos/experience-aerial.jpg",
+      av1: withBasePath("/videos/experience-aerial.av1.mp4"),
+      mp4: withBasePath("/videos/experience-aerial.mp4"),
+      poster: withBasePath("/videos/experience-aerial.jpg"),
       label: "Aerial hoop and silks training in the studio",
     },
     items: [
@@ -37,9 +38,9 @@ const experiences: Experience[] = [
     title: "Good people, good nights",
     photos: [],
     video: {
-      av1: "/videos/experience-social.av1.mp4",
-      mp4: "/videos/experience-social.mp4",
-      poster: "/videos/experience-social.jpg",
+      av1: withBasePath("/videos/experience-social.av1.mp4"),
+      mp4: withBasePath("/videos/experience-social.mp4"),
+      poster: withBasePath("/videos/experience-social.jpg"),
       label: "The group sharing dinner at long tables under a pergola",
     },
     items: [
@@ -54,16 +55,16 @@ const experiences: Experience[] = [
     title: "Golden Hour Sunset Boat Cruise & Wine",
     photos: [
       {
-        src: "/images/experiences/golden-hour/03.webp",
+        src: withBasePath("/images/experiences/golden-hour/03.webp"),
         alt: "Friends smiling on the deck of a sailboat out at sea",
         position: "object-[50%_70%]",
       },
       {
-        src: "/images/experiences/golden-hour/01.avif",
+        src: withBasePath("/images/experiences/golden-hour/01.avif"),
         alt: "Sun setting behind the 25 de Abril bridge over the Tagus",
       },
       {
-        src: "/images/experiences/golden-hour/02.avif",
+        src: withBasePath("/images/experiences/golden-hour/02.avif"),
         alt: "Sailboat on the Tagus with the 25 de Abril bridge behind",
       },
     ],
@@ -78,16 +79,16 @@ const experiences: Experience[] = [
     title: "Live Lisbon",
     photos: [
       {
-        src: "/images/experiences/live-lisbon/01.webp",
+        src: withBasePath("/images/experiences/live-lisbon/01.webp"),
         alt: "Two friends on a viewpoint terrace above the rooftops of Alfama",
       },
       {
-        src: "/images/experiences/live-lisbon/02.webp",
+        src: withBasePath("/images/experiences/live-lisbon/02.webp"),
         alt: "Traveler on a viewpoint overlooking Lisbon's rooftops and the river",
         position: "object-[50%_60%]",
       },
       {
-        src: "/images/experiences/live-lisbon/03.webp",
+        src: withBasePath("/images/experiences/live-lisbon/03.webp"),
         alt: "Walking under colourful umbrellas on Lisbon's pink street",
       },
     ],
@@ -103,7 +104,7 @@ const experiences: Experience[] = [
     title: "Surf & Beach Day",
     photos: [
       {
-        src: "/images/experiences/surf/01.webp",
+        src: withBasePath("/images/experiences/surf/01.webp"),
         alt: "The group in wetsuits holding blue surfboards by a stone wall",
         position: "object-[50%_55%]",
       },

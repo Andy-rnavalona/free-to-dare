@@ -6,6 +6,7 @@ import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
 import { ItinerarySection } from "@/components/itinerary-section";
 import { ReelCard } from "@/components/reel-card";
+import { withBasePath } from "@/lib/base-path";
 // Kept for later, together with its commented-out usage at the bottom of the page
 // import { SecretMomentSection } from "@/components/secret-moment-section";
 import { StaysSection } from "@/components/stays-section";
@@ -116,7 +117,7 @@ export default function Home() {
                 <div className="relative flex items-center justify-between">
                   <div className="relative size-16 overflow-hidden rounded-full ring-4 ring-white">
                     <Image
-                      src="/images/owner-avatar.webp"
+                      src={withBasePath("/images/owner-avatar.webp")}
                       alt="Portrait of the retreat host"
                       fill
                       sizes="64px"

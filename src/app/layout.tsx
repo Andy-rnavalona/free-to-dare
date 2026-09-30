@@ -40,6 +40,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  // Domain of the share image URLs (they already carry the basePath)
+  metadataBase: new URL("https://freetodare.com"),
   title: "Free to Dare — Lisbon Aerial Urban Escape",
   description:
     "A curated aerial retreat in Lisbon: daily aerial hoop and silks training with Pamela Mariotto, a sunset boat cruise, surf, photoshoots and time with the community. 5 – 11 September 2027.",
@@ -47,7 +49,6 @@ export const metadata: Metadata = {
     title: "Free to Dare — Lisbon Aerial Urban Escape",
     description:
       "Train every day, explore Lisbon during jacaranda season and share the week with people who love aerial as much as you do. 5 – 11 September 2027.",
-    images: ["/videos/hero-section-poster.jpg"],
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Lock } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   DEPOSIT,
@@ -8,6 +9,8 @@ import {
   RETREAT,
   dueToday as dueTodayFor,
   formatEuro,
+  isPaymentPlan,
+  isStayId,
   planTotal,
   stripeLink,
   type PaymentPlan,
@@ -21,12 +24,33 @@ import { PaymentScheduleDialog } from "@/booking/components/payment-schedule";
 import { PlanCard } from "@/booking/components/plan-card";
 import { StayCard } from "@/booking/components/stay-card";
 import { PLAN_LABELS, STAYS, findStay } from "@/booking/stays";
+import { withBasePath } from "@/lib/base-path";
 
 const STEPS = ["Choose your stay", "Payment plan", "Accept & pay"];
 
 type Step = 0 | 1 | 2;
 
 const smooth: ScrollIntoViewOptions = { behavior: "smooth", block: "start" };
+
+/**
+ * The booking page opened on the `?stay=` / `?plan=` of the URL, read in the
+ * browser (static export), inside a <Suspense>. Read once when mounted: the page
+ * then rewrites the URL itself as choices are made, which must not remount it.
+ */
+export function BookingPageFromUrl() {
+  const searchParams = useSearchParams();
+  const [initial] = useState(() => {
+    const stay = searchParams.get("stay");
+    const plan = searchParams.get("plan");
+    const initialStay = isStayId(stay) ? stay : null;
+    return {
+      initialStay,
+      initialPlan: initialStay && isPaymentPlan(plan) ? plan : null,
+    };
+  });
+
+  return <BookingPage {...initial} />;
+}
 
 /**
  * Booking page, one step at a time: 01 choose a stay → 02 choose a payment
@@ -160,7 +184,7 @@ export function BookingPage({
           <span>
             I have read and accept the{" "}
             <a
-              href="/terms"
+              href={withBasePath("/terms")}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"
@@ -169,7 +193,7 @@ export function BookingPage({
             </a>{" "}
             and{" "}
             <a
-              href="/cancellation-policy"
+              href={withBasePath("/cancellation-policy")}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"

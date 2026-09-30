@@ -2,11 +2,14 @@
 
 import { Check, Mail } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   RETREAT,
   dueToday,
   formatEuro,
+  isPaymentPlan,
+  isStayId,
   planTotal,
   remainingBalance,
 } from "@/booking/booking-config";
@@ -38,6 +41,22 @@ function Amount({
         {value}
       </dd>
     </div>
+  );
+}
+
+/** The confirmation page for the `?stay=&plan=&next=` of the URL, read in the browser (static export), inside a <Suspense> */
+export function ConfirmationPageFromUrl() {
+  const searchParams = useSearchParams();
+  const stay = searchParams.get("stay");
+  const plan = searchParams.get("plan");
+
+  return (
+    <ConfirmationPage
+      // Reset when "View my booking" changes the URL
+      key={searchParams.toString()}
+      choice={isStayId(stay) && isPaymentPlan(plan) ? { stay, plan } : null}
+      next={searchParams.get("next")}
+    />
   );
 }
 

@@ -21,6 +21,7 @@ import {
 } from "@/booking/booking-config";
 import { CardVideo } from "@/components/card-video";
 import { ItineraryDay } from "@/components/itinerary-day";
+import { withBasePath } from "@/lib/base-path";
 
 // The booking page opens on step 01, no stay chosen yet
 const RESERVE_URL = "/booking";
@@ -75,14 +76,14 @@ const days: Day[] = [
       "Welcome to Lisbon! Arrive, settle into the Living Lounge Hostel and meet the group. Today is intentionally relaxed, giving everyone time to arrive and get comfortable before our first evening together.",
     media: [
       {
-        src: "/images/jour1/01.webp",
+        src: withBasePath("/images/jour1/01.webp"),
         alt: "Friends watching the sunset over Lisbon and the 25 de Abril Bridge",
         position: "object-[50%_30%]",
       },
       {
-        av1: "/images/jour1/rooftop-dinner.av1.mp4",
-        mp4: "/images/jour1/rooftop-dinner.mp4",
-        poster: "/images/jour1/rooftop-dinner.jpg",
+        av1: withBasePath("/images/jour1/rooftop-dinner.av1.mp4"),
+        mp4: withBasePath("/images/jour1/rooftop-dinner.mp4"),
+        poster: withBasePath("/images/jour1/rooftop-dinner.jpg"),
         label: "Rooftop dinner with live music in Lisbon",
         hasAudio: true,
       },
@@ -114,14 +115,14 @@ const days: Day[] = [
       "Our first full day combines aerial movement with one of Lisbon’s most beautiful experiences on the water.",
     media: [
       {
-        av1: "/images/jour2/lisbon-tagus.av1.mp4",
-        mp4: "/images/jour2/lisbon-tagus.mp4",
-        poster: "/images/jour2/lisbon-tagus.jpg",
+        av1: withBasePath("/images/jour2/lisbon-tagus.av1.mp4"),
+        mp4: withBasePath("/images/jour2/lisbon-tagus.mp4"),
+        poster: withBasePath("/images/jour2/lisbon-tagus.jpg"),
         label: "Sailing boats on the Tagus and the streets of Lisbon",
         hasAudio: false,
       },
       {
-        src: "/images/jour2/01.avif",
+        src: withBasePath("/images/jour2/01.avif"),
         alt: "Sunset over the Tagus and the 25 de Abril Bridge",
       },
     ],
@@ -159,12 +160,12 @@ const days: Day[] = [
       "Today we discover Lisbon beyond the obvious tourist spots before returning to the studio for our second training.",
     media: [
       {
-        src: "/images/jour3/01.webp",
+        src: withBasePath("/images/jour3/01.webp"),
         alt: "Yellow tram crossing a Lisbon street",
         position: "object-[50%_45%]",
       },
       {
-        src: "/images/jour3/02.webp",
+        src: withBasePath("/images/jour3/02.webp"),
         alt: "Woman in a hat looking over the Tagus and the 25 de Abril Bridge",
       },
     ],
@@ -200,12 +201,12 @@ const days: Day[] = [
       "Today is about capturing the urban character of Lisbon and creating memories that look as good as they feel.",
     media: [
       {
-        src: "/images/jour4/01.webp",
+        src: withBasePath("/images/jour4/01.webp"),
         alt: "Photographer shooting a portrait under the arcades of Praça do Comércio",
         position: "object-[50%_55%]",
       },
       {
-        src: "/images/jour4/02.webp",
+        src: withBasePath("/images/jour4/02.webp"),
         alt: "Aerial hoop pose outdoors above a Lisbon amphitheatre",
         position: "object-[50%_45%]",
       },
@@ -242,12 +243,12 @@ const days: Day[] = [
       "A slower morning followed by a creative afternoon dedicated to aerial photography and training.",
     media: [
       {
-        src: "/images/jour5/01.webp",
+        src: withBasePath("/images/jour5/01.webp"),
         alt: "Aerial hoop pose against a black studio background",
         fit: "contain",
       },
       {
-        src: "/images/jour5/02.webp",
+        src: withBasePath("/images/jour5/02.webp"),
         alt: "Two friends hugging on a sunny Lisbon promenade",
         fit: "contain",
       },
@@ -293,12 +294,12 @@ const days: Day[] = [
       "Our final full day takes us from the aerial studio to the Atlantic Ocean.",
     media: [
       {
-        src: "/images/jour6/01.webp",
+        src: withBasePath("/images/jour6/01.webp"),
         alt: "Surf group in wetsuits posing with their boards",
         position: "object-[50%_70%]",
       },
       {
-        src: "/images/jour6/02.webp",
+        src: withBasePath("/images/jour6/02.webp"),
         alt: "Surfers walking on the beach at sunset",
         position: "object-[50%_75%]",
       },

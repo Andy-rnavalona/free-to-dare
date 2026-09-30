@@ -7,6 +7,7 @@ import {
   type StayId,
 } from "@/booking/booking-config";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
+import { withBasePath } from "@/lib/base-path";
 
 const HOSTEL_INSTAGRAM = "https://www.instagram.com/livingloungehostel/";
 
@@ -65,26 +66,26 @@ const options: {
 
 const photos = {
   main: {
-    src: "/images/hostel/01.webp",
+    src: withBasePath("/images/hostel/01.webp"),
     alt: "Living room with a travel wall and a red lounge",
   },
   side: [
     {
-      src: "/images/hostel/02.webp",
+      src: withBasePath("/images/hostel/02.webp"),
       alt: "Calm single room with teal accents",
     },
-    { src: "/images/hostel/03.webp", alt: "Bunk room with warm light" },
+    { src: withBasePath("/images/hostel/03.webp"), alt: "Bunk room with warm light" },
   ],
   strip: [
     {
-      src: "/images/hostel/04.webp",
+      src: withBasePath("/images/hostel/04.webp"),
       alt: "Warm wooden hallway with a welcome chalkboard",
     },
     {
-      src: "/images/hostel/05.webp",
+      src: withBasePath("/images/hostel/05.webp"),
       alt: "Reading corner with plants and a vintage cabinet",
     },
-    { src: "/images/hostel/06.webp", alt: "Twin room with a red curtain" },
+    { src: withBasePath("/images/hostel/06.webp"), alt: "Twin room with a red curtain" },
   ],
 };
 

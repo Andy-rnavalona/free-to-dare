@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SparkleIcon } from "@/components/icons";
 import { InstagramBadge, PAMELA_INSTAGRAM } from "@/components/instagram-badge";
+import { withBasePath } from "@/lib/base-path";
 
 const bio = [
   "Coming from Italy, Pamela Mariotto is an aerial dancer, performer and certified aerial instructor whose background combines dance, aerial technique and artistic expression.",
@@ -55,7 +56,7 @@ export function InstructorSection() {
             className="group group/ig relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink lg:aspect-auto lg:h-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
           >
             <Image
-              src="/images/pamela-aerial-silks.jpg"
+              src={withBasePath("/images/pamela-aerial-silks.jpg")}
               alt="Pamela Mariotto performing a split on white aerial silks against a clear blue sky"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"

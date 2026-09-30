@@ -7,6 +7,7 @@ import {
   VolumeOffIcon,
   VolumeOnIcon,
 } from "@/components/icons";
+import { withBasePath } from "@/lib/base-path";
 
 const SUBTITLE = "A city made for curious minds";
 
@@ -73,7 +74,7 @@ export function ReelCard() {
     >
       <video
         ref={videoRef}
-        poster="/videos/lisbon-city.jpg"
+        poster={withBasePath("/videos/lisbon-city.jpg")}
         muted
         loop
         playsInline
@@ -85,10 +86,10 @@ export function ReelCard() {
         className="absolute inset-0 size-full object-cover"
       >
         <source
-          src="/videos/lisbon-city.av1.mp4"
+          src={withBasePath("/videos/lisbon-city.av1.mp4")}
           type='video/mp4; codecs="av01.0.08M.08"'
         />
-        <source src="/videos/lisbon-city.mp4" type="video/mp4" />
+        <source src={withBasePath("/videos/lisbon-city.mp4")} type="video/mp4" />
       </video>
 
       <div

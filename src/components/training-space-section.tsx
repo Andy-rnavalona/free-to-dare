@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { StudioVideo } from "@/components/studio-video";
+import { withBasePath } from "@/lib/base-path";
 
 const included = [
   "Training / studio space",
@@ -85,7 +86,7 @@ export function TrainingSpaceSection() {
                 className="relative aspect-square w-full overflow-hidden rounded-2xl sm:w-60 xl:w-64"
               >
                 <Image
-                  src="/images/garden-patio.webp"
+                  src={withBasePath("/images/garden-patio.webp")}
                   alt="Guests chatting at wooden tables in the bamboo-lined courtyard patio"
                   fill
                   sizes="(min-width: 640px) 16rem, 100vw"

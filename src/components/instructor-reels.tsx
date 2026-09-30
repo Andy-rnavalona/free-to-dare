@@ -3,22 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 import { PauseIcon, PlayIcon } from "@/components/icons";
 import { InstagramBadge, PAMELA_INSTAGRAM } from "@/components/instagram-badge";
+import { withBasePath } from "@/lib/base-path";
 
 // The grid gets one column per reel (up to 4), so adding a video is enough
 const reels = [
   {
-    src: "/videos/aerial-silks-beach.mp4",
-    poster: "/videos/aerial-silks-beach.jpg",
+    src: withBasePath("/videos/aerial-silks-beach.mp4"),
+    poster: withBasePath("/videos/aerial-silks-beach.jpg"),
     label: "Pamela climbing white aerial silks by the sea",
   },
   {
-    src: "/videos/aerial-hoop-stage.mp4",
-    poster: "/videos/aerial-hoop-stage.jpg",
+    src: withBasePath("/videos/aerial-hoop-stage.mp4"),
+    poster: withBasePath("/videos/aerial-hoop-stage.jpg"),
     label: "Pamela spinning on an aerial hoop on an open-air stage",
   },
   {
-    src: "/videos/aerial-hoop-sunset.mp4",
-    poster: "/videos/aerial-hoop-sunset.jpg",
+    src: withBasePath("/videos/aerial-hoop-sunset.mp4"),
+    poster: withBasePath("/videos/aerial-hoop-sunset.jpg"),
     label: "Pamela holding a split on an aerial hoop at sunset",
   },
 ];

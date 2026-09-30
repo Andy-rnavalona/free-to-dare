@@ -5,12 +5,13 @@ import {
   type PaymentPlan,
   type StayId,
 } from "@/booking/booking-config";
+import { withBasePath } from "@/lib/base-path";
 
 /* Stay options of the booking page, worded as in the payment mockup.
    Prices come from booking-config.ts. */
 
-const IMG = "/images/booking";
-const HOSTEL_IMG = "/images/hostel";
+const IMG = withBasePath("/images/booking");
+const HOSTEL_IMG = withBasePath("/images/hostel");
 
 export type Photo = { src: string; alt: string };
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CardCarousel } from "@/components/card-carousel";
 import { CardVideo } from "@/components/card-video";
+import { withBasePath } from "@/lib/base-path";
 
 /**
  * “Hear it from the women who came” — the same section as the Open Air page,
@@ -22,8 +23,8 @@ const stories: Story[] = [
   {
     media: {
       kind: "video",
-      src: "/images/stories/the-crew.mp4",
-      poster: "/images/stories/the-crew-poster.jpg",
+      src: withBasePath("/images/stories/the-crew.mp4"),
+      poster: withBasePath("/images/stories/the-crew-poster.jpg"),
     },
     label: "The crew, on the coast",
     rotation: "-rotate-4",
@@ -31,32 +32,32 @@ const stories: Story[] = [
   {
     media: {
       kind: "video",
-      src: "/images/stories/hanging-pole.mp4",
-      poster: "/images/stories/hanging-pole-poster.jpg",
+      src: withBasePath("/images/stories/hanging-pole.mp4"),
+      poster: withBasePath("/images/stories/hanging-pole-poster.jpg"),
     },
     label: "Pole above the Atlantic",
     rotation: "rotate-3",
   },
   {
-    media: { kind: "photo", src: "/images/stories/green-cliffs.avif" },
+    media: { kind: "photo", src: withBasePath("/images/stories/green-cliffs.avif") },
     label: "Green cliffs, all together",
     rotation: "-rotate-2",
   },
   {
     media: {
       kind: "photo",
-      src: "/images/stories/pole-camp-madeira.avif",
+      src: withBasePath("/images/stories/pole-camp-madeira.avif"),
     },
     label: "Pole Camp Madeira",
     rotation: "rotate-4",
   },
   {
-    media: { kind: "photo", src: "/images/stories/boat-day.avif" },
+    media: { kind: "photo", src: withBasePath("/images/stories/boat-day.avif") },
     label: "Boat day",
     rotation: "-rotate-3",
   },
   {
-    media: { kind: "photo", src: "/images/stories/fanal-forest.avif" },
+    media: { kind: "photo", src: withBasePath("/images/stories/fanal-forest.avif") },
     label: "Fanal forest",
     rotation: "-rotate-2",
   },

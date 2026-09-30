@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { DEPOSIT, formatEuro } from "@/booking/booking-config";
 import { BackgroundVideo } from "@/components/background-video";
 import { ArrowRightIcon } from "@/components/icons";
+import { withBasePath } from "@/lib/base-path";
 
 function PillIcon({ children }: { children: ReactNode }) {
   return (
@@ -101,13 +102,13 @@ export function HeroSection() {
       className="relative min-h-svh w-full overflow-hidden bg-ink text-white"
     >
       <BackgroundVideo
-        poster="/videos/hero-section-poster.jpg"
+        poster={withBasePath("/videos/hero-section-poster.jpg")}
         sources={[
           {
-            src: "/videos/hero-section.av1.mp4",
+            src: withBasePath("/videos/hero-section.av1.mp4"),
             type: 'video/mp4; codecs="av01.0.08M.08"',
           },
-          { src: "/videos/hero-section.mp4", type: "video/mp4" },
+          { src: withBasePath("/videos/hero-section.mp4"), type: "video/mp4" },
         ]}
         className="absolute inset-0 size-full object-cover brightness-50 grayscale-50"
       />
