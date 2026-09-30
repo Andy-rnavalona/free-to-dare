@@ -6,8 +6,6 @@ import {
   Space_Mono,
   Work_Sans,
 } from "next/font/google";
-import { ScrollReveal } from "@/components/scroll-reveal";
-import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const inter = Inter({
@@ -42,9 +40,15 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lisbon Aerial Escape",
+  title: "Free to Dare — Lisbon Aerial Urban Escape",
   description:
-    "A curated city escape to discover Lisbon from above during jacaranda season.",
+    "A curated aerial retreat in Lisbon: daily aerial hoop and silks training with Pamela Mariotto, a sunset boat cruise, surf, photoshoots and time with the community. 5 – 11 September 2027.",
+  openGraph: {
+    title: "Free to Dare — Lisbon Aerial Urban Escape",
+    description:
+      "Train every day, explore Lisbon during jacaranda season and share the week with people who love aerial as much as you do. 5 – 11 September 2027.",
+    images: ["/videos/hero-section-poster.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -62,11 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
-        <SiteHeader />
-        {children}
-        <ScrollReveal />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

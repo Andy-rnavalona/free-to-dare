@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
+import { FaqSection } from "@/components/faq-section";
 import { HeroSection } from "@/components/hero-section";
 import { InstructorReels } from "@/components/instructor-reels";
 import { InstructorSection } from "@/components/instructor-section";
 import { ItinerarySection } from "@/components/itinerary-section";
 import { ReelCard } from "@/components/reel-card";
-import { SecretMomentSection } from "@/components/secret-moment-section";
+// Kept for later, together with its commented-out usage at the bottom of the page
+// import { SecretMomentSection } from "@/components/secret-moment-section";
 import { StaysSection } from "@/components/stays-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
 import { TrainingSpaceSection } from "@/components/training-space-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
 
@@ -147,6 +150,8 @@ export default function Home() {
       <TrainingSpaceSection />
       <ItinerarySection />
       <StaysSection />
+      <TestimonialsSection />
+      <FaqSection />
       {/* <SecretMomentSection /> */}
     </main>
   );

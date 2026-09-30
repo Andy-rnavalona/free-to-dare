@@ -1,28 +1,65 @@
 import Image from "next/image";
+import Link from "next/link";
+import {
+  DEPOSIT,
+  STAY_PRICES,
+  formatEuro,
+  type StayId,
+} from "@/booking/booking-config";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 
 const HOSTEL_INSTAGRAM = "https://www.instagram.com/livingloungehostel/";
-const RESERVE_URL = "#join";
 
-const options = [
+const options: {
+  stay: StayId;
+  kicker: string;
+  title: string;
+  description: string;
+  /* What the price buys, shown under the description */
+  ticket: string;
+  includes: string[];
+}[] = [
   {
+    stay: "shared",
     kicker: "Shared stay",
     title: "Shared room — 2 people",
-    price: "€2,050",
     description: "Share a twin room with one other participant.",
+    ticket: "Retreat ticket + 6 nights shared room",
+    includes: [
+      "6 aerial classes",
+      "Activities",
+      "Daily breakfast",
+      "Welcome dinner",
+      "Airport & activity transfers",
+    ],
   },
   {
+    stay: "private",
     kicker: "Private stay",
     title: "Private room",
-    price: "€2,150",
     description: "Your own room for more privacy and personal space.",
+    ticket: "Retreat ticket + 6 nights private room",
+    includes: [
+      "6 aerial classes",
+      "Activities",
+      "Daily breakfast",
+      "Welcome dinner",
+      "Airport & activity transfers",
+    ],
   },
   {
+    stay: "none",
     kicker: "Flexible stay",
     title: "Without accommodation",
-    price: "€1,750",
     description:
       "Join the full retreat experience while organising your own stay.",
+    ticket: "Full retreat ticket — accommodation not included",
+    includes: [
+      "5 aerial classes",
+      "Activities",
+      "Welcome dinner",
+      "Airport & activity transfers",
+    ],
   },
 ];
 
@@ -52,7 +89,7 @@ const photos = {
 };
 
 const reassurances = [
-  "€500 secures your place",
+  `${formatEuro(DEPOSIT)} secures your place`,
   "Only the deposit is paid today",
   "Pay the balance in instalments",
 ];
@@ -140,7 +177,7 @@ export function StaysSection() {
                   </h3>
                   <p className="text-forest">
                     <span className="font-display text-2xl">
-                      {option.price}
+                      {formatEuro(STAY_PRICES[option.stay])}
                     </span>
                     <span className="text-sm text-muted"> / person</span>
                   </p>
@@ -149,17 +186,27 @@ export function StaysSection() {
                   {option.description}
                 </p>
 
+                {/* What the price buys */}
+                <p className="mt-4 flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                  <span aria-hidden="true" className="h-px w-5 shrink-0 bg-sun" />
+                  {option.ticket}
+                </p>
+                <p className="mt-1.5 text-sm text-muted">
+                  {option.includes.join(" · ")}
+                </p>
+
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
                   <span className="bg-sun px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest">
-                    €500 deposit to reserve
+                    {formatEuro(DEPOSIT)} deposit to reserve
                   </span>
-                  <a
-                    href={RESERVE_URL}
+                  {/* Opens the booking page with this stay already chosen */}
+                  <Link
+                    href={`/booking?stay=${option.stay}`}
                     className="inline-flex items-center gap-3 rounded-full bg-forest px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
                   >
                     Reserve your spot
                     <ArrowRightIcon className="size-3.5" />
-                  </a>
+                  </Link>
                 </div>
               </li>
             ))}

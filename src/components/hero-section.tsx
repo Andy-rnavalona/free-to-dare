@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { DEPOSIT, formatEuro } from "@/booking/booking-config";
 import { BackgroundVideo } from "@/components/background-video";
 import { ArrowRightIcon } from "@/components/icons";
 
@@ -64,7 +65,7 @@ const facts = [
     ),
   },
   {
-    label: "€500 deposit to reserve your spot",
+    label: `${formatEuro(DEPOSIT)} deposit to reserve your spot`,
     icon: (
       <>
         <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -119,13 +120,6 @@ export function HeroSection() {
       </div>
 
       <div className="relative mx-auto flex min-h-svh w-full max-w-7xl flex-col justify-center px-5 pb-16 pt-28 sm:px-10 md:pb-24 lg:px-14 min-[88rem]:px-0">
-        <p
-          data-reveal
-          className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-white/70"
-        >
-          Metamorphosis Games presents
-        </p>
-
         <h1
           id="hero-title"
           data-reveal
@@ -181,8 +175,9 @@ export function HeroSection() {
                 Step out <span className="ml-2 -translate-y-1">→</span>
               </span>
             </p>
+            {/* Scrolls to the stay options, where each card opens the booking page */}
             <a
-              href="#join"
+              href="#stays"
               className="flex items-center gap-3 rounded bg-white px-5 py-3.5 text-sm font-extrabold uppercase tracking-tight text-forest transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-white/30 lg:ml-6 lg:gap-4 lg:px-6 lg:py-4 lg:text-base"
             >
               Reserve your spot

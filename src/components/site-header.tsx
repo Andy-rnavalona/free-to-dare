@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const HOME = "/";
 
 const navLinks = [
   { label: "Trips", href: "#trips", active: true },
   { label: "Stays", href: "#stays" },
   { label: "Networking", href: "#networking" },
-  { label: "Games", href: "#games" },
 ];
 
 function Logo() {
@@ -72,7 +74,15 @@ function NavLink({
 
 const SOLID_AFTER_PX = 80;
 
+/**
+ * Header of every Free to Dare page. On the landing page it starts transparent
+ * over the hero video; elsewhere (booking pages) there is no video behind it,
+ * so it is solid from the start and its section links lead back to the landing.
+ */
 export function SiteHeader() {
+  const onLanding = usePathname() === HOME;
+  const to = (href: string) =>
+    href.startsWith("#") && !onLanding ? `${HOME}${href}` : href;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -83,7 +93,7 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const solid = scrolled || open;
+  const solid = scrolled || open || !onLanding;
 
   useEffect(() => {
     if (!open) return;
@@ -102,7 +112,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`ftd-header fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         solid
           ? "shadow-[0_24px_40px_-12px_rgb(17_26_41/0.35)] backdrop-blur-sm"
           : ""
@@ -132,7 +142,7 @@ export function SiteHeader() {
           className="ml-auto hidden items-center gap-12 lg:flex"
         >
           <Link
-            href="#join"
+            href={to("#join")}
             className="rounded-full bg-sun px-4 py-3 font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-night transition hover:brightness-105 hover:-translate-y-px"
           >
             Join the club
@@ -140,19 +150,19 @@ export function SiteHeader() {
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <NavLink {...link} />
+                <NavLink {...link} href={to(link.href)} />
               </li>
             ))}
           </ul>
         </nav>
         <div className="ml-[clamp(3rem,11vw,11rem)] hidden lg:block">
-          <NavLink label="Contact" href="#contact" />
+          <NavLink label="Contact" href={to("#contact")} />
         </div>
 
         {/* Mobile controls */}
         <div className="ml-auto flex items-center gap-3 lg:hidden">
           <Link
-            href="#join"
+            href={to("#join")}
             className="hidden rounded-full bg-sun px-4 py-2.5 font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-night min-[420px]:inline-block"
           >
             Join the club
@@ -194,12 +204,12 @@ export function SiteHeader() {
         <ul className="divide-y divide-white/10">
           {[...navLinks, { label: "Contact", href: "#contact" }].map((link) => (
             <li key={link.href} className="py-3">
-              <NavLink {...link} inline onClick={close} />
+              <NavLink {...link} href={to(link.href)} inline onClick={close} />
             </li>
           ))}
         </ul>
         <Link
-          href="#join"
+          href={to("#join")}
           onClick={close}
           className="mt-6 block rounded-full bg-sun py-4 text-center font-mono text-xs font-bold uppercase tracking-[0.2em] text-night"
         >

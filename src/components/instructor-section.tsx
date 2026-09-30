@@ -9,7 +9,7 @@ const bio = [
   "Rather than simply learning individual tricks, we will explore transitions, fluid movement and combinations on both hoop and silks, learning how to connect different elements naturally and transform them into beautiful sequences.",
 ];
 
-const classes = ["3 Aerial Silks Classes", "3 Aerial Hoop Classes"];
+const classes = ["5 Aerial Classes : Aerial Silks & Aerial Hoop", "1 Aerial Studio Photoshoot"];
 
 function ItalianFlag() {
   return (

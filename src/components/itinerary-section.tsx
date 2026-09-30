@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 import {
   ArrowRightIcon,
@@ -13,11 +14,16 @@ import {
   UtensilsIcon,
   WavesIcon,
 } from "@/components/icons";
+import {
+  DEPOSIT,
+  PRICE_FROM,
+  formatEuro,
+} from "@/booking/booking-config";
 import { CardVideo } from "@/components/card-video";
 import { ItineraryDay } from "@/components/itinerary-day";
 
-const RESERVE_URL = "#join";
-const PRICE_FROM = "€1,750";
+// The booking page opens on step 01, no stay chosen yet
+const RESERVE_URL = "/booking";
 const NIGHTS = 6;
 const HOSTEL = "Living Lounge Hostel";
 
@@ -37,6 +43,8 @@ type Photo = {
   alt: string;
   /** object-position class keeping the subject in the landscape crop */
   position?: string;
+  /** Shows the whole frame instead of cropping it, on a dark backdrop */
+  fit?: "contain";
 };
 
 type Video = {
@@ -120,7 +128,7 @@ const days: Day[] = [
     activities: [
       {
         kind: "Aerial training",
-        title: "Aerial Hoop Class #1",
+        title: "Aerial Class #1",
         description:
           "Our first 90-minute aerial hoop training takes place at JAYA Aerial Lab – Studio 1.",
         icon: SparklesIcon,
@@ -167,7 +175,6 @@ const days: Day[] = [
         description:
           "Explore Lisbon with a local guide through historic neighbourhoods, colourful streets, viewpoints and hidden corners — focused on the atmosphere and stories of the city rather than a traditional sightseeing tour.",
         icon: FootprintsIcon,
-        transfer: true,
       },
       {
         kind: "Social",
@@ -177,7 +184,7 @@ const days: Day[] = [
       },
       {
         kind: "Aerial training",
-        title: "Aerial Hoop Class #2",
+        title: "Aerial Class #2",
         description:
           "Return to JAYA Aerial Lab for another 90-minute training session.",
         icon: SparklesIcon,
@@ -210,7 +217,6 @@ const days: Day[] = [
         description:
           "Explore some of Lisbon’s most photogenic locations during our urban photoshoot. Think colourful façades, azulejos, yellow trams, narrow streets, viewpoints and cinematic city moments.",
         icon: CameraIcon,
-        transfer: true,
       },
       {
         kind: "Free time",
@@ -220,7 +226,7 @@ const days: Day[] = [
       },
       {
         kind: "Aerial training",
-        title: "Aerial Hoop Class #3",
+        title: "Aerial Class #3",
         description:
           "Continue our aerial journey with the third 90-minute hoop class at JAYA.",
         icon: SparklesIcon,
@@ -238,12 +244,12 @@ const days: Day[] = [
       {
         src: "/images/jour5/01.webp",
         alt: "Aerial hoop pose against a black studio background",
-        position: "object-[50%_45%]",
+        fit: "contain",
       },
       {
         src: "/images/jour5/02.webp",
         alt: "Two friends hugging on a sunny Lisbon promenade",
-        position: "object-[50%_30%]",
+        fit: "contain",
       },
     ],
     activities: [
@@ -264,7 +270,7 @@ const days: Day[] = [
       },
       {
         kind: "Aerial training",
-        title: "Aerial Hoop Class #4",
+        title: "Aerial Class #4",
         description:
           "Continue directly with our fourth 90-minute aerial hoop training.",
         icon: SparklesIcon,
@@ -300,7 +306,7 @@ const days: Day[] = [
     activities: [
       {
         kind: "Aerial training",
-        title: "Aerial Hoop Class #5",
+        title: "Aerial Class #5",
         description:
           "Begin the day with our fifth and final 90-minute aerial hoop session at JAYA Aerial Lab.",
         icon: SparklesIcon,
@@ -335,7 +341,6 @@ const days: Day[] = [
         title: "Farewell Evening",
         description: "Celebrate our final evening together in Lisbon.",
         icon: UtensilsIcon,
-        transfer: true,
       },
     ],
     overnight: true,
@@ -370,7 +375,12 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
   const sizes = single
     ? "(min-width: 1280px) 50rem, (min-width: 1024px) 60vw, 90vw"
     : "(min-width: 1280px) 25rem, (min-width: 1024px) 30vw, 45vw";
-  const frame = "h-40 w-full rounded-2xl sm:h-[280px]";
+  // A row with uncropped photos needs more height: the portraits are shown
+  // whole and simply sit on the card, with no backdrop around them.
+  const contain = media.some((item) => "fit" in item && item.fit === "contain");
+  const frame = contain
+    ? "h-64 w-full rounded-2xl sm:h-[420px]"
+    : "h-40 w-full rounded-2xl sm:h-[280px]";
 
   return (
     <>
@@ -397,7 +407,11 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
                 width={1080}
                 height={1620}
                 sizes={sizes}
-                className={`${frame} object-cover ${item.position ?? ""}`}
+                className={`${frame} ${
+                  item.fit === "contain"
+                    ? "object-contain"
+                    : `object-cover ${item.position ?? ""}`
+                }`}
               />
             ),
           )}
@@ -554,21 +568,21 @@ export function ItinerarySection() {
                   From
                 </p>
                 <p className="mt-1 font-display text-4xl leading-none text-forest">
-                  {PRICE_FROM}
+                  {formatEuro(PRICE_FROM)}
                 </p>
                 <p className="mt-3">
                   <span className="inline-block bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
-                    €500 deposit to reserve
+                    {formatEuro(DEPOSIT)} deposit to reserve
                   </span>
                 </p>
               </div>
-              <a
+              <Link
                 href={RESERVE_URL}
                 className="mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-forest px-5 py-3.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
               >
                 Book your spot
                 <ArrowRightIcon className="size-3.5" />
-              </a>
+              </Link>
               <p className="mt-3 text-center text-xs text-muted">
                 Flexible payment options available
               </p>
@@ -588,16 +602,16 @@ export function ItinerarySection() {
               From
             </p>
             <p className="font-display text-2xl leading-none text-forest">
-              {PRICE_FROM}
+              {formatEuro(PRICE_FROM)}
             </p>
           </div>
-          <a
+          <Link
             href={RESERVE_URL}
             className="inline-flex shrink-0 items-center gap-3 rounded-full bg-forest px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
           >
             Book your spot
             <ArrowRightIcon className="size-3.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

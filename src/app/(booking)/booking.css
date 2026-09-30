@@ -1,0 +1,151 @@
+/*
+ * FREE TO DARE — booking pages (/free-to-dare/booking and its confirmation).
+ * Reproduces the payment mockup: its palette, radii, fonts and the few custom
+ * classes it uses. Scoped to .ftd-booking-root so the landing page keeps its
+ * own look. The colors only this mockup uses are declared in globals.css.
+ */
+
+/* Same layer order as Tailwind's entry, in case this file is parsed first */
+@layer theme, base, components, utilities;
+
+/* Pure white and light only, even when the device is in dark mode */
+html:has(.ftd-booking-root) {
+  color-scheme: only light;
+  background-color: #fff;
+}
+
+.ftd-booking-root {
+  color-scheme: only light;
+
+  /* Every surface is pure white: page, steps, cards, summary. Buttons, yellow
+     badges and text keep the mockup's colors; borders keep separating the cards. */
+  --background: #fff;
+  --color-card: #fff;
+  --color-secondary: #fff;
+  --color-muted: #fff;
+
+  /* Colors whose names the landing page already uses */
+  --foreground: oklch(28% 0.045 152);
+  --color-ink: oklch(20% 0.01 120);
+  --color-sand: oklch(93% 0.02 90);
+
+  /* The mockup's radius scale is built on a 1rem base */
+  --radius-sm: calc(1rem - 4px);
+  --radius-md: calc(1rem - 2px);
+  --radius-lg: 1rem;
+  --radius-xl: calc(1rem + 4px);
+  --radius-2xl: calc(1rem + 8px);
+  --radius-3xl: calc(1rem + 12px);
+
+  /* The mockup's background covers the whole window, short pages included */
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-bk-sans), system-ui, sans-serif;
+}
+
+@layer base {
+  .ftd-booking-root *,
+  .ftd-booking-root ::before,
+  .ftd-booking-root ::after,
+  .ftd-booking-root ::backdrop {
+    border-color: var(--color-border);
+  }
+}
+
+/* In the components layer so Tailwind utilities (text sizes, leading, border
+   colors) win over them, as they do in the mockup */
+/* `font-display` is a Tailwind utility here (see the @theme in globals.css), so
+   the override has to sit in the same layer and win on specificity. The header
+   is inside this root but keeps the landing page's display font. */
+@layer utilities {
+  .ftd-booking-root .font-display {
+    font-family: var(--font-bk-display), "Arial Narrow", sans-serif;
+  }
+
+  .ftd-booking-root .ftd-header .font-display {
+    font-family: var(--font-work-sans-black), sans-serif;
+    font-weight: 900;
+  }
+}
+
+@layer components {
+  .ftd-booking-root .label-mono {
+    font-family: var(--font-bk-mono), ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.6875rem;
+    font-weight: 500;
+  }
+
+  .ftd-booking-root .display-xl {
+    font-family: var(--font-bk-display), "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    line-height: 0.9;
+  }
+
+  .ftd-booking-root .card-editorial {
+    border-radius: var(--radius-3xl);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card);
+    transition:
+      border-color 0.25s,
+      box-shadow 0.25s,
+      transform 0.25s;
+  }
+
+  .ftd-booking-root .card-selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+
+  /* A step that appears once the previous one is chosen */
+  .ftd-booking-root .reveal-step {
+    animation: bk-reveal-step 0.5s both;
+  }
+
+  .ftd-booking-root .bk-dialog {
+    animation: bk-dialog-in 0.2s both;
+  }
+
+  .ftd-booking-root .bk-dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.8);
+    animation: bk-fade-in 0.2s both;
+  }
+}
+
+@keyframes bk-reveal-step {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Centering uses the `translate` property (Tailwind v4), so zooming through
+   `transform` composes with it */
+@keyframes bk-dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes bk-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ftd-booking-root .reveal-step,
+  .ftd-booking-root .bk-dialog,
+  .ftd-booking-root .bk-dialog::backdrop {
+    animation: none;
+  }
+}
