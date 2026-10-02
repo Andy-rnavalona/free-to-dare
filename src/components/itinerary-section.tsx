@@ -22,9 +22,10 @@ import {
 import { CardVideo } from "@/components/card-video";
 import { ItineraryDay } from "@/components/itinerary-day";
 import { withBasePath } from "@/lib/base-path";
+import { LISBON_BOOKING } from "@/lib/routes";
 
 // The booking page opens on step 01, no stay chosen yet
-const RESERVE_URL = "/booking";
+const RESERVE_URL = LISBON_BOOKING;
 const NIGHTS = 6;
 const HOSTEL = "Living Lounge Hostel";
 

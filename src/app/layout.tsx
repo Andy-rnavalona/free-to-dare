@@ -39,16 +39,18 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
 });
 
+// Brand-level defaults; each page (the Azores homepage, the Lisbon retreat,
+// the booking pages) overrides the title and description with its own.
 export const metadata: Metadata = {
   // Domain of the share image URLs (they already carry the basePath)
   metadataBase: new URL("https://freetodare.com"),
-  title: "Free to Dare — Lisbon Aerial Urban Escape",
+  title: "Free to Dare — Retreats for people who move",
   description:
-    "A curated aerial retreat in Lisbon: daily aerial hoop and silks training with Pamela Mariotto, a sunset boat cruise, surf, photoshoots and time with the community. 5 – 11 September 2027.",
+    "Free to Dare organises pole and aerial retreats: train every day, discover a new place and share the week with a small group of people who love movement as much as you do.",
   openGraph: {
-    title: "Free to Dare — Lisbon Aerial Urban Escape",
+    title: "Free to Dare — Retreats for people who move",
     description:
-      "Train every day, explore Lisbon during jacaranda season and share the week with people who love aerial as much as you do. 5 – 11 September 2027.",
+      "Pole and aerial retreats where training, travel and community come packaged together — you just show up and enjoy the week.",
   },
 };
 

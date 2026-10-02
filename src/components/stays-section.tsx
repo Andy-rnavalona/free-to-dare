@@ -8,6 +8,7 @@ import {
 } from "@/booking/booking-config";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { withBasePath } from "@/lib/base-path";
+import { LISBON_BOOKING } from "@/lib/routes";
 
 const HOSTEL_INSTAGRAM = "https://www.instagram.com/livingloungehostel/";
 
@@ -202,7 +203,7 @@ export function StaysSection() {
                   </span>
                   {/* Opens the booking page with this stay already chosen */}
                   <Link
-                    href={`/booking?stay=${option.stay}`}
+                    href={`${LISBON_BOOKING}?stay=${option.stay}`}
                     className="inline-flex items-center gap-3 rounded-full bg-forest px-5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink"
                   >
                     Reserve your spot

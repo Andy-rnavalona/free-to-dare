@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AZORES_RETREAT, LISBON_RETREAT } from "@/lib/routes";
 
-const HOME = "/";
+/* Nothing answers at the domain root: every page belongs to one of the
+   retreats, and the logo and the section links lead back to its landing. */
+const LANDINGS = [AZORES_RETREAT, LISBON_RETREAT];
 
 const navLinks = [
   { label: "Trips", href: "#trips", active: true },
@@ -12,10 +15,10 @@ const navLinks = [
   { label: "Networking", href: "#networking" },
 ];
 
-function Logo() {
+function Logo({ href }: { href: string }) {
   return (
     <Link
-      href="/"
+      href={href}
       aria-label="Free to Dare — home"
       className="relative inline-block pb-2 font-display text-[1.35rem] uppercase leading-[0.95] tracking-[-0.01em] sm:text-[1.6rem]"
     >
@@ -75,14 +78,19 @@ function NavLink({
 const SOLID_AFTER_PX = 80;
 
 /**
- * Header of every Free to Dare page. On the landing page it starts transparent
- * over the hero video; elsewhere (booking pages) there is no video behind it,
- * so it is solid from the start and its section links lead back to the landing.
+ * Header of every Free to Dare page. Over a hero — the landing pages, which
+ * pass `overHero` — it starts transparent and its section links stay on the
+ * page. Elsewhere (the booking pages) there is nothing behind it, so it is
+ * solid from the start and its section links lead back to the landing of the
+ * retreat the page belongs to.
  */
-export function SiteHeader() {
-  const onLanding = usePathname() === HOME;
+export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
+  const pathname = usePathname();
+  const landing =
+    LANDINGS.find((path) => pathname.startsWith(path)) ?? LISBON_RETREAT;
+  const onLanding = overHero;
   const to = (href: string) =>
-    href.startsWith("#") && !onLanding ? `${HOME}${href}` : href;
+    href.startsWith("#") && !onLanding ? `${landing}${href}` : href;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -134,7 +142,7 @@ export function SiteHeader() {
           solid ? "lg:h-20" : "lg:h-[6.25rem]"
         }`}
       >
-        <Logo />
+        <Logo href={landing} />
 
         {/* Desktop navigation */}
         <nav
