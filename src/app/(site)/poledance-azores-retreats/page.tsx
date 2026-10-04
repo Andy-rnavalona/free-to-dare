@@ -37,7 +37,7 @@ export default function Home() {
       <PhotoshootSection />
       <CommunitySection />
       <PricingSection />
-      <FinalCtaSection />
+      {/* <FinalCtaSection /> */}
     </main>
   );
 }

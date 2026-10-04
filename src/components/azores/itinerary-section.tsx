@@ -407,7 +407,7 @@ export function ItinerarySection() {
       id="itinerary"
       aria-labelledby="itinerary-title"
       data-reveal-group
-      className="scroll-mt-28 bg-card py-16 lg:py-24"
+      className="scroll-mt-28 bg-white"
     >
       <div className={CONTAINER}>
         <p data-reveal className={`${MICRO} text-[0.65rem] text-forest`}>

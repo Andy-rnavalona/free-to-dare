@@ -24,7 +24,7 @@ export function PricingSection() {
       id="pricing"
       aria-labelledby="pricing-title"
       data-reveal-group
-      className="scroll-mt-28 bg-card py-16 lg:py-24"
+      className="scroll-mt-28 bg-white"
     >
       <div className={CONTAINER}>
         <h2
