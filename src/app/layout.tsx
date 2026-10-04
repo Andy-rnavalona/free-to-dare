@@ -58,6 +58,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      // Smooth scroll is for in-page "#…" links only (globals.css)
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${workSansBlack.variable} ${spaceMono.variable} ${caveat.variable} ${cormorant.variable} h-full antialiased`}
       suppressHydrationWarning
     >

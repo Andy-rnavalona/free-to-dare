@@ -90,6 +90,14 @@ html {
   scroll-padding-top: 6.25rem;
 }
 
+/* Glides to a section from a "#…" link of the header. Page changes stay
+   instant: Next.js lifts it then, thanks to data-scroll-behavior on <html>. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background-color: var(--color-paper);
   background-image: radial-gradient(
