@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ExperienceSection } from "@/components/experience-section";
 import { FaqSection } from "@/components/faq-section";
@@ -25,6 +26,17 @@ const tripDetails = [
   { label: "When", value: "5 – 11 June 2027" },
   { label: "Group size", value: "Maximum 16 people" },
 ];
+
+export const metadata: Metadata = {
+  title: "Lisbon Aerial Urban Escape | Free to Dare",
+  description:
+    "A curated aerial retreat in Lisbon: daily aerial hoop and silks training with Pamela Mariotto, a sunset boat cruise, surf, photoshoots and time with the community. 5 – 11 June 2027.",
+  openGraph: {
+    title: "Free to Dare — Lisbon Aerial Urban Escape",
+    description:
+      "Train every day, explore Lisbon during jacaranda season and share the week with people who love aerial as much as you do. 5 – 11 June 2027.",
+  },
+};
 
 export default function Home() {
   return (
@@ -89,7 +101,21 @@ export default function Home() {
             </section>
 
             {/* Visual */}
-            <ReelCard />
+            <ReelCard
+              poster={withBasePath("/videos/lisbon-city.jpg")}
+              sources={[
+                {
+                  src: withBasePath("/videos/lisbon-city.av1.mp4"),
+                  type: 'video/mp4; codecs="av01.0.08M.08"',
+                },
+                {
+                  src: withBasePath("/videos/lisbon-city.mp4"),
+                  type: "video/mp4",
+                },
+              ]}
+              label="Lisbon in motion: trams, viewpoints, the 25 de Abril bridge and the pink street"
+              caption="A city made for curious minds"
+            />
 
             {/* Details */}
             <aside className="flex flex-col gap-5 lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-5 xl:col-span-1 xl:flex xl:gap-5">

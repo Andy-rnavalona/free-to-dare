@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Mail } from "lucide-react";
+import { LISBON_CONFIRMATION, LISBON_RETREAT } from "@/lib/routes";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -146,13 +147,13 @@ export function ConfirmationPage({
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href={`/booking/confirmation${query ? `?${query}` : ""}`}
+              href={`${LISBON_CONFIRMATION}${query ? `?${query}` : ""}`}
               className="font-display rounded-full bg-primary px-7 py-3.5 text-sm uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
             >
               View my booking
             </Link>
             <Link
-              href="/"
+              href={LISBON_RETREAT}
               className="font-display rounded-full border border-primary px-7 py-3.5 text-sm uppercase tracking-wide transition-colors hover:bg-secondary"
             >
               Back to Free to Dare

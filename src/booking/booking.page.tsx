@@ -24,7 +24,7 @@ import { PaymentScheduleDialog } from "@/booking/components/payment-schedule";
 import { PlanCard } from "@/booking/components/plan-card";
 import { StayCard } from "@/booking/components/stay-card";
 import { PLAN_LABELS, STAYS, findStay } from "@/booking/stays";
-import { withBasePath } from "@/lib/base-path";
+import { LISBON_CANCELLATION, LISBON_TERMS } from "@/lib/routes";
 
 const STEPS = ["Choose your stay", "Payment plan", "Accept & pay"];
 
@@ -184,7 +184,7 @@ export function BookingPage({
           <span>
             I have read and accept the{" "}
             <a
-              href={withBasePath("/terms")}
+              href={LISBON_TERMS}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"
@@ -193,7 +193,7 @@ export function BookingPage({
             </a>{" "}
             and{" "}
             <a
-              href={withBasePath("/cancellation-policy")}
+              href={LISBON_CANCELLATION}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"
