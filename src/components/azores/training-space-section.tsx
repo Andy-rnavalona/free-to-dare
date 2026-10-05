@@ -1,6 +1,35 @@
 import Image from "next/image";
+import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
+import { AZORES } from "@/components/azores/retreat";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
+
+const stats = [
+  { value: "5 × 90", label: "min pole classes" },
+  { value: "4", label: "pole stages" },
+  { value: String(AZORES.groupMax), label: "participants max" },
+  { value: "2", label: "people per pole" },
+];
+
+/* The studio, from the poles installed for the retreat to the room itself. */
+const studio: Photo[] = [
+  {
+    src: withBasePath("/videos/azores/training-space.jpg"),
+    alt: "A look around the empty studio, from the timber roof to the floor",
+    video: {
+      av1: withBasePath("/videos/azores/training-space.av1.mp4"),
+      mp4: withBasePath("/videos/azores/training-space.mp4"),
+    },
+  },
+  {
+    src: withBasePath("/images/azores/studio-empty.jpg"),
+    alt: "The empty studio under its timber roof, lit by side windows",
+  },
+  {
+    src: withBasePath("/images/azores/studio-group.jpg"),
+    alt: "A group sitting together in the studio between sessions",
+  },
+];
 
 const included = [
   "Training / studio space",
@@ -41,16 +70,13 @@ export function TrainingSpaceSection() {
             data-reveal
             className="relative overflow-hidden rounded-3xl bg-ink lg:sticky lg:top-32 lg:self-start"
           >
-            <Image
-              src={withBasePath("/images/azores/studio.jpg")}
-              alt="Indoor studio with four pole stages installed for the retreat"
-              width={1024}
-              height={1280}
+            <StayGallery
+              photos={studio}
+              className="aspect-[4/5]"
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="aspect-[4/5] w-full object-cover"
             />
             <span
-              className={`${MICRO} pointer-events-none absolute left-5 top-5 rounded-full bg-paper/90 px-4 py-2 text-[0.65rem] text-ink sm:left-6 sm:top-6`}
+              className={`${MICRO} pointer-events-none absolute left-5 top-5 z-20 rounded-full bg-paper/90 px-4 py-2 text-[0.65rem] text-ink sm:left-6 sm:top-6`}
             >
               The studio
             </span>
@@ -70,7 +96,25 @@ export function TrainingSpaceSection() {
               We install four pole stages specifically for the retreat, giving us
               a reliable training environment regardless of the weather outside.
             </p>
-            <ul className="mt-8">
+
+            <dl className="mt-8 grid grid-cols-2 gap-x-8">
+              {stats.map(({ value, label }) => (
+                <div
+                  key={label}
+                  data-reveal
+                  className="flex flex-col-reverse border-t-2 border-forest/20 py-5"
+                >
+                  <dt className={`${MICRO} mt-2 text-[0.65rem] text-muted`}>
+                    {label}
+                  </dt>
+                  <dd className="font-display text-3xl text-forest sm:text-4xl">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <ul className="mt-6">
               {included.map((item) => (
                 <li
                   key={item}
@@ -88,13 +132,12 @@ export function TrainingSpaceSection() {
                   Outside the studio
                 </p>
                 <h3 className="mt-2 text-[clamp(1.4rem,1.8vw,1.75rem)] font-extrabold uppercase leading-tight tracking-tight text-forest">
-                  Garden, patio &amp; bar
+                  Indoor studio  Small groups, more training time
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
-                  Between sessions, the garden and patio give everyone space to
-                  slow down, stretch and spend time together — with a small bar
-                  area to keep the atmosphere relaxed from training days to the
-                  last evening.
+            The retreat includes 5 × 90-minute pole classes in a private indoor studio. With 4 pole stages and a maximum of 8 participants per class, there are only 2 people per pole, giving you plenty of time to train and practise.
+
+The studio also has a kitchen and toilets, so everything you need is available on site.
                 </p>
               </div>
               <div

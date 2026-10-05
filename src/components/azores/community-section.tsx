@@ -1,7 +1,24 @@
-import Image from "next/image";
 import { SparkleIcon } from "@/components/icons";
+import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
+
+/* Moments from a past retreat, led by the video montage. */
+const moments: Photo[] = [
+  {
+    src: withBasePath("/videos/azores/community-poster.webp"),
+    alt: "The group dancing, swimming and training together on a past retreat",
+    video: {
+      av1: withBasePath("/videos/azores/community.av1.mp4"),
+      mp4: withBasePath("/videos/azores/community.mp4"),
+      sound: true,
+    },
+  },
+  {
+    src: withBasePath("/images/azores/community-group.webp"),
+    alt: "The group in flower garlands by the pool at sunset",
+  },
+];
 
 export function CommunitySection() {
   return (
@@ -46,14 +63,12 @@ export function CommunitySection() {
 
         <div
           data-reveal
-          className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink"
+          className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl bg-ink lg:max-w-lg"
         >
-          <Image
-            src={withBasePath("/images/azores/community.jpg")}
-            alt="The group laughing together at a Sete Cidades viewpoint"
-            fill
-            sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
+          <StayGallery
+            photos={moments}
+            className="aspect-[4/5]"
+            sizes="(min-width: 1024px) 32rem, 28rem"
           />
         </div>
       </div>

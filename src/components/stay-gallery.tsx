@@ -2,8 +2,22 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { BackgroundVideo } from "@/components/background-video";
+import { CardVideo } from "@/components/card-video";
 
-export type Photo = { src: string; alt: string; position?: string };
+export type Photo = {
+  /** The image, or the poster when this slide is a video */
+  src: string;
+  alt: string;
+  position?: string;
+  /** Turns the slide into a muted loop over `src` as its poster */
+  video?: {
+    av1: string;
+    mp4: string;
+    /** Has a soundtrack: shows pause and sound buttons over the loop */
+    sound?: boolean;
+  };
+};
 
 export function StayGallery({
   photos,
@@ -25,19 +39,67 @@ export function StayGallery({
 
   return (
     <div className={`relative overflow-hidden bg-ink ${className}`}>
-      {photos.map((photo, i) => (
-        <Image
-          key={photo.src}
-          src={photo.src}
-          alt={photo.alt}
-          fill
-          sizes={sizes}
-          aria-hidden={i !== index}
-          className={`object-cover transition-[opacity,scale] duration-500 ease-out ${
-            photo.position ?? ""
-          } ${imageClassName} ${i === index ? "opacity-100" : "opacity-0"}`}
-        />
-      ))}
+      {photos.map((photo, i) => {
+        const shared = `absolute inset-0 size-full object-cover transition-[opacity,scale] duration-500 ease-out ${
+          photo.position ?? ""
+        } ${imageClassName} ${i === index ? "opacity-100" : "opacity-0"}`;
+
+        /* A video slide only holds its loop while it is the one on show, so
+           the others are not left decoding behind it. */
+        return photo.video ? (
+          i === index ? (
+            photo.video.sound ? (
+              <div key={photo.src} className={shared}>
+                <CardVideo
+                  poster={photo.src}
+                  sources={[
+                    {
+                      src: photo.video.av1,
+                      type: 'video/mp4; codecs="av01.0.08M.08"',
+                    },
+                    { src: photo.video.mp4, type: "video/mp4" },
+                  ]}
+                  label={photo.alt}
+                  className="size-full"
+                />
+              </div>
+            ) : (
+              <BackgroundVideo
+                key={photo.src}
+                poster={photo.src}
+                sources={[
+                  {
+                    src: photo.video.av1,
+                    type: 'video/mp4; codecs="av01.0.08M.08"',
+                  },
+                  { src: photo.video.mp4, type: "video/mp4" },
+                ]}
+                className={shared}
+              />
+            )
+          ) : (
+            <Image
+              key={photo.src}
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              sizes={sizes}
+              aria-hidden
+              className={shared}
+            />
+          )
+        ) : (
+          <Image
+            key={photo.src}
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes={sizes}
+            aria-hidden={i !== index}
+            className={shared}
+          />
+        );
+      })}
 
       {soldOut && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center bg-forest/45">

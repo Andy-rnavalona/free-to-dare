@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BackgroundVideo } from "@/components/background-video";
 import { SparkleIcon } from "@/components/icons";
 import { withBasePath } from "@/lib/base-path";
 import { AZORES } from "@/components/azores/retreat";
@@ -55,22 +56,41 @@ export function AccommodationSection() {
           className="mt-12 grid gap-3 md:grid-cols-3 md:grid-rows-2 lg:mt-14"
         >
           <div className="relative min-h-[20rem] overflow-hidden rounded-3xl bg-ink md:col-span-2 md:row-span-2">
-            <Image
-              src={withBasePath("/images/azores/pool.jpg")}
-              alt="Swimming pool at the accommodation"
-              fill
-              sizes="(min-width: 768px) 60vw, 100vw"
-              className="object-cover"
+            <BackgroundVideo
+              sources={[
+                {
+                  src: withBasePath("/videos/azores/accommodation.webm"),
+                  type: "video/webm",
+                },
+                {
+                  src: withBasePath("/videos/azores/accommodation.mp4"),
+                  type: "video/mp4",
+                },
+              ]}
+              poster={withBasePath("/videos/azores/accommodation-poster.webp")}
+              className="absolute inset-0 size-full object-cover"
             />
           </div>
           {[
             {
-              src: "exterior.jpg",
-              alt: "Historic exterior of the stay",
+              src: "hotel-entrance.webp",
+              alt: "Columned entrance of the historic hotel",
             },
             {
-              src: "restaurant.jpg",
-              alt: "Breakfast room of the stay",
+              src: "hotel-room.webp",
+              alt: "Twin bedroom with a painted wall mural",
+            },
+            {
+              src: "hotel-hall.webp",
+              alt: "Grand staircase in the hotel's entrance hall",
+            },
+            {
+              src: "hotel-room-2.webp",
+              alt: "Double bedroom with a window onto the town",
+            },
+            {
+              src: "hotel-facade.webp",
+              alt: "Pink facade of the hotel at sunset",
             },
           ].map((photo) => (
             <div
@@ -87,6 +107,15 @@ export function AccommodationSection() {
             </div>
           ))}
         </div>
+
+        <p
+          data-reveal
+          className="mt-5 max-w-4xl text-xs leading-relaxed text-muted/80 sm:text-sm"
+        >
+          Accommodation reserved for retreat participants · Independently owned
+          and operated by Vila Galé Collection São Miguel · Hotel imagery
+          courtesy of Vila Galé.
+        </p>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-12">
           <ul data-reveal className="flex flex-wrap gap-3">
