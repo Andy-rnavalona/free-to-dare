@@ -1,6 +1,27 @@
 import Image from "next/image";
+import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
+
+/* The studio, from the poles installed for the retreat to the room itself. */
+const studio: Photo[] = [
+  {
+    src: withBasePath("/videos/azores/training-space.jpg"),
+    alt: "A look around the empty studio, from the timber roof to the floor",
+    video: {
+      av1: withBasePath("/videos/azores/training-space.av1.mp4"),
+      mp4: withBasePath("/videos/azores/training-space.mp4"),
+    },
+  },
+  {
+    src: withBasePath("/images/azores/studio-empty.jpg"),
+    alt: "The empty studio under its timber roof, lit by side windows",
+  },
+  {
+    src: withBasePath("/images/azores/studio-group.jpg"),
+    alt: "A group sitting together in the studio between sessions",
+  },
+];
 
 const included = [
   "Training / studio space",
@@ -41,16 +62,13 @@ export function TrainingSpaceSection() {
             data-reveal
             className="relative overflow-hidden rounded-3xl bg-ink lg:sticky lg:top-32 lg:self-start"
           >
-            <Image
-              src={withBasePath("/images/azores/studio.jpg")}
-              alt="Indoor studio with four pole stages installed for the retreat"
-              width={1024}
-              height={1280}
+            <StayGallery
+              photos={studio}
+              className="aspect-[4/5]"
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="aspect-[4/5] w-full object-cover"
             />
             <span
-              className={`${MICRO} pointer-events-none absolute left-5 top-5 rounded-full bg-paper/90 px-4 py-2 text-[0.65rem] text-ink sm:left-6 sm:top-6`}
+              className={`${MICRO} pointer-events-none absolute left-5 top-5 z-20 rounded-full bg-paper/90 px-4 py-2 text-[0.65rem] text-ink sm:left-6 sm:top-6`}
             >
               The studio
             </span>
