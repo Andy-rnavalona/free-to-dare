@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { BackgroundVideo } from "@/components/background-video";
+import { CardVideo } from "@/components/card-video";
 
 export type Photo = {
   /** The image, or the poster when this slide is a video */
@@ -10,7 +11,12 @@ export type Photo = {
   alt: string;
   position?: string;
   /** Turns the slide into a muted loop over `src` as its poster */
-  video?: { av1: string; mp4: string };
+  video?: {
+    av1: string;
+    mp4: string;
+    /** Has a soundtrack: shows pause and sound buttons over the loop */
+    sound?: boolean;
+  };
 };
 
 export function StayGallery({
@@ -42,18 +48,35 @@ export function StayGallery({
            the others are not left decoding behind it. */
         return photo.video ? (
           i === index ? (
-            <BackgroundVideo
-              key={photo.src}
-              poster={photo.src}
-              sources={[
-                {
-                  src: photo.video.av1,
-                  type: 'video/mp4; codecs="av01.0.08M.08"',
-                },
-                { src: photo.video.mp4, type: "video/mp4" },
-              ]}
-              className={shared}
-            />
+            photo.video.sound ? (
+              <div key={photo.src} className={shared}>
+                <CardVideo
+                  poster={photo.src}
+                  sources={[
+                    {
+                      src: photo.video.av1,
+                      type: 'video/mp4; codecs="av01.0.08M.08"',
+                    },
+                    { src: photo.video.mp4, type: "video/mp4" },
+                  ]}
+                  label={photo.alt}
+                  className="size-full"
+                />
+              </div>
+            ) : (
+              <BackgroundVideo
+                key={photo.src}
+                poster={photo.src}
+                sources={[
+                  {
+                    src: photo.video.av1,
+                    type: 'video/mp4; codecs="av01.0.08M.08"',
+                  },
+                  { src: photo.video.mp4, type: "video/mp4" },
+                ]}
+                className={shared}
+              />
+            )
           ) : (
             <Image
               key={photo.src}

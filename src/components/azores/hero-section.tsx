@@ -4,7 +4,6 @@ import {
   CreditCard,
   MapPin,
   Users,
-  Wallet,
 } from "lucide-react";
 import { BackgroundVideo } from "@/components/background-video";
 import { ArrowRightIcon } from "@/components/icons";
@@ -25,9 +24,8 @@ const facts = [
   { label: AZORES.dates, Icon: Calendar },
   { label: AZORES.place, Icon: MapPin },
   { label: AZORES.classes, Icon: Clock },
-  { label: `Maximum ${AZORES.groupMax} participants`, Icon: Users },
+  { label: `${AZORES.groupMax} SPOTS`, Icon: Users },
   { label: `${formatEuro(AZORES.deposit)} deposit to reserve`, Icon: CreditCard },
-  { label: "Flexible payment plans available", Icon: Wallet },
 ];
 
 export function HeroSection() {
@@ -59,10 +57,12 @@ export function HeroSection() {
         <h1
           id="hero-title"
           data-reveal
-          className={`${DISPLAY} text-[15vw] leading-[0.86] sm:text-7xl lg:text-8xl xl:text-[8.5rem]`}
+          className={`${DISPLAY} text-[13vw] leading-[0.86] sm:text-7xl lg:text-7xl xl:text-7xl`}
         >
           <span className="block">Azores</span>
-          <span className="block text-sun">Into the wild</span>
+          <span className="block">
+            Into the <span className="text-sun">wild</span>
+          </span>
         </h1>
 
         <p data-reveal className={`${MICRO} mt-6 text-sm tracking-[0.35em]`}>
@@ -71,7 +71,7 @@ export function HeroSection() {
 
         <p
           data-reveal
-          className="mt-8 max-w-3xl border-l-2 border-sun pl-6 font-serif text-xl italic leading-tight tracking-tight text-white/85 sm:pl-8 md:text-2xl lg:text-[1.75rem]"
+          className="mt-8 max-w-3xl border-l-2 border-sun pl-6 font-serif text-xl italic leading-tight tracking-tight text-white/85 sm:pl-8 md:text-2xl lg:text-[1.5rem]"
         >
           Train pole. Explore one of the wildest islands in the Atlantic. Spend a
           week between volcanic landscapes, thermal waters, ocean adventures and
@@ -91,15 +91,26 @@ export function HeroSection() {
         </ul>
 
         <div data-reveal className="mt-10 flex flex-wrap items-center gap-8">
-          <a href={PRICING_ANCHOR} className={BUTTON_LIGHT}>
-            Reserve your spot
-            <ArrowRightIcon className="size-4" />
-          </a>
+          <div className="relative">
+            <p
+              aria-hidden="true"
+              className="absolute top-1/2 hidden -translate-x-full -translate-y-1/2 font-script text-2xl text-sun lg:block"
+            >
+              {/* Inner span floats so the animation doesn't reset the positioning */}
+              <span className="flex animate-floating items-center">
+                Step out <span className="ml-2 -translate-y-1">→</span>
+              </span>
+            </p>
+            <a href={PRICING_ANCHOR} className={`${BUTTON_LIGHT} lg:ml-6`}>
+              Reserve your spot
+              <ArrowRightIcon className="size-4" />
+            </a>
+          </div>
           <a
-            href="#experience"
-            className={`${MICRO} inline-flex items-center border-b border-white/40 pb-1 text-white/90 transition-colors hover:text-sun`}
+            href="#included"
+            className="inline-flex items-center border-b border-white/40 pb-1 text-xs font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-sun"
           >
-            Discover the experience
+            See what&apos;s included
           </a>
         </div>
       </div>

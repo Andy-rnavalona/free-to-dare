@@ -364,14 +364,6 @@ function TripTabs({ onPick }: { onPick: () => void }) {
           {t.id === "disciplines" && <DisciplinesTab onPick={onPick} />}
         </div>
       ))}
-
-      <span className="mt-6 inline-flex items-center gap-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-muted">
-        View all trips
-        <span aria-hidden="true">→</span>
-        <span className="rounded-full bg-ink/8 px-1.5 py-0.5 text-[0.5rem] tracking-[0.14em]">
-          Soon
-        </span>
-      </span>
     </>
   );
 }

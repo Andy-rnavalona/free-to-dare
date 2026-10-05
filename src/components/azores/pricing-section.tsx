@@ -8,14 +8,18 @@ import {
   MICRO,
 } from "@/components/azores/ui";
 
-const soloIncludes = [
-  `${AZORES.nights} nights accommodation`,
-  "Daily breakfast",
-  "5 pole classes",
-  "Scheduled activities",
-  "Group transfers",
-  "Welcome dinner",
-  "Photoshoot",
+const soloIncludes: { item: string; detail?: string }[] = [
+  { item: `${AZORES.nights} nights accommodation` },
+  { item: "Daily breakfast" },
+  { item: "5 pole classes" },
+  { item: "Scheduled activities" },
+  {
+    item: "All grouped transfers included",
+    detail:
+      "Airport transfers + transfers to pole classes, scheduled activities and excursions",
+  },
+  { item: "Welcome dinner" },
+  { item: "Photoshoot" },
 ];
 
 export function PricingSection() {
@@ -57,24 +61,35 @@ export function PricingSection() {
                 </span>
               </p>
               <p className="mt-3 text-sm font-semibold">
-                For one pole participant.
+                Shared Room
               </p>
 
               <ul className="mt-8">
-                {soloIncludes.map((item) => (
+                {soloIncludes.map(({ item, detail }) => (
                   <li
                     key={item}
-                    className="flex items-center gap-3 border-t border-line py-3 text-sm"
+                    className="flex items-start gap-3 border-t border-line py-3 text-sm"
                   >
-                    <CheckIcon className="size-4 shrink-0 text-forest" />
-                    {item}
+                    <CheckIcon className="mt-0.5 size-4 shrink-0 text-forest" />
+                    {detail ? (
+                      <span>
+                        <span className="block text-[0.8rem] font-semibold uppercase tracking-wide text-forest">
+                          {item}
+                        </span>
+                        <span className="mt-1 block text-xs leading-relaxed text-muted">
+                          {detail}
+                        </span>
+                      </span>
+                    ) : (
+                      item
+                    )}
                   </li>
                 ))}
               </ul>
             </div>
 
             <p
-              className={`${MICRO} bg-sun px-7 py-4 text-[0.65rem] text-ink sm:px-10`}
+              className={`${MICRO} border-t border-line px-7 pt-6 text-[0.65rem] text-muted sm:px-10`}
             >
               {formatEuro(AZORES.deposit)} deposit to reserve
             </p>
@@ -118,7 +133,7 @@ export function PricingSection() {
             </div>
 
             <p
-              className={`${MICRO} bg-sun px-7 py-4 text-[0.65rem] text-ink sm:px-10`}
+              className={`${MICRO} border-t border-line px-7 pt-6 text-[0.65rem] text-muted sm:px-10`}
             >
               {formatEuro(AZORES.deposit)} deposit to reserve
             </p>

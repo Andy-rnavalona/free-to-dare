@@ -96,8 +96,7 @@ export function ExperiencesSection() {
             data-reveal
             className={`${DISPLAY} text-[clamp(2.75rem,6vw,4.75rem)] text-forest`}
           >
-            <span className="block">Go into</span>
-            <span className="block">the wild</span>
+            <span className="block">LIVE THE AZORES EXPERIENCE</span>
           </h2>
           <p
             data-reveal
