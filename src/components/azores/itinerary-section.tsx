@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  BedDouble,
   Camera,
   Footprints,
   Leaf,
@@ -16,6 +15,7 @@ import {
   Waves,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { CardVideo } from "@/components/card-video";
 import { ArrowRightIcon } from "@/components/icons";
 import { ItineraryDay } from "@/components/itinerary-day";
 import { formatEuro } from "@/booking/booking-config";
@@ -29,7 +29,6 @@ import {
   MICRO,
 } from "@/components/azores/ui";
 
-const STAY = "Your Azores home";
 const TRANSFERS_INCLUDED = "Transfers for scheduled activities are included.";
 const RETURN_INCLUDED = "Return group transfer is included.";
 const AIRPORT_INCLUDED = "Group airport transfers are included.";
@@ -47,10 +46,14 @@ type Day = {
   title: string;
   date: string;
   intro: string;
-  /** Two photos above the intro */
-  gallery: { src: string; alt: string }[];
+  /** Two photos (or short videos) above the intro */
+  gallery: Media[];
   activities: Activity[];
 };
+
+type Media =
+  | { src: string; alt: string }
+  | { av1: string; mp4: string; poster: string; label: string };
 
 const photo = (src: string, alt: string) => ({
   src: withBasePath(`/images/azores/${src}`),
@@ -67,12 +70,19 @@ const QUAD = photo("quad.jpg", "Quad bikes on an island dirt road");
 const THERMAL = photo("thermal.jpg", "Natural thermal pool on São Miguel");
 const TEA = photo("tea.jpg", "Tea plantations on the north coast");
 const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast");
+const AIRPORT = photo("airport.webp", "Ponta Delgada airport by the ocean");
+const WELCOME_DINNER = {
+  av1: withBasePath("/videos/azores/welcome-dinner.av1.mp4"),
+  mp4: withBasePath("/videos/azores/welcome-dinner.mp4"),
+  poster: withBasePath("/videos/azores/welcome-dinner-poster.webp"),
+  label: "The group around a long table at the welcome dinner",
+};
 
 const days: Day[] = [
   {
     title: "Welcome to São Miguel",
     date: "Tuesday, 30 June",
-    gallery: [SETE_CIDADES, COMMUNITY],
+    gallery: [AIRPORT, WELCOME_DINNER],
     intro:
       "Welcome to São Miguel! Arrive, settle into your stay and meet the group. We intentionally keep the first day relaxed, with no complex activities planned, giving everyone time to arrive, unpack and get comfortable. In the evening, we’ll take an easy walk through Ponta Delgada city centre before coming together for our first dinner at a local restaurant.",
     activities: [
@@ -80,7 +90,7 @@ const days: Day[] = [
         kind: "Travel",
         title: "Arrival & group transfers",
         description:
-          "Land in Ponta Delgada, where the group transfer brings you to your accommodation.",
+          "Grouped airport transfers to Vila Galé Collection S. Miguel are included. The hotel is only around 10 minutes from the airport. Transfers are organised according to participants’ flight arrival times, including late arrivals and flight delays.",
         note: AIRPORT_INCLUDED,
         Icon: Plane,
       },
@@ -285,21 +295,34 @@ const days: Day[] = [
   },
 ];
 
-function DayPanel({ day, index }: { day: Day; index: number }) {
+function DayPanel({ day }: { day: Day }) {
   return (
     <>
       <div className="mb-4 grid gap-3 sm:grid-cols-2">
-        {day.gallery.map((item) => (
-          <Image
-            key={item.src}
-            src={item.src}
-            alt={item.alt}
-            width={1024}
-            height={768}
-            sizes="(min-width: 1280px) 22rem, (min-width: 640px) 30vw, 90vw"
-            className="h-40 w-full rounded-2xl object-cover sm:h-[17rem]"
-          />
-        ))}
+        {day.gallery.map((item) =>
+          "mp4" in item ? (
+            <CardVideo
+              key={item.mp4}
+              sources={[
+                { src: item.av1, type: 'video/mp4; codecs="av01.0.05M.08"' },
+                { src: item.mp4, type: "video/mp4" },
+              ]}
+              poster={item.poster}
+              label={item.label}
+              className="h-40 w-full rounded-2xl sm:h-[17rem]"
+            />
+          ) : (
+            <Image
+              key={item.src}
+              src={item.src}
+              alt={item.alt}
+              width={1024}
+              height={768}
+              sizes="(min-width: 1280px) 22rem, (min-width: 640px) 30vw, 90vw"
+              className="h-40 w-full rounded-2xl object-cover sm:h-[17rem]"
+            />
+          ),
+        )}
       </div>
 
       <p className="text-sm leading-relaxed text-muted">{day.intro}</p>
@@ -334,29 +357,6 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
         ))}
       </ul>
 
-      {index < AZORES.nights && (
-        <div className="mt-4 rounded-2xl bg-card p-4">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-            <div className="flex min-w-0 items-center gap-3">
-              <BedDouble
-                aria-hidden="true"
-                className="size-5 shrink-0 text-forest"
-              />
-              <h3
-                className={`${DISPLAY} text-lg leading-tight tracking-[-0.01em] text-forest`}
-              >
-                {STAY}
-              </h3>
-            </div>
-            <span className={`${BADGE_SUN} shrink-0 text-[0.65rem]`}>
-              Night {index + 1}/{AZORES.nights}
-            </span>
-          </div>
-          <p className="mt-2 pl-8 text-sm text-muted">
-            Overnight in São Miguel.
-          </p>
-        </div>
-      )}
     </>
   );
 }
@@ -445,7 +445,7 @@ export function ItinerarySection() {
                   date={day.date}
                   defaultOpen={i === 0}
                 >
-                  <DayPanel day={day} index={i} />
+                  <DayPanel day={day} />
                 </ItineraryDay>
               </div>
             ))}

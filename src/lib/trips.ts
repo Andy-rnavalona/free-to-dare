@@ -34,7 +34,7 @@ export const TRIPS: Trip[] = [
     country: "Portugal",
     discipline: "Pole Dance",
     name: "Pole Dance Retreat",
-    soon: true,
+    href:'https://madeiracreativevillage.com/upcoming-retreats',
     image: "/images/trips/madeira-pole-dance.jpg",
     alt: "Pole dancer on a black sand beach below the cliffs",
   },
@@ -62,8 +62,8 @@ export const TRIPS: Trip[] = [
     discipline: "Fitness & Workout",
     name: "Workout Retreat",
     soon: true,
-    image: "/images/trips/madeira-workout.jpg",
-    alt: "Riders on quad bikes along a hydrangea-lined track",
+    image: "/images/trips/madeira-workout.webp",
+    alt: "A woman running along a seafront jetty below the cliffs",
   },
 ];
 

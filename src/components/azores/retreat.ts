@@ -17,10 +17,18 @@ export const AZORES = {
   classes: "5 × 90 min Pole Classes",
   /** Paid today to hold a place */
   deposit: 500,
-  /** Lowest price per person, for the "From €…" labels */
-  priceFrom: 2850,
+  /** Shown as "From €…": the shared room at the returning-participant price */
+  priceFrom: 2700,
+  /** Shared room, 2 people per room, per person */
+  priceShared: 2850,
+  /** Taken off the shared room for returning participants */
+  loyaltyDiscount: 150,
+  /** Private room, single occupancy, per person */
+  pricePrivate: 3250,
   /** One pole participant plus an accompanying guest */
-  pricePartner: 4100,
+  pricePartner: 4300,
+  /** Retreat ticket without accommodation, per person */
+  priceRetreatOnly: 1950,
 } as const;
 
 /** Where every call to action leads, as in the reference design */

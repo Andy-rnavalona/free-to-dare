@@ -63,13 +63,9 @@ const experiences: Experience[] = [
   {
     tag: "Reset",
     title: "NATURAL HOT SPRINGS — CALDEIRA VELHA",
-    image: "thermal.jpg",
-    alt: "Natural thermal pool surrounded by subtropical plants",
+    image: "thermal-waterfall.webp",
+    alt: "Warm waterfall falling into the bathing pool at Caldeira Velha",
     gallery: [
-      {
-        image: "thermal-waterfall.webp",
-        alt: "Warm waterfall falling into the bathing pool at Caldeira Velha",
-      },
       {
         image: "thermal-ferns.webp",
         alt: "The thermal pool seen from above, ringed by tree ferns",
