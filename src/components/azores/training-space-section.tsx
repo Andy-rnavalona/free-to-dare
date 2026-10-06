@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
 import { AZORES } from "@/components/azores/retreat";
@@ -14,6 +14,10 @@ const stats = [
 /* The studio, from the poles installed for the retreat to the room itself. */
 const studio: Photo[] = [
   {
+    src: withBasePath("/images/azores/studio-group.jpg"),
+    alt: "A group sitting together in the studio between sessions",
+  },
+  {
     src: withBasePath("/videos/azores/training-space.jpg"),
     alt: "A look around the empty studio, from the timber roof to the floor",
     video: {
@@ -25,16 +29,11 @@ const studio: Photo[] = [
     src: withBasePath("/images/azores/studio-empty.jpg"),
     alt: "The empty studio under its timber roof, lit by side windows",
   },
-  {
-    src: withBasePath("/images/azores/studio-group.jpg"),
-    alt: "A group sitting together in the studio between sessions",
-  },
 ];
 
 const included = [
   "Training / studio space",
   "Sound system & speakers",
-  "Changing rooms",
   "Toilets & showers",
 ];
 
@@ -102,12 +101,12 @@ export function TrainingSpaceSection() {
                 <div
                   key={label}
                   data-reveal
-                  className="flex flex-col-reverse border-t-2 border-forest/20 py-5"
+                  className="flex flex-col-reverse border-b border-forest/20 py-3"
                 >
                   <dt className={`${MICRO} mt-2 text-[0.65rem] text-muted`}>
                     {label}
                   </dt>
-                  <dd className="font-display text-3xl text-forest sm:text-4xl">
+                  <dd className="font-display text-xl text-forest sm:text-xl">
                     {value}
                   </dd>
                 </div>
@@ -140,7 +139,7 @@ export function TrainingSpaceSection() {
 The studio also has a kitchen and toilets, so everything you need is available on site.
                 </p>
               </div>
-              <div
+              {/* <div
                 data-reveal
                 className="relative aspect-square w-full overflow-hidden rounded-2xl bg-ink sm:w-60 xl:w-64"
               >
@@ -151,7 +150,7 @@ The studio also has a kitchen and toilets, so everything you need is available o
                   sizes="(min-width: 640px) 16rem, 100vw"
                   className="object-cover"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

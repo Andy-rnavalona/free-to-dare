@@ -17,7 +17,7 @@ export function PhotoshootSection() {
       className="relative scroll-mt-28 overflow-hidden bg-ink text-white"
     >
       <Image
-        src={withBasePath("/images/azores/photoshoot.jpg")}
+        src={withBasePath("/images/azores/photoshoot.webp")}
         alt="Pole photoshoot on the volcanic coast of São Miguel"
         fill
         sizes="100vw"
