@@ -26,11 +26,11 @@ export default function Home() {
       <HeroSection />
       <IntroSection />
       <ExperiencesSection />
+      <CommunitySection />
       <TrainingSpaceSection />
       <AccommodationSection />
       <ItinerarySection />
       <IncludedSection />
-      <CommunitySection />
       <PricingSection />
       {/* <FinalCtaSection /> */}
     </main>

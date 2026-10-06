@@ -66,7 +66,7 @@ const WHALE = photo("whale.jpg", "A whale surfacing in the Atlantic");
 const QUAD = photo("quad.jpg", "Quad bikes on an island dirt road");
 const THERMAL = photo("thermal.jpg", "Natural thermal pool on São Miguel");
 const TEA = photo("tea.jpg", "Tea plantations on the north coast");
-const PHOTOSHOOT = photo("photoshoot.jpg", "Pole photoshoot on the Azores coast");
+const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast");
 
 const days: Day[] = [
   {
@@ -74,7 +74,7 @@ const days: Day[] = [
     date: "Tuesday, 30 June",
     gallery: [SETE_CIDADES, COMMUNITY],
     intro:
-      "Welcome to São Miguel! Arrive, settle into your stay and meet the group. Today is intentionally relaxed, giving everyone time to arrive and get comfortable before our first evening together.",
+      "Welcome to São Miguel! Arrive, settle into your stay and meet the group. We intentionally keep the first day relaxed, with no complex activities planned, giving everyone time to arrive, unpack and get comfortable. In the evening, we’ll take an easy walk through Ponta Delgada city centre before coming together for our first dinner at a local restaurant.",
     activities: [
       {
         kind: "Travel",
