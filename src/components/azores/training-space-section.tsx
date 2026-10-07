@@ -96,7 +96,7 @@ export function TrainingSpaceSection() {
               a reliable training environment regardless of the weather outside.
             </p>
 
-            <dl className="mt-8 grid grid-cols-2 gap-x-8">
+            <dl className="mt-2 grid grid-cols-2 gap-x-8">
               {stats.map(({ value, label }) => (
                 <div
                   key={label}
@@ -113,7 +113,7 @@ export function TrainingSpaceSection() {
               ))}
             </dl>
 
-            <ul className="mt-6">
+            <ul className="mt-2">
               {included.map((item) => (
                 <li
                   key={item}
@@ -125,7 +125,7 @@ export function TrainingSpaceSection() {
               ))}
             </ul>
 
-            <div className="grid items-center gap-8 pt-12 sm:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="grid items-center gap-8 pt-6 sm:grid-cols-[minmax(0,1fr)_auto]">
               <div data-reveal>
                 <p className={`${MICRO} text-[0.65rem] text-muted`}>
                   Outside the studio

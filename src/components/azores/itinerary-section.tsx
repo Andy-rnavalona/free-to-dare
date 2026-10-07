@@ -2,17 +2,13 @@ import Image from "next/image";
 import {
   Camera,
   Footprints,
-  Leaf,
+  Luggage,
   Mountain,
   Plane,
   Ship,
   Sparkles,
   Sun,
-  Trees,
-  Truck,
-  Users,
   UtensilsCrossed,
-  Waves,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { CardVideo } from "@/components/card-video";
@@ -32,6 +28,7 @@ import {
 const TRANSFERS_INCLUDED = "Transfers for scheduled activities are included.";
 const RETURN_INCLUDED = "Return group transfer is included.";
 const AIRPORT_INCLUDED = "Group airport transfers are included.";
+const WHALE_WATCHING_INCLUDED = "Whale watching and scheduled group transfers are included.";
 
 type Activity = {
   kind: string;
@@ -53,22 +50,57 @@ type Day = {
 
 type Media =
   | { src: string; alt: string }
-  | { av1: string; mp4: string; poster: string; label: string };
+  | {
+      av1: string;
+      mp4: string;
+      poster: string;
+      label: string;
+      hasAudio?: boolean;
+    };
 
 const photo = (src: string, alt: string) => ({
   src: withBasePath(`/images/azores/${src}`),
   alt,
 });
 
-const SETE_CIDADES = photo("hero.jpg", "The twin crater lakes of Sete Cidades");
+const SETE_CIDADES_LAKE = photo(
+  "sete-cidades-lake.avif",
+  "Blue hydrangeas overlooking the lake and volcanic crater of Sete Cidades",
+);
+const SETE_CIDADES_QUAD = photo(
+  "sete-cidades-quad.avif",
+  "A group riding quad bikes above the blue and green lakes of Sete Cidades",
+);
 const COMMUNITY = photo("community.jpg", "The group together at a viewpoint");
-const STUDIO = photo("studio.jpg", "The retreat's pole studio");
+const NORTH_COAST_TEA = photo(
+  "north-coast-tea.avif",
+  "Lush tea plantations on São Miguel’s north coast",
+);
+const NORTH_COAST_WATERFALL = photo(
+  "north-coast-waterfall.avif",
+  "A waterfall surrounded by lush greenery on São Miguel",
+);
 const BREAKFAST = photo("restaurant.jpg", "Breakfast room of the stay");
-const FOGO = photo("fogo.jpg", "Lagoa do Fogo crater lake");
-const WHALE = photo("whale.jpg", "A whale surfacing in the Atlantic");
-const QUAD = photo("quad.jpg", "Quad bikes on an island dirt road");
-const THERMAL = photo("thermal.jpg", "Natural thermal pool on São Miguel");
-const TEA = photo("tea.jpg", "Tea plantations on the north coast");
+const WHALE = photo("whale-breaching.webp", "A whale breaching in the Atlantic");
+const POLE_CLASS_03 = photo(
+  "pole-class-03.avif",
+  "A pole dancer performing a pose in the studio",
+);
+const POLE_TRAINING = {
+  av1: withBasePath("/videos/azores/pole-training.av1.mp4"),
+  mp4: withBasePath("/videos/azores/pole-training.mp4"),
+  poster: withBasePath("/videos/azores/pole-training-poster.webp"),
+  label: "The group practising pole dance on the studio stages",
+  hasAudio: false,
+};
+const LAGOA_DO_FOGO = photo(
+  "lagoa-do-fogo-viewpoint.avif",
+  "A visitor overlooking Lagoa do Fogo and its volcanic crater on São Miguel",
+);
+const SANTA_BARBARA_BEACH = photo(
+  "santa-barbara-beach.avif",
+  "Atlantic waves along Santa Bárbara Beach on São Miguel’s north coast",
+);
 const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast");
 const AIRPORT = photo("airport.webp", "Ponta Delgada airport by the ocean");
 const WELCOME_DINNER = {
@@ -105,9 +137,9 @@ const days: Day[] = [
     ],
   },
   {
-    title: "First flight & Ponta Delgada",
+    title: "Pole & the north coast",
     date: "Wednesday, 1 July",
-    gallery: [STUDIO, BREAKFAST],
+    gallery: [NORTH_COAST_TEA, NORTH_COAST_WATERFALL],
     intro:
       "Our first full day starts in the studio before discovering the island’s capital together.",
     activities: [
@@ -115,50 +147,27 @@ const days: Day[] = [
         kind: "Pole training",
         title: "Pole Class 01",
         description:
-          "Our first 90-minute pole session takes place in our partner studio, with four pole stages installed for the retreat.",
+          "Our first 90-minute pole session takes place at our partner studio, with four pole stages installed specifically for the retreat. All scheduled transfers are included, and the studio is only a 5–10 minute drive from our accommodation.",
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
       {
-        kind: "City",
-        title: "Ponta Delgada old town",
+        kind: "Explore",
+        title: "THE NORTH COAST EXPLORATION",
         description:
-          "After training, we explore the old town of Ponta Delgada together — colourful facades, the marina and the relaxed atmosphere of the island’s capital.",
+          "After our morning pole training, we’ll have lunch together in Ponta Delgada (not included in the retreat price) before heading to São Miguel’s lush North Coast — Gorreana Tea Plantation, Cascata do Limbo and Miradouro de Santa Iria. We’ll return to the hotel in the evening.",
         note: RETURN_INCLUDED,
         Icon: Footprints,
-      },
-      {
-        kind: "Community",
-        title: "Community moments",
-        description:
-          "The evening is left open to spend time together as a group — dinner, conversation and the first shared memories of the week.",
-        Icon: Users,
       },
     ],
   },
   {
     title: "Sete Cidades",
     date: "Thursday, 2 July",
-    gallery: [SETE_CIDADES, FOGO],
+    gallery: [SETE_CIDADES_LAKE, SETE_CIDADES_QUAD],
     intro:
       "Today we head west for the island’s most iconic volcanic landscapes before returning to the studio for training.",
     activities: [
-      {
-        kind: "Volcanic",
-        title: "Vista do Rei viewpoint",
-        description:
-          "We begin at the famous Vista do Rei viewpoint, overlooking the twin lakes of Sete Cidades from above.",
-        note: RETURN_INCLUDED,
-        Icon: Mountain,
-      },
-      {
-        kind: "Volcanic",
-        title: "Lagoa do Canário & Boca do Inferno",
-        description:
-          "A stop at the Lagoa do Canário and the mythical Boca do Inferno belvedere — one of the most breathtaking views of the island.",
-        note: RETURN_INCLUDED,
-        Icon: Trees,
-      },
       {
         kind: "Pole training",
         title: "Pole Class 02",
@@ -167,34 +176,51 @@ const days: Day[] = [
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
+      {
+        kind: "Volcanic",
+        title: "Sete Cidades Adventure — Choose Your Experience",
+        description:
+          "In the afternoon, we head west to discover the spectacular volcanic landscapes of Sete Cidades. Choose between a half-day quad adventure, combining off-road trails, crater views and the famous blue and green lakes, or a guided scenic van tour, taking you through the volcanic crater and some of its most spectacular viewpoints.As part of the experience, we’ll stop at Vista do Rei and the iconic abandoned Monte Palace Hotel, overlooking the Sete Cidades lakes, where we’ll take time to capture photos and video content against this extraordinary cinematic backdrop.",
+        note: "A valid driving licence is required for the quad experience. Your selected experience and group transfers are included.",
+        Icon: Mountain,
+      },
     ],
   },
   {
     title: "Into the Atlantic",
     date: "Friday, 3 July",
-    gallery: [WHALE, QUAD],
+    gallery: [WHALE, POLE_CLASS_03],
     intro: "A day on the water, between Atlantic air, whales and training.",
     activities: [
       {
         kind: "On the water",
         title: "Whale watching",
         description:
-          "We head out to sea with a local crew to observe whales and dolphins in their natural environment.",
-        note: TRANSFERS_INCLUDED,
+          "We start the morning on the Atlantic, heading out with a local crew in search of whales and dolphins in their natural environment. A unique opportunity to experience São Miguel from the ocean and discover the incredible marine life of the Azores.",
+        note: WHALE_WATCHING_INCLUDED,
         Icon: Ship,
+      },
+      {
+        kind: "Slow afternoon",
+        title: "Lunch & rest",
+        description:
+          "After our morning at sea, we return to the hotel for a long break. Take your time to shower, rest, enjoy lunch at one of the nearby restaurants or simply relax before training.",
+        note: "Lunch is not included.",
+        Icon: UtensilsCrossed,
       },
       {
         kind: "Pole training",
         title: "Pole Class 03",
-        description: "Back in the studio for the third 90-minute pole session.",
+        description:
+          "Later in the afternoon, we head to the studio for our third 90-minute pole session. Classes take place in small groups, allowing plenty of space and individual attention.",
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
       {
         kind: "Free time",
-        title: "Free time",
+        title: "Free evening",
         description:
-          "The evening is free — rest, explore, or simply enjoy the slow rhythm of the island.",
+          "After training, we return to the hotel at around 7:15 PM. The rest of the evening is completely free — go for dinner, explore Ponta Delgada or simply relax after a full day of ocean and pole.",
         Icon: Sun,
       },
     ],
@@ -202,63 +228,72 @@ const days: Day[] = [
   {
     title: "Fire, tea & thermal waters",
     date: "Saturday, 4 July",
-    gallery: [THERMAL, TEA],
+    gallery: [LAGOA_DO_FOGO, SANTA_BARBARA_BEACH],
     intro:
       "The wildest day of the week: volcanic fire, tea fields and warm thermal waters.",
     activities: [
       {
-        kind: "Volcanic",
+        kind: "Pole Class 04",
+        title: "Photoshoot preparation",
+        description:
+          "We start the day with our fourth 90-minute pole session, with a special focus on preparing poses, shapes and combinations for our upcoming outdoor photoshoot. Classes take place in small groups, allowing plenty of space and individual attention.",
+        note: "Scheduled group transfers are included.",
+        Icon: Sparkles,
+      },
+      {
+        kind: "Lunch & rest",
+        title: "Slow afternoon",
+        description:
+          "After training, we return to the hotel for a long break. Enjoy lunch, shower, rest or take a nap before heading out again later in the afternoon.",
+        Icon: UtensilsCrossed,
+        note: "Lunch is not included."
+      },
+      {
+        kind: "Volcanic landscapes",
         title: "Lagoa do Fogo",
         description:
-          "We cross the island to Lagoa do Fogo, one of the most beautiful crater lakes in the Azores.",
-        note: RETURN_INCLUDED,
+          "Later in the afternoon, we leave Ponta Delgada for one of São Miguel’s most spectacular volcanic landscapes. Around 30 minutes from the hotel, we stop at panoramic viewpoints overlooking Lagoa do Fogo, with time to enjoy the crater views and take photos.",
         Icon: Mountain,
       },
       {
-        kind: "Reset",
-        title: "Thermal waters",
+        kind: "Atlantic sunset",
+        title: "Santa Bárbara Beach",
         description:
-          "We slow down in the island’s natural thermal waters — a real reset in the middle of the week.",
-        note: TRANSFERS_INCLUDED,
-        Icon: Waves,
-      },
-      {
-        kind: "Local",
-        title: "Tea plantations & north coast",
-        description:
-          "We visit the tea plantations and follow São Miguel’s wild north coast back home.",
-        note: RETURN_INCLUDED,
-        Icon: Leaf,
+          "From Lagoa do Fogo, we continue for around 20 minutes towards the North Coast and the beautiful volcanic sands of Santa Bárbara Beach. Enjoy a coffee or drink at the beach bar, walk along the black-sand beach, take photos or simply relax by the Atlantic as the sun goes down. After sunset, we return to Ponta Delgada.",
+        note: "Scheduled group transfers are included.",
+        Icon: Sun,
       },
     ],
   },
   {
     title: "Wild ride & create",
     date: "Sunday, 5 July",
-    gallery: [QUAD, PHOTOSHOOT],
+    gallery: [POLE_TRAINING, PHOTOSHOOT],
     intro:
-      "An adventure day on four wheels, closed by a creative moment in front of the camera.",
+      "A final pole session, time to rest and an outdoor photoshoot among São Miguel’s hydrangeas.",
     activities: [
       {
-        kind: "Adventure",
-        title: "Quad experience",
-        description:
-          "We explore the island’s dirt roads and wild landscapes on a guided quad experience.",
-        note: TRANSFERS_INCLUDED,
-        Icon: Truck,
-      },
-      {
         kind: "Pole training",
-        title: "Pole Class 04",
-        description: "Fourth 90-minute pole session in the studio.",
-        note: TRANSFERS_INCLUDED,
+        title: "Pole Class 05",
+        description:
+          "We start the day with our fifth and final 90-minute pole session.",
+        note: "Returned group transfers are included.",
         Icon: Sparkles,
       },
       {
-        kind: "Create",
-        title: "Azores photoshoot",
+        kind: "Rest",
+        title: "Lunch & rest",
         description:
-          "One professional photoshoot is included in the retreat. The exact location will be selected closer to the retreat depending on weather and local conditions.",
+          "After training, we return to the hotel for lunch and a proper break, with time to shower, rest and get ready for the photoshoot.",
+        note: "Lunch is not included.",
+        Icon: UtensilsCrossed,
+      },
+      {
+        kind: "Pole photoshoot",
+        title: "In a sea of hydrangeas",
+        description:
+          "One of the signature moments of our Azores retreat. Later in the afternoon, we take one pole stage outdoors for a professional photoshoot surrounded by São Miguel’s iconic hydrangeas. Each participant will have her own dedicated time in front of the camera. The exact location will be carefully selected closer to the retreat according to the hydrangea bloom, weather conditions, accessibility and safe installation of the pole stage.",
+        note: "Group transfers are included.",
         Icon: Camera,
       },
     ],
@@ -270,25 +305,25 @@ const days: Day[] = [
     intro: "Our last morning together before flying home.",
     activities: [
       {
-        kind: "Pole training",
-        title: "Pole Class 05",
-        description: "A final 90-minute session to close the week in the studio.",
-        note: TRANSFERS_INCLUDED,
-        Icon: Sparkles,
+        kind: "Last morning",
+        title: "Breakfast together",
+        description:
+          "Our last morning together in the Azores. We enjoy breakfast at the hotel, share a final moment with the group and get ready for the journey home.",
+        Icon: UtensilsCrossed,
       },
       {
-        kind: "Community",
-        title: "Community moments",
+        kind: "Check-out",
+        title: "Time to say goodbye",
         description:
-          "We finish the week the way we started it: together, with the people who made it special.",
-        Icon: Users,
+          "After breakfast, it’s time to pack, check out and say goodbye to São Miguel — taking home new memories, new connections and plenty of photos from the week.",
+        Icon: Luggage,
       },
       {
         kind: "Travel",
         title: "Group airport transfers",
         description:
-          "Group airport transfers take everyone back to Ponta Delgada airport in time for their flight.",
-        note: RETURN_INCLUDED,
+          "Grouped transfers take you from the hotel to Ponta Delgada Airport according to the scheduled departure times.",
+        note: "Return group airport transfer is included.",
         Icon: Plane,
       },
     ],
@@ -309,6 +344,7 @@ function DayPanel({ day }: { day: Day }) {
               ]}
               poster={item.poster}
               label={item.label}
+              hasAudio={item.hasAudio}
               className="h-40 w-full rounded-2xl sm:h-[17rem]"
             />
           ) : (
@@ -356,7 +392,6 @@ function DayPanel({ day }: { day: Day }) {
           </li>
         ))}
       </ul>
-
     </>
   );
 }
