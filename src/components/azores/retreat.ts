@@ -18,7 +18,7 @@ export const AZORES = {
   /** Paid today to hold a place */
   deposit: 500,
   /** Shown as "From €…": the shared room at the returning-participant price */
-  priceFrom: 2700,
+  priceFrom: 2850,
   /** Shared room, 2 people per room, per person */
   priceShared: 2850,
   /** Taken off the shared room for returning participants */
