@@ -201,17 +201,26 @@ const days: Day[] = [
         Icon: Ship,
       },
       {
+        kind: "Slow afternoon",
+        title: "Lunch & rest",
+        description:
+          "After our morning at sea, we return to the hotel for a long break. Take your time to shower, rest, enjoy lunch at one of the nearby restaurants or simply relax before training.",
+        note: "Lunch is not included.",
+        Icon: UtensilsCrossed,
+      },
+      {
         kind: "Pole training",
         title: "Pole Class 03",
-        description: "Back in the studio for the third 90-minute pole session.",
+        description:
+          "Later in the afternoon, we head to the studio for our third 90-minute pole session. Classes take place in small groups, allowing plenty of space and individual attention.",
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
       {
         kind: "Free time",
-        title: "Free time",
+        title: "Free evening",
         description:
-          "The evening is free — rest, explore, or simply enjoy the slow rhythm of the island.",
+          "After training, we return to the hotel at around 7:15 PM. The rest of the evening is completely free — go for dinner, explore Ponta Delgada or simply relax after a full day of ocean and pole.",
         Icon: Sun,
       },
     ],
