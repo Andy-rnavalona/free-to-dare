@@ -73,7 +73,7 @@ const experiences: Experience[] = [
     tag: "Adventure",
     title: "Quad Experience",
     description:
-      "Explore Sete Cidades on a guided quad adventure through off-road trails and crater views. A scenic van tour offers a more relaxed alternative. A driving licence is required for the quad.",
+      "Discover Sete Cidades with two options: an adventurous quad ride through off-road trails or a relaxing scenic van tour.",
     image: "sete-cidades-quad.avif",
     alt: "A group riding quad bikes above the blue and green lakes of Sete Cidades",
   },
