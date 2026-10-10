@@ -8,6 +8,7 @@ import { IntroSection } from "@/components/azores/intro-section";
 import { ItinerarySection } from "@/components/azores/itinerary-section";
 import { PricingSection } from "@/components/azores/pricing-section";
 import { TrainingSpaceSection } from "@/components/azores/training-space-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
 
 export const metadata: Metadata = {
   title: "Azores Into The Wild — Pole Dance Escape | Free to Dare",
@@ -32,6 +33,7 @@ export default function Home() {
       <ItinerarySection />
       <IncludedSection />
       <PricingSection />
+      <TestimonialsSection />
       {/* <FinalCtaSection /> */}
     </main>
   );
