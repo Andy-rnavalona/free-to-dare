@@ -4,17 +4,11 @@ import { Check, Lock } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
-  DEPOSIT,
-  FULL_PAYMENT_DISCOUNT,
-  RETREAT,
   dueToday as dueTodayFor,
   formatEuro,
   isPaymentPlan,
-  isStayId,
   planTotal,
-  stripeLink,
   type PaymentPlan,
-  type StayId,
 } from "@/booking/booking-config";
 import { saveBookingChoice } from "@/booking/booking-storage";
 import { BookingSummary } from "@/booking/components/booking-summary";
@@ -23,8 +17,13 @@ import { HomeSection } from "@/booking/components/home-section";
 import { PaymentScheduleDialog } from "@/booking/components/payment-schedule";
 import { PlanCard } from "@/booking/components/plan-card";
 import { StayCard } from "@/booking/components/stay-card";
-import { PLAN_LABELS, STAYS, findStay } from "@/booking/stays";
-import { LISBON_CANCELLATION, LISBON_TERMS } from "@/lib/routes";
+import {
+  BOOKING_RETREATS,
+  findStay,
+  stripeLink,
+  type BookingRetreatId,
+} from "@/booking/retreats";
+import { planLabels } from "@/booking/stays";
 
 const STEPS = ["Choose your stay", "Payment plan", "Accept & pay"];
 
@@ -37,19 +36,21 @@ const smooth: ScrollIntoViewOptions = { behavior: "smooth", block: "start" };
  * browser (static export), inside a <Suspense>. Read once when mounted: the page
  * then rewrites the URL itself as choices are made, which must not remount it.
  */
-export function BookingPageFromUrl() {
+export function BookingPageFromUrl({ retreatId }: { retreatId: BookingRetreatId }) {
   const searchParams = useSearchParams();
   const [initial] = useState(() => {
-    const stay = searchParams.get("stay");
+    const retreat = BOOKING_RETREATS[retreatId];
+    const stay = findStay(retreat, searchParams.get("stay"));
     const plan = searchParams.get("plan");
-    const initialStay = isStayId(stay) ? stay : null;
     return {
-      initialStay,
-      initialPlan: initialStay && isPaymentPlan(plan) ? plan : null,
+      initialStay: stay?.id ?? null,
+      // A plan this stay does not offer is not chosen
+      initialPlan:
+        stay && isPaymentPlan(plan) && stripeLink(retreat, stay.id, plan) ? plan : null,
     };
   });
 
-  return <BookingPage {...initial} />;
+  return <BookingPage retreatId={retreatId} {...initial} />;
 }
 
 /**
@@ -62,12 +63,17 @@ export function BookingPageFromUrl() {
  * step 02, a stay and a plan (e.g. back from a cancelled payment) open step 03.
  */
 export function BookingPage({
+  retreatId,
   initialStay,
   initialPlan,
 }: {
-  initialStay: StayId | null;
+  retreatId: BookingRetreatId;
+  initialStay: string | null;
   initialPlan: PaymentPlan | null;
 }) {
+  const retreat = BOOKING_RETREATS[retreatId];
+  const { deposit, fullPaymentDiscount } = retreat;
+  const labels = planLabels(deposit);
   const [stay, setStay] = useState(initialStay);
   const [plan, setPlan] = useState(initialStay ? initialPlan : null);
   const [step, setStep] = useState<Step>(initialStay ? (initialPlan ? 2 : 1) : 0);
@@ -77,13 +83,15 @@ export function BookingPage({
   const content = useRef<HTMLElement>(null);
   const summary = useRef<HTMLDivElement>(null);
 
-  const pkg = stay ? findStay(stay) : null;
-  const dueToday = pkg && plan ? dueTodayFor(plan, pkg.price) : DEPOSIT;
+  const pkg = findStay(retreat, stay);
+  const dueToday = pkg && plan ? dueTodayFor(retreat, plan, pkg.price) : deposit;
+  // Only the plans whose Payment Link exists for the chosen stay are offered
+  const offered = (p: PaymentPlan) => !!pkg && !!stripeLink(retreat, pkg.id, p);
 
   const reachable = (i: Step) => i === 0 || (i === 1 && !!stay) || (i === 2 && !!stay && !!plan);
 
   /** Shows a step and makes it a browser history entry, so Back returns to the previous one */
-  function goToStep(next: Step, choice?: { stay?: StayId; plan?: PaymentPlan }) {
+  function goToStep(next: Step, choice?: { stay?: string; plan?: PaymentPlan }) {
     if (choice?.stay) setStay(choice.stay);
     if (choice?.plan) setPlan(choice.plan);
     if (next !== step) {
@@ -146,14 +154,14 @@ export function BookingPage({
       setShowError(true);
       return;
     }
-    const link = stripeLink(pkg.id, plan);
+    const link = stripeLink(retreat, pkg.id, plan);
     if (!link) {
       window.alert(
-        `Online payment for this option is not available yet. Please choose the ${formatEuro(DEPOSIT)} deposit or contact us.`,
+        `Online payment for this option is not available yet. Please choose the ${formatEuro(deposit)} deposit or contact us.`,
       );
       return;
     }
-    saveBookingChoice({ stay: pkg.id, plan });
+    saveBookingChoice(retreatId, { stay: pkg.id, plan });
     setRedirecting(true);
     window.location.assign(link);
   }
@@ -169,7 +177,7 @@ export function BookingPage({
       <div>
         {plan === "instalments" && (
           <div className="mb-4">
-            <PaymentScheduleDialog plan="instalments" total={pkg.price} />
+            <PaymentScheduleDialog pricing={retreat} plan="instalments" total={pkg.price} />
           </div>
         )}
         <label className="flex items-start gap-3 text-sm">
@@ -184,7 +192,7 @@ export function BookingPage({
           <span>
             I have read and accept the{" "}
             <a
-              href={LISBON_TERMS}
+              href={retreat.routes.terms}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"
@@ -193,7 +201,7 @@ export function BookingPage({
             </a>{" "}
             and{" "}
             <a
-              href={LISBON_CANCELLATION}
+              href={retreat.routes.cancellation}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-2 hover:text-primary"
@@ -233,13 +241,13 @@ export function BookingPage({
 
       <div className=" border-border bg-card">
         <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 ">
-          <span className="label-mono text-muted-foreground">{RETREAT.name}</span>
+          <span className="label-mono text-muted-foreground">{retreat.name}</span>
           <h1 className="display-xl mt-3 text-5xl md:text-7xl">Book your escape</h1>
           <p className="font-display mt-3 text-xl uppercase text-primary">
-            {RETREAT.dates}
+            {retreat.dates}
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            {formatEuro(DEPOSIT)} deposit secures your place • Flexible payment
+            {formatEuro(deposit)} deposit secures your place • Flexible payment
             options
           </p>
           {/* Stepper: numbered circles joined by a line, green up to the
@@ -307,13 +315,14 @@ export function BookingPage({
                   Choose how you want to stay
                 </h2>
                 <p className="mt-3 max-w-xl text-sm text-muted-foreground">
-                  Choose the option that feels right for you. Your {formatEuro(DEPOSIT)}{" "}
+                  Choose the option that feels right for you. Your {formatEuro(deposit)}{" "}
                   deposit secures your place today.
                 </p>
                 <div className="mt-8 space-y-5">
-                  {STAYS.map((option) => (
+                  {retreat.stays.map((option) => (
                     <StayCard
                       key={option.id}
+                      retreat={retreat}
                       pkg={option}
                       selected={stay === option.id}
                       onSelect={() => goToStep(1, { stay: option.id })}
@@ -322,7 +331,7 @@ export function BookingPage({
                 </div>
               </section>
 
-              <HomeSection />
+              {retreat.homeSection && <HomeSection />}
             </>
           )}
 
@@ -336,53 +345,65 @@ export function BookingPage({
                 This is how much you pay and when. You&apos;ll choose your payment
                 method in the final step.
               </p>
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
-                <PlanCard
-                  active={plan === "deposit"}
-                  onSelect={() => goToStep(2, { plan: "deposit" })}
-                  title={PLAN_LABELS.deposit}
-                  big={`${formatEuro(DEPOSIT)} today`}
-                  text="Secure your place now and pay the remaining balance later."
-                  rows={[
-                    ["Retreat total", formatEuro(pkg.price)],
-                    ["Pay today", formatEuro(DEPOSIT)],
-                    ["Remaining", formatEuro(pkg.price - DEPOSIT)],
-                  ]}
-                  cta="Choose deposit"
-                  extra={<PaymentScheduleDialog plan="deposit" total={pkg.price} />}
-                />
-                <PlanCard
-                  featured
-                  active={plan === "full"}
-                  onSelect={() => goToStep(2, { plan: "full" })}
-                  badge={`Save ${formatEuro(FULL_PAYMENT_DISCOUNT)}`}
-                  title={PLAN_LABELS.full}
-                  strike={formatEuro(pkg.price)}
-                  big={`${formatEuro(planTotal("full", pkg.price))} today`}
-                  text={`Pay your retreat in full today and save ${formatEuro(FULL_PAYMENT_DISCOUNT)}.`}
-                  rows={[
-                    ["Standard price", formatEuro(pkg.price)],
-                    ["Full payment discount", `− ${formatEuro(FULL_PAYMENT_DISCOUNT)}`],
-                    ["Remaining", formatEuro(0)],
-                  ]}
-                  note="Nothing left to pay later."
-                  cta={`Pay in full & save ${formatEuro(FULL_PAYMENT_DISCOUNT)}`}
-                />
-                <PlanCard
-                  active={plan === "instalments"}
-                  onSelect={() => goToStep(2, { plan: "instalments" })}
-                  title={PLAN_LABELS.instalments}
-                  big={`${formatEuro(DEPOSIT)} today`}
-                  text="Reserve your place and split the remaining balance into manageable payments."
-                  rows={[
-                    ["Retreat total", formatEuro(pkg.price)],
-                    ["Pay today", formatEuro(DEPOSIT)],
-                    ["Remaining", formatEuro(pkg.price - DEPOSIT)],
-                  ]}
-                  note="Remaining balance paid according to the instalment schedule."
-                  cta="Choose instalments"
-                  extra={<PaymentScheduleDialog plan="instalments" total={pkg.price} />}
-                />
+              <div
+                className={`mt-8 grid gap-4 ${offered("full") ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+              >
+                {offered("deposit") && (
+                  <PlanCard
+                    active={plan === "deposit"}
+                    onSelect={() => goToStep(2, { plan: "deposit" })}
+                    title={labels.deposit}
+                    big={`${formatEuro(deposit)} today`}
+                    text="Secure your place now and pay the remaining balance later."
+                    rows={[
+                      ["Retreat total", formatEuro(pkg.price)],
+                      ["Pay today", formatEuro(deposit)],
+                      ["Remaining", formatEuro(pkg.price - deposit)],
+                    ]}
+                    cta="Choose deposit"
+                    extra={
+                      <PaymentScheduleDialog pricing={retreat} plan="deposit" total={pkg.price} />
+                    }
+                  />
+                )}
+                {offered("full") && (
+                  <PlanCard
+                    featured
+                    active={plan === "full"}
+                    onSelect={() => goToStep(2, { plan: "full" })}
+                    badge={`Save ${formatEuro(fullPaymentDiscount)}`}
+                    title={labels.full}
+                    strike={formatEuro(pkg.price)}
+                    big={`${formatEuro(planTotal(retreat, "full", pkg.price))} today`}
+                    text={`Pay your retreat in full today and save ${formatEuro(fullPaymentDiscount)}.`}
+                    rows={[
+                      ["Standard price", formatEuro(pkg.price)],
+                      ["Full payment discount", `− ${formatEuro(fullPaymentDiscount)}`],
+                      ["Remaining", formatEuro(0)],
+                    ]}
+                    note="Nothing left to pay later."
+                    cta={`Pay in full & save ${formatEuro(fullPaymentDiscount)}`}
+                  />
+                )}
+                {offered("instalments") && (
+                  <PlanCard
+                    active={plan === "instalments"}
+                    onSelect={() => goToStep(2, { plan: "instalments" })}
+                    title={labels.instalments}
+                    big={`${formatEuro(deposit)} today`}
+                    text="Reserve your place and split the remaining balance into manageable payments."
+                    rows={[
+                      ["Retreat total", formatEuro(pkg.price)],
+                      ["Pay today", formatEuro(deposit)],
+                      ["Remaining", formatEuro(pkg.price - deposit)],
+                    ]}
+                    note="Remaining balance paid according to the instalment schedule."
+                    cta="Choose instalments"
+                    extra={
+                      <PaymentScheduleDialog pricing={retreat} plan="instalments" total={pkg.price} />
+                    }
+                  />
+                )}
               </div>
             </section>
           )}
@@ -390,10 +411,11 @@ export function BookingPage({
           {step === 2 && pkg && plan && (
             <div ref={summary} className="reveal-step mx-auto max-w-xl">
               <BookingSummary
+                retreat={retreat}
                 pkg={pkg}
                 dueToday={dueToday}
                 plan={plan}
-                planLabel={PLAN_LABELS[plan]}
+                planLabel={labels[plan]}
               >
                 {acceptAndPay}
               </BookingSummary>

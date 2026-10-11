@@ -1,8 +1,9 @@
 /*
  * FREE TO DARE — booking configuration.
- * The single source for every price, the deposit and the Stripe Payment Links,
- * used by the landing page (/) and the booking pages
- * (/booking). Change a value here and it changes everywhere.
+ * The single source for every price, the deposit and the Stripe Payment Links
+ * of the Lisbon retreat, used by its landing page and its booking pages, and
+ * the payment plan arithmetic every retreat's booking page shares (the Azores
+ * one is set in retreats.ts). Change a value here and it changes everywhere.
  *
  * No Stripe secret key belongs in this site: Payment Links are public URLs.
  */
@@ -80,48 +81,60 @@ export function isPaymentPlan(value: unknown): value is PaymentPlan {
   return PAYMENT_PLANS.includes(value as PaymentPlan);
 }
 
-/** The Payment Link for a stay and plan, or null while it is still a TODO */
-export function stripeLink(stay: StayId, plan: PaymentPlan) {
-  const link = STRIPE_LINKS[stay][plan];
-  return link.startsWith("https://") ? link : null;
-}
-
 export function formatEuro(amount: number) {
   return `€${amount.toLocaleString("en-GB")}`;
 }
 
+/** What the payment plans of one retreat are worked out from */
+export type Pricing = {
+  deposit: number;
+  fullPaymentDiscount: number;
+  instalments: { count: number; dates: string[] };
+};
+
+/** The Lisbon retreat's pricing, as the constants above set it */
+export const LISBON_PRICING: Pricing = {
+  deposit: DEPOSIT,
+  fullPaymentDiscount: FULL_PAYMENT_DISCOUNT,
+  instalments: INSTALMENTS,
+};
+
 /** Retreat price after the plan's discount */
-export function planTotal(plan: PaymentPlan, price: number) {
-  return plan === "full" ? price - FULL_PAYMENT_DISCOUNT : price;
+export function planTotal(pricing: Pricing, plan: PaymentPlan, price: number) {
+  return plan === "full" ? price - pricing.fullPaymentDiscount : price;
 }
 
-export function dueToday(plan: PaymentPlan, price: number) {
-  return plan === "full" ? planTotal("full", price) : DEPOSIT;
+export function dueToday(pricing: Pricing, plan: PaymentPlan, price: number) {
+  return plan === "full" ? planTotal(pricing, "full", price) : pricing.deposit;
 }
 
-export function remainingBalance(plan: PaymentPlan, price: number) {
-  return planTotal(plan, price) - dueToday(plan, price);
+export function remainingBalance(pricing: Pricing, plan: PaymentPlan, price: number) {
+  return planTotal(pricing, plan, price) - dueToday(pricing, plan, price);
 }
 
 export type ScheduledPayment = { when: string; amount: number; note: string };
 
-export function paymentSchedule(plan: PaymentPlan, price: number): ScheduledPayment[] {
+export function paymentSchedule(
+  pricing: Pricing,
+  plan: PaymentPlan,
+  price: number,
+): ScheduledPayment[] {
   if (plan === "full") {
     return [
       {
         when: "Today",
-        amount: planTotal("full", price),
-        note: `Full retreat payment (saves ${formatEuro(FULL_PAYMENT_DISCOUNT)})`,
+        amount: planTotal(pricing, "full", price),
+        note: `Full retreat payment (saves ${formatEuro(pricing.fullPaymentDiscount)})`,
       },
     ];
   }
-  const balance = price - DEPOSIT;
-  const deposit = { when: "Today", amount: DEPOSIT, note: "Booking deposit" };
+  const balance = price - pricing.deposit;
+  const deposit = { when: "Today", amount: pricing.deposit, note: "Booking deposit" };
   if (plan === "deposit") {
     return [deposit, { when: "Date to be confirmed", amount: balance, note: "Remaining balance" }];
   }
   // The last instalment absorbs the rounding
-  const { count, dates } = INSTALMENTS;
+  const { count, dates } = pricing.instalments;
   const instalment = Math.round(balance / count);
   const last = balance - instalment * (count - 1);
   return [

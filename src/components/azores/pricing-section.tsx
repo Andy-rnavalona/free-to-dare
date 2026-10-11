@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Gift, House } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { formatEuro } from "@/booking/booking-config";
-import { AZORES, PRICING_ANCHOR } from "@/components/azores/retreat";
+import { AZORES } from "@/components/azores/retreat";
+import { AZORES_BOOKING } from "@/lib/routes";
 import {
   BUTTON_DARK,
   CONTAINER,
@@ -24,7 +26,11 @@ type Plan = {
   includes: Include[];
   /** Highlighted box under the list */
   callout?: { Icon: LucideIcon; title: string; text: ReactNode };
+  /** Shows the "Early Birds" badge next to the price */
+  earlyBird?: boolean;
   cta: string;
+  /** The `?stay=` its button opens the booking page on */
+  stay: string;
 };
 
 const transfers = (detail: string): Include => ({
@@ -45,7 +51,7 @@ const plans: Plan[] = [
     subtitle: "Per person, 2 people per room",
     includes: [
       { item: `${AZORES.nights} nights accommodation (shared room)` },
-      { item: "Daily breakfast & dinner" },
+      { item: "Daily breakfast & welcome dinner" },
       { item: "5 pole classes (90 min)" },
       { item: "Scheduled activities & excursions" },
       POLE_TRANSFERS,
@@ -66,6 +72,7 @@ const plans: Plan[] = [
       ),
     },
     cta: "Reserve your spot",
+    stay: "shared",
   },
   {
     label: "Private Room",
@@ -73,9 +80,10 @@ const plans: Plan[] = [
     per: "person",
     title: "Private Room",
     subtitle: "Single occupancy, limited availability",
+    earlyBird: true,
     includes: [
       { item: `${AZORES.nights} nights accommodation (private room)` },
-      { item: "Daily breakfast & dinner" },
+      { item: "Daily breakfast & welcome dinner" },
       { item: "5 pole classes (90 min)" },
       { item: "Scheduled activities & excursions" },
       POLE_TRANSFERS,
@@ -83,6 +91,7 @@ const plans: Plan[] = [
       { item: "Pole photoshoot" },
     ],
     cta: "Reserve your room",
+    stay: "private",
   },
   {
     label: "Pole + Partner",
@@ -90,10 +99,10 @@ const plans: Plan[] = [
     per: "couple",
     title: "1 pole participant + 1 accompanying guest",
     intro:
-      "Share the Azores experience together. Your partner joins the accommodation, breakfast & dinner, all transfers, excursions, activities and welcome dinner, while the pole classes are reserved for the pole participant.",
+      "Share the Azores experience together. Your partner joins the accommodation, breakfast, all transfers, excursions, activities and welcome dinner, while the pole classes are reserved for the pole participant.",
     includes: [
       { item: `${AZORES.nights} nights accommodation (shared room for two)` },
-      { item: "Daily breakfast & dinner" },
+      { item: "Daily breakfast & welcome dinner" },
       { item: "5 pole classes for 1 person (90 min)" },
       { item: "All scheduled activities & excursions (for both guests)" },
       transfers("Airport transfers + transfers to activities and excursions"),
@@ -101,6 +110,7 @@ const plans: Plan[] = [
       { item: "Pole photoshoot (for pole participant)" },
     ],
     cta: "Reserve for two",
+    stay: "partner",
   },
   {
     label: "Retreat Only",
@@ -121,6 +131,7 @@ const plans: Plan[] = [
       text: "You can book your own accommodation directly with the hotel or any nearby hotel and join the retreat with this ticket.",
     },
     cta: "Reserve your ticket",
+    stay: "none",
   },
 ];
 
@@ -153,8 +164,18 @@ export function PricingSection() {
 }
 
 function PlanCard({ plan, number }: { plan: Plan; number: number }) {
-  const { label, price, per, title, subtitle, intro, includes, callout, cta } =
-    plan;
+  const {
+    label,
+    price,
+    per,
+    title,
+    subtitle,
+    intro,
+    includes,
+    callout,
+    earlyBird,
+    cta,
+  } = plan;
 
   return (
     <article
@@ -169,12 +190,15 @@ function PlanCard({ plan, number }: { plan: Plan; number: number }) {
           </span>
         </div>
 
-        <p className="mt-8 font-display text-4xl leading-none tracking-[-0.02em] text-ink sm:text-5xl xl:text-[2.6rem]">
-          {price}
-          <span className="ml-2 inline-block font-sans text-base font-medium tracking-normal text-muted">
-            / {per}
-          </span>
-        </p>
+        <div className="mt-8 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+          <p className="font-display text-4xl leading-none tracking-[-0.02em] text-ink sm:text-5xl xl:text-[2.6rem]">
+            {price}
+            <span className="ml-2 inline-block font-sans text-base font-medium tracking-normal text-muted">
+              / {per}
+            </span>
+          </p>
+          {earlyBird && <EarlyBirdBadge />}
+        </div>
         <p className="mt-4 font-bold leading-snug text-ink">{title}</p>
         {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
         {intro && (
@@ -226,11 +250,25 @@ function PlanCard({ plan, number }: { plan: Plan; number: number }) {
         {formatEuro(AZORES.deposit)} deposit to reserve
       </p>
       <div className="p-7 xl:p-6">
-        <a href={PRICING_ANCHOR} className={BUTTON_DARK}>
+        <Link href={`${AZORES_BOOKING}?stay=${plan.stay}`} className={BUTTON_DARK}>
           {cta}
           <ArrowRightIcon className="size-3.5" />
-        </a>
+        </Link>
       </div>
     </article>
+  );
+}
+
+/** "Early Birds" stamp next to the price, with the closing date */
+function EarlyBirdBadge() {
+  return (
+    <p className="shrink-0 -rotate-3 rounded-xl bg-sun px-3 py-2 text-forest">
+      <span className="block font-serif text-[1.65rem] font-medium italic leading-none">
+        Early Birds
+      </span>
+      <span className="mt-1 block font-mono text-[0.6rem] font-bold uppercase tracking-[0.15em]">
+        Close {AZORES.earlyBirdDeadline}
+      </span>
+    </p>
   );
 }

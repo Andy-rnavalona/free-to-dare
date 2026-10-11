@@ -1,21 +1,22 @@
 import type { ReactNode } from "react";
 import {
-  FULL_PAYMENT_DISCOUNT,
-  RETREAT,
   formatEuro,
   remainingBalance,
   type PaymentPlan,
 } from "@/booking/booking-config";
+import type { BookingRetreat } from "@/booking/retreats";
 import type { StayPackage } from "@/booking/stays";
 
 /** "Your booking" card: the stay, the plan and what is due today */
 export function BookingSummary({
+  retreat,
   pkg,
   dueToday,
   plan,
   planLabel,
   children,
 }: {
+  retreat: BookingRetreat;
   pkg: StayPackage;
   dueToday: number;
   plan: PaymentPlan | null;
@@ -23,16 +24,16 @@ export function BookingSummary({
   children?: ReactNode;
 }) {
   const full = plan === "full";
-  const remaining = plan ? remainingBalance(plan, pkg.price) : pkg.price - dueToday;
+  const remaining = plan ? remainingBalance(retreat, plan, pkg.price) : pkg.price - dueToday;
 
   return (
     <aside className="card-editorial p-6">
       <span className="label-mono text-muted-foreground">Your booking</span>
-      <h3 className="display-xl mt-2 text-2xl">{RETREAT.name}</h3>
-      <p className="mt-1 text-sm text-muted-foreground">{RETREAT.datesShort}</p>
+      <h3 className="display-xl mt-2 text-2xl">{retreat.name}</h3>
+      <p className="mt-1 text-sm text-muted-foreground">{retreat.datesShort}</p>
       <div className="mt-5 border-t border-border pt-5">
         <p className="font-display text-xl uppercase leading-none">{pkg.title}</p>
-        <p className="mt-1 text-sm text-muted-foreground">1 guest</p>
+        <p className="mt-1 text-sm text-muted-foreground">{pkg.guests ?? "1 guest"}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {planLabel && (
             <p className="label-mono inline-block rounded-full bg-secondary px-3 py-1">
@@ -41,7 +42,7 @@ export function BookingSummary({
           )}
           {full && (
             <p className="label-mono inline-block rounded-full bg-accent px-3 py-1 text-accent-foreground">
-              You save {formatEuro(FULL_PAYMENT_DISCOUNT)}
+              You save {formatEuro(retreat.fullPaymentDiscount)}
             </p>
           )}
         </div>
@@ -55,7 +56,7 @@ export function BookingSummary({
           <div className="flex items-center justify-between">
             <dt className="label-mono text-muted-foreground">Full payment discount</dt>
             <dd className="font-display text-lg text-primary">
-              − {formatEuro(FULL_PAYMENT_DISCOUNT)}
+              − {formatEuro(retreat.fullPaymentDiscount)}
             </dd>
           </div>
         )}

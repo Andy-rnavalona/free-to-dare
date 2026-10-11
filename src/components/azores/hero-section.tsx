@@ -9,7 +9,7 @@ import { BackgroundVideo } from "@/components/background-video";
 import { ArrowRightIcon } from "@/components/icons";
 import { withBasePath } from "@/lib/base-path";
 import { formatEuro } from "@/booking/booking-config";
-import { AZORES, PRICING_ANCHOR } from "@/components/azores/retreat";
+import { AZORES, ITINERARY_BOOKING_ID } from "@/components/azores/retreat";
 import {
   BUTTON_LIGHT,
   CONTAINER,
@@ -101,7 +101,10 @@ export function HeroSection() {
                 Step out <span className="ml-2 -translate-y-1">→</span>
               </span>
             </p>
-            <a href={PRICING_ANCHOR} className={`${BUTTON_LIGHT} lg:ml-6`}>
+            <a
+              href={`#${ITINERARY_BOOKING_ID}`}
+              className={`${BUTTON_LIGHT} lg:ml-6`}
+            >
               Reserve your spot
               <ArrowRightIcon className="size-4" />
             </a>

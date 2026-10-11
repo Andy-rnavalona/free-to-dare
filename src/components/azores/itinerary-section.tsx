@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  BedDouble,
   Camera,
   Footprints,
   Luggage,
@@ -16,7 +17,8 @@ import { ArrowRightIcon } from "@/components/icons";
 import { ItineraryDay } from "@/components/itinerary-day";
 import { formatEuro } from "@/booking/booking-config";
 import { withBasePath } from "@/lib/base-path";
-import { AZORES, PRICING_ANCHOR } from "@/components/azores/retreat";
+import { AZORES, ITINERARY_BOOKING_ID } from "@/components/azores/retreat";
+import { AZORES_BOOKING } from "@/lib/routes";
 import {
   BADGE_SUN,
   BUTTON_DARK,
@@ -226,7 +228,7 @@ const days: Day[] = [
     ],
   },
   {
-    title: "Fire, tea & thermal waters",
+    title: "Lagoa do Fogo & Santa Bárbara Beach",
     date: "Saturday, 4 July",
     gallery: [LAGOA_DO_FOGO, SANTA_BARBARA_BEACH],
     intro:
@@ -266,7 +268,7 @@ const days: Day[] = [
     ],
   },
   {
-    title: "Wild ride & create",
+    title: "Training & Hydrangea Photoshoot",
     date: "Sunday, 5 July",
     gallery: [POLE_TRAINING, PHOTOSHOOT],
     intro:
@@ -409,8 +411,26 @@ function BookingCard() {
         <p className={`${MICRO} text-[0.65rem] text-muted`}>From</p>
         <p className="mt-1 font-display text-4xl leading-none text-forest">
           {formatEuro(AZORES.priceFrom)}
+          <span className="ml-2 inline-block font-sans text-base font-medium text-muted">
+            / person
+          </span>
         </p>
-        <p className="mt-3">
+        <p className="mt-2 text-sm text-muted">
+          Retreat + {AZORES.nights} nights accommodation
+        </p>
+        <div className="mt-4 flex items-center gap-3 rounded-xl bg-forest/[0.06] px-4 py-3">
+          <BedDouble aria-hidden="true" className="size-5 shrink-0 text-forest" />
+          <p className="text-sm leading-snug text-muted">
+            Retreat only (without accommodation):
+            <span className="block">
+              <span className="font-display text-base text-forest">
+                {formatEuro(AZORES.priceRetreatOnly)}
+              </span>{" "}
+              / person
+            </span>
+          </p>
+        </div>
+        <p className="mt-4">
           <span className={`${BADGE_SUN} inline-block text-[0.65rem]`}>
             {formatEuro(AZORES.deposit)} deposit to reserve
           </span>
@@ -418,7 +438,7 @@ function BookingCard() {
       </div>
 
       <a
-        href={PRICING_ANCHOR}
+        href={withBasePath(AZORES_BOOKING)}
         className={`${BUTTON_DARK} mt-6 flex w-full justify-center py-3.5`}
       >
         Book now
@@ -468,7 +488,11 @@ export function ItinerarySection() {
           participants
         </p>
 
-        <div className="mt-12 flex flex-col gap-10 lg:mt-14 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+        {/* The hero's "Reserve your spot" lands here, on the booking card */}
+        <div
+          id={ITINERARY_BOOKING_ID}
+          className="mt-12 flex scroll-mt-28 flex-col gap-10 lg:mt-14 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14"
+        >
           {/* Days. The reveal sits on a wrapper so its transition doesn't
               override the card's hover one */}
           <div className="order-last min-w-0 space-y-3 lg:order-none">

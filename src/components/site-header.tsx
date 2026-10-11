@@ -7,12 +7,12 @@ import { useEffect, useId, useRef, useState } from "react";
 import { withBasePath } from "@/lib/base-path";
 import { AZORES_RETREAT, LISBON_RETREAT } from "@/lib/routes";
 import {
-  COUNTRIES,
-  DISCIPLINES,
   TRIP_TABS,
-  TRIPS,
+  countriesOf,
+  disciplinesOf,
   tripInDestination,
   tripInDiscipline,
+  tripsBesides,
   type Trip,
   type TripTab,
 } from "@/lib/trips";
@@ -149,11 +149,14 @@ function TripLink({
   );
 }
 
+/** What every tab gets: the trips to show, and what picking one does */
+type TabProps = { trips: Trip[]; onPick: () => void };
+
 /** Destinations: the places, under the country they are in. */
-function DestinationsTab({ onPick }: { onPick: () => void }) {
+function DestinationsTab({ trips, onPick }: TabProps) {
   return (
     <div className="space-y-6">
-      {COUNTRIES.map((country) => (
+      {countriesOf(trips).map((country) => (
         <div
           key={country.country}
           className="gap-6 sm:grid sm:grid-cols-[6rem_1fr]"
@@ -199,10 +202,10 @@ function DestinationsTab({ onPick }: { onPick: () => void }) {
 }
 
 /** Disciplines: one card per practice, over a washed-out photo of it. */
-function DisciplinesTab({ onPick }: { onPick: () => void }) {
+function DisciplinesTab({ trips, onPick }: TabProps) {
   return (
     <ul className="grid gap-4 sm:grid-cols-3">
-      {DISCIPLINES.map((discipline) => (
+      {disciplinesOf(trips).map((discipline) => (
         <li
           key={discipline.discipline}
           className="relative overflow-hidden rounded-2xl bg-card p-5"
@@ -243,10 +246,10 @@ function DisciplinesTab({ onPick }: { onPick: () => void }) {
 }
 
 /** All trips: every retreat, each with its photo. */
-function AllTripsTab({ onPick }: { onPick: () => void }) {
+function AllTripsTab({ trips, onPick }: TabProps) {
   return (
     <ul className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-      {TRIPS.map((trip) => (
+      {trips.map((trip) => (
         <li key={tripInDestination(trip)}>
           <TripCard trip={trip} onPick={onPick} />
         </li>
@@ -301,6 +304,8 @@ function TripCard({ trip, onPick }: { trip: Trip; onPick: () => void }) {
  */
 function TripTabs({ onPick }: { onPick: () => void }) {
   const [tab, setTab] = useState<TripTab>("all");
+  // Every trip but the one whose page is open
+  const trips = tripsBesides(usePathname());
   const base = useId();
   const tabId = (id: TripTab) => `${base}-tab-${id}`;
   const panelId = (id: TripTab) => `${base}-panel-${id}`;
@@ -359,9 +364,13 @@ function TripTabs({ onPick }: { onPick: () => void }) {
           hidden={tab !== t.id}
           className="pt-6"
         >
-          {t.id === "all" && <AllTripsTab onPick={onPick} />}
-          {t.id === "destinations" && <DestinationsTab onPick={onPick} />}
-          {t.id === "disciplines" && <DisciplinesTab onPick={onPick} />}
+          {t.id === "all" && <AllTripsTab trips={trips} onPick={onPick} />}
+          {t.id === "destinations" && (
+            <DestinationsTab trips={trips} onPick={onPick} />
+          )}
+          {t.id === "disciplines" && (
+            <DisciplinesTab trips={trips} onPick={onPick} />
+          )}
         </div>
       ))}
     </>
@@ -543,7 +552,6 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [tripsOpen]);
-
 
   // Transparent over the hero video, solid once the page has scrolled
   useEffect(() => {

@@ -25,8 +25,10 @@ export const metadata: Metadata = {
 // Static export: ?stay= / ?plan= are read in the browser; the HTML holds step 01
 export default function Page() {
   return (
-    <Suspense fallback={<BookingPage initialStay={null} initialPlan={null} />}>
-      <BookingPageFromUrl />
+    <Suspense
+      fallback={<BookingPage retreatId="lisbon" initialStay={null} initialPlan={null} />}
+    >
+      <BookingPageFromUrl retreatId="lisbon" />
     </Suspense>
   );
 }

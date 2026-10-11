@@ -29,7 +29,12 @@ export const AZORES = {
   pricePartner: 4300,
   /** Retreat ticket without accommodation, per person */
   priceRetreatOnly: 1950,
+  /** Last day of the early bird prices above */
+  earlyBirdDeadline: "18 October 2026",
 } as const;
 
 /** Where every call to action leads, as in the reference design */
 export const PRICING_ANCHOR = "#pricing";
+
+/** The itinerary days beside their booking card, where the hero's button leads */
+export const ITINERARY_BOOKING_ID = "itinerary-booking";

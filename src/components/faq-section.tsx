@@ -2,7 +2,10 @@ import { FaqItem } from "@/components/faq-item";
 
 const CONTACT_EMAIL = "contact@freetodare.com";
 
-const questions: { question: string; answers: string[] }[] = [
+export type FaqQuestion = { question: string; answers: string[] };
+
+/** The Lisbon retreat questions, used unless a page passes its own */
+const lisbonQuestions: FaqQuestion[] = [
   {
     question: "What makes this retreat special?",
     answers: [
@@ -43,7 +46,11 @@ const questions: { question: string; answers: string[] }[] = [
   },
 ];
 
-export function FaqSection() {
+export function FaqSection({
+  questions = lisbonQuestions,
+}: {
+  questions?: FaqQuestion[];
+}) {
   return (
     <section
       id="faq"

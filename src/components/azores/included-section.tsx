@@ -11,7 +11,7 @@ const included = [
   "Transfers for scheduled activities",
   "Welcome dinner",
   "Whale watching",
-  "Quad experience",
+  "Quad adventure or guided van tour with a guide to explore Sete Cidades",
   "Photoshoot",
   "Scheduled São Miguel experiences & visits",
 ];

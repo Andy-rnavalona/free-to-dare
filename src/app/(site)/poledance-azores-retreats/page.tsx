@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AccommodationSection } from "@/components/azores/accommodation-section";
 import { CommunitySection } from "@/components/azores/community-section";
+import { AZORES_FAQ } from "@/components/azores/faq";
 import { ExperiencesSection } from "@/components/azores/experiences-section";
 import { HeroSection } from "@/components/azores/hero-section";
 import { IncludedSection } from "@/components/azores/included-section";
@@ -8,6 +9,7 @@ import { IntroSection } from "@/components/azores/intro-section";
 import { ItinerarySection } from "@/components/azores/itinerary-section";
 import { PricingSection } from "@/components/azores/pricing-section";
 import { TrainingSpaceSection } from "@/components/azores/training-space-section";
+import { FaqSection } from "@/components/faq-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 
 export const metadata: Metadata = {
@@ -31,9 +33,10 @@ export default function Home() {
       <TrainingSpaceSection />
       <AccommodationSection />
       <ItinerarySection />
+      <TestimonialsSection />
       <IncludedSection />
       <PricingSection />
-      <TestimonialsSection />
+      <FaqSection questions={AZORES_FAQ} />
       {/* <FinalCtaSection /> */}
     </main>
   );

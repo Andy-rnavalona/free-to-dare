@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 // Static export: ?stay= / ?plan= / ?next= are read in the browser
 export default function Page() {
   return (
-    <Suspense fallback={<ConfirmationPage choice={null} next={null} />}>
-      <ConfirmationPageFromUrl />
+    <Suspense fallback={<ConfirmationPage retreatId="lisbon" choice={null} next={null} />}>
+      <ConfirmationPageFromUrl retreatId="lisbon" />
     </Suspense>
   );
 }

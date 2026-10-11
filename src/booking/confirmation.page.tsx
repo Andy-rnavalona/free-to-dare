@@ -1,16 +1,13 @@
 "use client";
 
 import { Check, Mail } from "lucide-react";
-import { LISBON_CONFIRMATION, LISBON_RETREAT } from "@/lib/routes";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
-  RETREAT,
   dueToday,
   formatEuro,
   isPaymentPlan,
-  isStayId,
   planTotal,
   remainingBalance,
 } from "@/booking/booking-config";
@@ -18,7 +15,11 @@ import {
   readBookingChoice,
   type BookingChoice,
 } from "@/booking/booking-storage";
-import { findStay } from "@/booking/stays";
+import {
+  BOOKING_RETREATS,
+  findStay,
+  type BookingRetreatId,
+} from "@/booking/retreats";
 
 function Amount({
   label,
@@ -46,16 +47,17 @@ function Amount({
 }
 
 /** The confirmation page for the `?stay=&plan=&next=` of the URL, read in the browser (static export), inside a <Suspense> */
-export function ConfirmationPageFromUrl() {
+export function ConfirmationPageFromUrl({ retreatId }: { retreatId: BookingRetreatId }) {
   const searchParams = useSearchParams();
-  const stay = searchParams.get("stay");
+  const stay = findStay(BOOKING_RETREATS[retreatId], searchParams.get("stay"));
   const plan = searchParams.get("plan");
 
   return (
     <ConfirmationPage
       // Reset when "View my booking" changes the URL
       key={searchParams.toString()}
-      choice={isStayId(stay) && isPaymentPlan(plan) ? { stay, plan } : null}
+      retreatId={retreatId}
+      choice={stay && isPaymentPlan(plan) ? { stay: stay.id, plan } : null}
       next={searchParams.get("next")}
     />
   );
@@ -68,21 +70,24 @@ export function ConfirmationPageFromUrl() {
  * `?next=<label>|<amount>` optionally shows the next payment.
  */
 export function ConfirmationPage({
+  retreatId,
   choice: choiceFromUrl,
   next,
 }: {
+  retreatId: BookingRetreatId;
   choice: BookingChoice | null;
   next: string | null;
 }) {
+  const retreat = BOOKING_RETREATS[retreatId];
   const [choice, setChoice] = useState(choiceFromUrl);
 
   useEffect(() => {
     // sessionStorage only exists in the browser, hence after the first render
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!choiceFromUrl) setChoice(readBookingChoice());
-  }, [choiceFromUrl]);
+    if (!choiceFromUrl) setChoice(readBookingChoice(retreatId, retreat));
+  }, [choiceFromUrl, retreatId, retreat]);
 
-  const pkg = choice ? findStay(choice.stay) : null;
+  const pkg = choice ? findStay(retreat, choice.stay) : null;
   const [nextWhen, nextAmount] = next ? next.split("|") : [];
 
   const search = new URLSearchParams();
@@ -101,34 +106,34 @@ export function ConfirmationPage({
             <Check className="size-4" /> Booking confirmed
           </span>
           <h1 className="display-xl mt-6 text-5xl md:text-7xl">
-            You&apos;re coming to Lisbon.
+            You&apos;re coming to {retreat.destination}.
           </h1>
           <p className="mt-4 max-w-xl text-lg opacity-90">
-            Your place at {RETREAT.name} is officially reserved.
+            Your place at {retreat.name} is officially reserved.
           </p>
         </div>
       </div>
       <div className="mx-auto max-w-4xl px-5 py-12 md:px-8">
         <div className="card-editorial p-6 md:p-8">
           <span className="label-mono text-muted-foreground">Booking confirmed</span>
-          <h2 className="display-xl mt-2 text-3xl">{RETREAT.name}</h2>
-          <p className="mt-1 text-sm text-muted-foreground">{RETREAT.dates}</p>
+          <h2 className="display-xl mt-2 text-3xl">{retreat.name}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{retreat.dates}</p>
           {pkg && choice && (
             <>
               <p className="font-display mt-6 text-xl uppercase">{pkg.title}</p>
               <dl className="mt-6 grid gap-4 border-t border-border pt-6 sm:grid-cols-3">
                 <Amount
                   label="Total retreat"
-                  value={formatEuro(planTotal(choice.plan, pkg.price))}
+                  value={formatEuro(planTotal(retreat, choice.plan, pkg.price))}
                 />
                 <Amount
                   label="Paid today"
-                  value={formatEuro(dueToday(choice.plan, pkg.price))}
+                  value={formatEuro(dueToday(retreat, choice.plan, pkg.price))}
                   highlight
                 />
                 <Amount
                   label="Remaining"
-                  value={formatEuro(remainingBalance(choice.plan, pkg.price))}
+                  value={formatEuro(remainingBalance(retreat, choice.plan, pkg.price))}
                 />
               </dl>
             </>
@@ -147,13 +152,13 @@ export function ConfirmationPage({
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href={`${LISBON_CONFIRMATION}${query ? `?${query}` : ""}`}
+              href={`${retreat.routes.confirmation}${query ? `?${query}` : ""}`}
               className="font-display rounded-full bg-primary px-7 py-3.5 text-sm uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
             >
               View my booking
             </Link>
             <Link
-              href={LISBON_RETREAT}
+              href={retreat.routes.landing}
               className="font-display rounded-full border border-primary px-7 py-3.5 text-sm uppercase tracking-wide transition-colors hover:bg-secondary"
             >
               Back to Free to Dare
