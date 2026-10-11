@@ -1,9 +1,7 @@
 import {
-  DEPOSIT,
   STAY_PRICES,
   formatEuro,
   type PaymentPlan,
-  type StayId,
 } from "@/booking/booking-config";
 import { withBasePath } from "@/lib/base-path";
 
@@ -16,11 +14,16 @@ const HOSTEL_IMG = withBasePath("/images/hostel");
 export type Photo = { src: string; alt: string };
 
 export type StayPackage = {
-  id: StayId;
+  /** Also its `?stay=` value on the booking page */
+  id: string;
   index: string;
   label: string;
   title: string;
   price: number;
+  /** Who the price is for, when not one person: "couple" */
+  per?: string;
+  /** Who the booking covers, when not one guest: "2 guests" */
+  guests?: string;
   description: string;
   accommodationIncluded: boolean;
   availability: string;
@@ -140,10 +143,6 @@ export const STAYS: StayPackage[] = [
   },
 ];
 
-export function findStay(id: StayId) {
-  return STAYS.find((stay) => stay.id === id)!;
-}
-
 /** "Your Lisbon home" gallery: the first photo is the tall one.
  *  Same Living Lounge Hostel photos as the landing page (StaysSection). */
 export const HOME_GALLERY: Photo[] = [
@@ -164,8 +163,9 @@ export const HOME_GALLERY: Photo[] = [
   { src: `${HOSTEL_IMG}/06.webp`, alt: "Twin room with a red curtain" },
 ];
 
-export const PLAN_LABELS: Record<PaymentPlan, string> = {
-  deposit: `Reserve with ${formatEuro(DEPOSIT)} deposit`,
+/** How each payment plan is named, for a retreat's deposit */
+export const planLabels = (deposit: number): Record<PaymentPlan, string> => ({
+  deposit: `Reserve with ${formatEuro(deposit)} deposit`,
   full: "Pay in full",
   instalments: "Pay in instalments",
-};
+});

@@ -17,11 +17,8 @@ import { ArrowRightIcon } from "@/components/icons";
 import { ItineraryDay } from "@/components/itinerary-day";
 import { formatEuro } from "@/booking/booking-config";
 import { withBasePath } from "@/lib/base-path";
-import {
-  AZORES,
-  ITINERARY_BOOKING_ID,
-  PRICING_ANCHOR,
-} from "@/components/azores/retreat";
+import { AZORES, ITINERARY_BOOKING_ID } from "@/components/azores/retreat";
+import { AZORES_BOOKING } from "@/lib/routes";
 import {
   BADGE_SUN,
   BUTTON_DARK,
@@ -441,7 +438,7 @@ function BookingCard() {
       </div>
 
       <a
-        href={PRICING_ANCHOR}
+        href={withBasePath(AZORES_BOOKING)}
         className={`${BUTTON_DARK} mt-6 flex w-full justify-center py-3.5`}
       >
         Book now

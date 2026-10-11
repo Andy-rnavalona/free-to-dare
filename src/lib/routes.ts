@@ -18,3 +18,7 @@ export const LISBON_BOOKING = `${LISBON_RETREAT}/booking`;
 export const LISBON_CONFIRMATION = `${LISBON_BOOKING}/confirmation`;
 export const LISBON_TERMS = `${LISBON_RETREAT}/terms`;
 export const LISBON_CANCELLATION = `${LISBON_RETREAT}/cancellation-policy`;
+
+/** The Azores booking flow and its confirmation page */
+export const AZORES_BOOKING = `${AZORES_RETREAT}/booking`;
+export const AZORES_CONFIRMATION = `${AZORES_BOOKING}/confirmation`;

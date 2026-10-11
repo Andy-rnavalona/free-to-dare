@@ -3,8 +3,9 @@
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { DEPOSIT, formatEuro } from "@/booking/booking-config";
+import { formatEuro } from "@/booking/booking-config";
 import { Dialog } from "@/booking/components/dialog";
+import type { BookingRetreat } from "@/booking/retreats";
 import type { Photo, StayPackage } from "@/booking/stays";
 
 function RoomGallery({ photos }: { photos: Photo[] }) {
@@ -150,10 +151,12 @@ function RoomDetails({ pkg }: { pkg: StayPackage }) {
 }
 
 export function StayCard({
+  retreat,
   pkg,
   selected,
   onSelect,
 }: {
+  retreat: BookingRetreat;
   pkg: StayPackage;
   selected: boolean;
   onSelect: () => void;
@@ -166,7 +169,9 @@ export function StayCard({
         selected ? "card-selected border" : "hover:border-primary/40"
       }`}
     >
-      <div className="grid md:grid-cols-[1.1fr_1fr]">
+      <div
+        className={`grid ${cover || retreat.noPhotoTagline ? "md:grid-cols-[1.1fr_1fr]" : ""}`}
+      >
         <div className="order-2 p-6 md:order-1 md:p-8">
           <div className="flex items-center justify-between gap-3">
             <span className="label-mono text-muted-foreground">
@@ -181,7 +186,9 @@ export function StayCard({
           <h3 className="display-xl mt-3 text-3xl md:text-4xl">{pkg.title}</h3>
           <p className="display-xl mt-2 text-2xl text-primary">
             {formatEuro(pkg.price)}{" "}
-            <span className="label-mono text-muted-foreground">/ person</span>
+            <span className="label-mono text-muted-foreground">
+              / {pkg.per ?? "person"}
+            </span>
           </p>
           <p className="mt-3 max-w-prose text-sm text-muted-foreground">
             {pkg.description}
@@ -191,9 +198,7 @@ export function StayCard({
               <span className="label-mono block text-muted-foreground">
                 Accommodation not included
               </span>
-              You book and pay for your own place to stay in Lisbon. Breakfast at
-              the retreat house is not included either — everything else in the
-              programme is exactly the same.
+              {retreat.ownStayNote}
             </p>
           )}
           <ul className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -206,7 +211,7 @@ export function StayCard({
           </ul>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="label-mono bg-accent px-3 py-1.5 text-accent-foreground">
-              {formatEuro(DEPOSIT)} deposit to reserve
+              {formatEuro(retreat.deposit)} deposit to reserve
             </span>
             <span className="label-mono text-muted-foreground">
               {pkg.availability}
@@ -239,15 +244,15 @@ export function StayCard({
               className="object-cover"
             />
           </div>
-        ) : (
+        ) : retreat.noPhotoTagline ? (
           <div className="order-1 flex items-end bg-primary p-8 text-primary-foreground md:order-2">
             <p className="display-xl text-3xl leading-tight">
-              Your Lisbon,
+              {retreat.noPhotoTagline[0]}
               <br />
-              your way.
+              {retreat.noPhotoTagline[1]}
             </p>
           </div>
-        )}
+        ) : null}
       </div>
     </article>
   );

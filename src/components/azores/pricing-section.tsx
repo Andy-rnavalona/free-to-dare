@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Gift, House } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { formatEuro } from "@/booking/booking-config";
-import { AZORES, PRICING_ANCHOR } from "@/components/azores/retreat";
+import { AZORES } from "@/components/azores/retreat";
+import { AZORES_BOOKING } from "@/lib/routes";
 import {
   BUTTON_DARK,
   CONTAINER,
@@ -27,6 +29,8 @@ type Plan = {
   /** Shows the "Early Birds" badge next to the price */
   earlyBird?: boolean;
   cta: string;
+  /** The `?stay=` its button opens the booking page on */
+  stay: string;
 };
 
 const transfers = (detail: string): Include => ({
@@ -68,6 +72,7 @@ const plans: Plan[] = [
       ),
     },
     cta: "Reserve your spot",
+    stay: "shared",
   },
   {
     label: "Private Room",
@@ -86,6 +91,7 @@ const plans: Plan[] = [
       { item: "Pole photoshoot" },
     ],
     cta: "Reserve your room",
+    stay: "private",
   },
   {
     label: "Pole + Partner",
@@ -104,6 +110,7 @@ const plans: Plan[] = [
       { item: "Pole photoshoot (for pole participant)" },
     ],
     cta: "Reserve for two",
+    stay: "partner",
   },
   {
     label: "Retreat Only",
@@ -124,6 +131,7 @@ const plans: Plan[] = [
       text: "You can book your own accommodation directly with the hotel or any nearby hotel and join the retreat with this ticket.",
     },
     cta: "Reserve your ticket",
+    stay: "none",
   },
 ];
 
@@ -242,10 +250,10 @@ function PlanCard({ plan, number }: { plan: Plan; number: number }) {
         {formatEuro(AZORES.deposit)} deposit to reserve
       </p>
       <div className="p-7 xl:p-6">
-        <a href={PRICING_ANCHOR} className={BUTTON_DARK}>
+        <Link href={`${AZORES_BOOKING}?stay=${plan.stay}`} className={BUTTON_DARK}>
           {cta}
           <ArrowRightIcon className="size-3.5" />
-        </a>
+        </Link>
       </div>
     </article>
   );

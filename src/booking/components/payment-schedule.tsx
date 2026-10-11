@@ -4,6 +4,7 @@ import {
   formatEuro,
   paymentSchedule,
   type PaymentPlan,
+  type Pricing,
 } from "@/booking/booking-config";
 import { Dialog } from "@/booking/components/dialog";
 
@@ -34,15 +35,17 @@ function Row({
 
 /** "View payment schedule" link and the dialog listing each payment */
 export function PaymentScheduleDialog({
+  pricing,
   plan,
   total,
   triggerLabel = "View payment schedule",
 }: {
+  pricing: Pricing;
   plan: PaymentPlan;
   total: number;
   triggerLabel?: string;
 }) {
-  const schedule = paymentSchedule(plan, total);
+  const schedule = paymentSchedule(pricing, plan, total);
   const today = schedule[0].amount;
 
   return (
