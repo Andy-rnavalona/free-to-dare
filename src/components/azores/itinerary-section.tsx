@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  BedDouble,
   Camera,
   Footprints,
   Luggage,
@@ -413,8 +414,26 @@ function BookingCard() {
         <p className={`${MICRO} text-[0.65rem] text-muted`}>From</p>
         <p className="mt-1 font-display text-4xl leading-none text-forest">
           {formatEuro(AZORES.priceFrom)}
+          <span className="ml-2 inline-block font-sans text-base font-medium text-muted">
+            / person
+          </span>
         </p>
-        <p className="mt-3">
+        <p className="mt-2 text-sm text-muted">
+          Retreat + {AZORES.nights} nights accommodation
+        </p>
+        <div className="mt-4 flex items-center gap-3 rounded-xl bg-forest/[0.06] px-4 py-3">
+          <BedDouble aria-hidden="true" className="size-5 shrink-0 text-forest" />
+          <p className="text-sm leading-snug text-muted">
+            Retreat only (without accommodation):
+            <span className="block">
+              <span className="font-display text-base text-forest">
+                {formatEuro(AZORES.priceRetreatOnly)}
+              </span>{" "}
+              / person
+            </span>
+          </p>
+        </div>
+        <p className="mt-4">
           <span className={`${BADGE_SUN} inline-block text-[0.65rem]`}>
             {formatEuro(AZORES.deposit)} deposit to reserve
           </span>
