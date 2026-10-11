@@ -38,7 +38,6 @@ const experiences: Experience[] = [
       "5 × 90-min Pole Dance classes",
       "Elegant pole style & choreography",
       "Max. 8 participants per group",
-      "Training adapted to different levels",
     ],
     image: "/videos/azores/pole-training-poster.webp",
     alt: "Pole dance training during a previous retreat, not the Azores studio",
@@ -62,8 +61,6 @@ const experiences: Experience[] = [
     items: [
       "Whale & dolphin watching in the Atlantic",
       "Marine wildlife experience with local experts",
-      "Dolphin swimming planned, subject to conditions",
-      "Final experience confirmed closer to the retreat",
     ],
     image: "whale-breaching.webp",
     alt: "Humpback whale breaching off the coast of São Miguel",
@@ -78,16 +75,16 @@ const experiences: Experience[] = [
     alt: "A group riding quad bikes above the blue and green lakes of Sete Cidades",
   },
   {
-    tag: "Reset",
-    title: "NATURAL HOT SPRINGS — CALDEIRA VELHA",
+    tag: "Sunset",
+    title: "Lagoa do Fogo & Santa Bárbara Beach",
     description:
-      "Slow down among tree ferns and lush greenery at Caldeira Velha. Warm thermal waters and a forest setting offer a quiet moment to unwind.",
-    image: "thermal-waterfall.webp",
-    alt: "Warm waterfall falling into the bathing pool at Caldeira Velha",
+      "Take in the crater views from the panoramic viewpoints over Lagoa do Fogo, then head to the north coast and the black sands of Santa Bárbara Beach to watch the sun go down over the Atlantic.",
+    image: "lagoa-do-fogo-viewpoint.avif",
+    alt: "A visitor overlooking Lagoa do Fogo and its volcanic crater on São Miguel",
     gallery: [
       {
-        image: "thermal-ferns.webp",
-        alt: "The thermal pool seen from above, ringed by tree ferns",
+        image: "santa-barbara-beach.avif",
+        alt: "Atlantic waves along Santa Bárbara Beach on São Miguel’s north coast",
       },
     ],
   },
@@ -103,7 +100,7 @@ const experiences: Experience[] = [
     tag: "Capture",
     title: "POLERINA HYDRANGEA PHOTOSHOOT",
     description:
-      "Your own moment in front of the camera, with a pole stage set among São Miguel’s hydrangeas. The location is chosen according to the bloom, weather and safe access.",
+      "Your own moment in front of the camera, with a pole stage set among São Miguel’s hydrangeas.",
     image: "photoshoot.webp",
     alt: "Pole dancer photographed on volcanic rocks by the Atlantic",
     highlight: true,

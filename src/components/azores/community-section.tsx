@@ -3,8 +3,12 @@ import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 
-/* Moments from a past retreat, led by the video montage. */
+/* Moments from a past retreat: the group photo first, then the video montage. */
 const moments: Photo[] = [
+  {
+    src: withBasePath("/images/azores/community-group.webp"),
+    alt: "The group in flower garlands by the pool at sunset",
+  },
   {
     src: withBasePath("/videos/azores/community-poster.webp"),
     alt: "The group dancing, swimming and training together on a past retreat",
@@ -13,10 +17,6 @@ const moments: Photo[] = [
       mp4: withBasePath("/videos/azores/community.mp4"),
       sound: true,
     },
-  },
-  {
-    src: withBasePath("/images/azores/community-group.webp"),
-    alt: "The group in flower garlands by the pool at sunset",
   },
 ];
 

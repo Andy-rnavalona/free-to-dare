@@ -18,14 +18,6 @@ const studio: Photo[] = [
     alt: "A group sitting together in the studio between sessions",
   },
   {
-    src: withBasePath("/videos/azores/training-space.jpg"),
-    alt: "A look around the empty studio, from the timber roof to the floor",
-    video: {
-      av1: withBasePath("/videos/azores/training-space.av1.mp4"),
-      mp4: withBasePath("/videos/azores/training-space.mp4"),
-    },
-  },
-  {
     src: withBasePath("/images/azores/studio-empty.jpg"),
     alt: "The empty studio under its timber roof, lit by side windows",
   },
@@ -67,11 +59,12 @@ export function TrainingSpaceSection() {
         <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <div
             data-reveal
-            className="relative overflow-hidden rounded-3xl bg-ink lg:sticky lg:top-32 lg:self-start"
+            className="relative overflow-hidden rounded-3xl bg-ink"
           >
             <StayGallery
               photos={studio}
-              className="aspect-[4/5]"
+              // On desktop, as tall as the details beside it
+              className="aspect-[4/5] lg:aspect-auto lg:h-full"
               sizes="(min-width: 1024px) 45vw, 100vw"
             />
             <span
@@ -96,14 +89,14 @@ export function TrainingSpaceSection() {
               a reliable training environment regardless of the weather outside.
             </p>
 
-            <dl className="mt-2 grid grid-cols-2 gap-x-8">
+            <dl className="mt-2 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
               {stats.map(({ value, label }) => (
                 <div
                   key={label}
                   data-reveal
-                  className="flex flex-col-reverse border-b border-forest/20 py-3"
+                  className="flex flex-col-reverse justify-end border-b border-forest/20 py-3"
                 >
-                  <dt className={`${MICRO} mt-2 text-[0.65rem] text-muted`}>
+                  <dt className={`${MICRO} mt-2 text-[0.55rem] tracking-[0.15em] text-muted`}>
                     {label}
                   </dt>
                   <dd className="font-display text-xl text-forest sm:text-xl">

@@ -7,7 +7,7 @@
  * of that page.
  */
 
-import { LISBON_RETREAT } from "@/lib/routes";
+import { AZORES_RETREAT, LISBON_RETREAT } from "@/lib/routes";
 
 export type Trip = {
   /** Where the retreat takes place */
@@ -34,9 +34,18 @@ export const TRIPS: Trip[] = [
     country: "Portugal",
     discipline: "Pole Dance",
     name: "Pole Dance Retreat",
-    href:'https://madeiracreativevillage.com/upcoming-retreats',
+    href: "https://madeiracreativevillage.com/upcoming-retreats",
     image: "/images/trips/madeira-pole-dance.jpg",
     alt: "Pole dancer on a black sand beach below the cliffs",
+  },
+  {
+    destination: "Azores",
+    country: "Portugal",
+    discipline: "Pole Dance",
+    name: "Pole Dance Retreat",
+    href: AZORES_RETREAT,
+    image: "/images/azores/hero.jpg",
+    alt: "The crater lakes of Sete Cidades under the clouds",
   },
   {
     destination: "Lisbon",
@@ -75,11 +84,18 @@ export const tripInDestination = (trip: Trip) =>
 export const tripInDiscipline = (trip: Trip) =>
   `${trip.destination} — ${trip.name}`;
 
-/* Groups the trips by `key`, keeping the order of TRIPS and letting the first
-   trip of each group stand for it — its image is the one the group shows. */
-function groupBy(key: (trip: Trip) => string) {
+/**
+ * The trips the menu offers on `pathname`: all of them but the one whose page
+ * this is — the menu leads elsewhere, never back to the page it is open on.
+ */
+export const tripsBesides = (pathname: string) =>
+  TRIPS.filter((trip) => !trip.href || !pathname.startsWith(trip.href));
+
+/* Groups `trips` by `key`, keeping their order and letting the first trip of
+   each group stand for it — its image is the one the group shows. */
+function groupBy(trips: Trip[], key: (trip: Trip) => string) {
   const groups = new Map<string, { label: string; trips: Trip[] }>();
-  for (const trip of TRIPS) {
+  for (const trip of trips) {
     const label = key(trip);
     const group = groups.get(label) ?? { label, trips: [] };
     group.trips.push(trip);
@@ -88,28 +104,28 @@ function groupBy(key: (trip: Trip) => string) {
   return [...groups.values()];
 }
 
-/** The destinations, under the country they belong to */
-export const COUNTRIES = groupBy((trip) => trip.country).map((country) => ({
-  country: country.label,
-  destinations: groupBy((trip) => trip.destination)
-    .filter((destination) => destination.trips[0].country === country.label)
-    .map((destination) => ({
-      destination: destination.label,
-      image: destination.trips[0].image,
-      alt: destination.trips[0].alt,
-      trips: destination.trips,
-    })),
-}));
+/** The destinations of `trips`, under the country they belong to */
+export const countriesOf = (trips: Trip[]) =>
+  groupBy(trips, (trip) => trip.country).map((country) => ({
+    country: country.label,
+    destinations: groupBy(country.trips, (trip) => trip.destination).map(
+      (destination) => ({
+        destination: destination.label,
+        image: destination.trips[0].image,
+        alt: destination.trips[0].alt,
+        trips: destination.trips,
+      }),
+    ),
+  }));
 
-/** The disciplines, each with the trips that practise it */
-export const DISCIPLINES = groupBy((trip) => trip.discipline).map(
-  (discipline) => ({
+/** The disciplines of `trips`, each with the trips that practise it */
+export const disciplinesOf = (trips: Trip[]) =>
+  groupBy(trips, (trip) => trip.discipline).map((discipline) => ({
     discipline: discipline.label,
     image: discipline.trips[0].image,
     alt: discipline.trips[0].alt,
     trips: discipline.trips,
-  }),
-);
+  }));
 
 export const TRIP_TABS = [
   { id: "all", label: "All trips" },
