@@ -51,7 +51,8 @@ type Day = {
 };
 
 type Media =
-  | { src: string; alt: string }
+  /** `portrait`: taller on phones, where a wide crop would cut the subject */
+  | { src: string; alt: string; portrait?: boolean }
   | {
       av1: string;
       mp4: string;
@@ -60,9 +61,10 @@ type Media =
       hasAudio?: boolean;
     };
 
-const photo = (src: string, alt: string) => ({
+const photo = (src: string, alt: string, portrait?: boolean) => ({
   src: withBasePath(`/images/azores/${src}`),
   alt,
+  portrait,
 });
 
 const SETE_CIDADES_LAKE = photo(
@@ -103,7 +105,7 @@ const SANTA_BARBARA_BEACH = photo(
   "santa-barbara-beach.avif",
   "Atlantic waves along Santa Bárbara Beach on São Miguel’s north coast",
 );
-const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast");
+const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast", true);
 const AIRPORT = photo("airport.webp", "Ponta Delgada airport by the ocean");
 const WELCOME_DINNER = {
   av1: withBasePath("/videos/azores/welcome-dinner.av1.mp4"),
@@ -357,7 +359,9 @@ function DayPanel({ day }: { day: Day }) {
               width={1024}
               height={768}
               sizes="(min-width: 1280px) 22rem, (min-width: 640px) 30vw, 90vw"
-              className="h-40 w-full rounded-2xl object-cover sm:h-[17rem]"
+              className={`w-full rounded-2xl object-cover sm:h-[17rem] ${
+                item.portrait ? "h-96" : "h-40"
+              }`}
             />
           ),
         )}
