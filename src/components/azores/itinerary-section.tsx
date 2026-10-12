@@ -512,6 +512,17 @@ export function ItinerarySection() {
                 </ItineraryDay>
               </div>
             ))}
+
+            {/* With the gap of the list, 2rem below the last day */}
+            <p
+              data-reveal
+              className="mt-5 rounded-xl bg-white p-5 text-sm leading-relaxed text-muted shadow-sm"
+            >
+              The activity order is indicative. The final schedule may be
+              adjusted according to local conditions, weather and operational
+              requirements, and partners for each experience are confirmed
+              closer to the retreat.
+            </p>
           </div>
 
           {/* Booking card: first on mobile, follows the scroll on desktop */}
