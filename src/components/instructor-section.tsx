@@ -68,6 +68,15 @@ export function InstructorSection() {
               label="Pamela Mariotto introducing the Lisbon aerial retreat, on the hoop and silks"
               className="size-full rounded-3xl"
             />
+            <a
+              href={PAMELA_INSTAGRAM.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
+              className="group/ig absolute right-4 top-4 z-10 rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-white sm:right-6 sm:top-6"
+            >
+              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} />
+            </a>
           </div>
         </div>
 
