@@ -16,7 +16,7 @@ import {
 } from "@/components/icons";
 import {
   DEPOSIT,
-  PRICE_FROM,
+  STAY_PRICES,
   formatEuro,
 } from "@/booking/booking-config";
 import { CardVideo } from "@/components/card-video";
@@ -570,9 +570,27 @@ export function ItinerarySection() {
                   From
                 </p>
                 <p className="mt-1 font-display text-4xl leading-none text-forest">
-                  {formatEuro(PRICE_FROM)}
+                  {formatEuro(STAY_PRICES.shared)}
+                  <span className="ml-2 inline-block font-sans text-base font-medium text-muted">
+                    / person
+                  </span>
                 </p>
-                <p className="mt-3">
+                <p className="mt-2 text-sm text-muted">
+                  Retreat + {NIGHTS} nights accommodation
+                </p>
+                <div className="mt-4 flex items-center gap-3 rounded-xl bg-forest/[0.06] px-4 py-3">
+                  <BedDoubleIcon aria-hidden="true" className="size-5 shrink-0 text-forest" />
+                  <p className="text-sm leading-snug text-muted">
+                    Retreat only (without accommodation):
+                    <span className="block">
+                      <span className="font-display text-base text-forest">
+                        {formatEuro(STAY_PRICES.none)}
+                      </span>{" "}
+                      / person
+                    </span>
+                  </p>
+                </div>
+                <p className="mt-4">
                   <span className="inline-block bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
                     {formatEuro(DEPOSIT)} deposit to reserve
                   </span>
@@ -604,7 +622,8 @@ export function ItinerarySection() {
               From
             </p>
             <p className="font-display text-2xl leading-none text-forest">
-              {formatEuro(PRICE_FROM)}
+              {formatEuro(STAY_PRICES.shared)}
+              <span className="ml-1.5 font-sans text-sm font-medium text-muted">/ person</span>
             </p>
           </div>
           <Link
