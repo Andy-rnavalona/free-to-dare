@@ -25,7 +25,7 @@ export const FULL_PAYMENT_DISCOUNT = 50;
 /** Price per person for each stay. The keys are also the `?stay=` values of the booking page. */
 export const STAY_PRICES = {
   shared: 1870,
-  private: 1970,
+  private: 1950,
   none: 1490,
 } as const;
 
