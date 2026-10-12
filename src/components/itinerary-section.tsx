@@ -28,7 +28,6 @@ import { LISBON_BOOKING } from "@/lib/routes";
 // The booking page opens on step 01, no stay chosen yet
 const RESERVE_URL = LISBON_BOOKING;
 const NIGHTS = 6;
-const HOSTEL = "Living Lounge Hostel";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -64,8 +63,6 @@ type Day = {
   /** Photos and videos shown above the intro; a day may have none */
   media?: (Photo | Video)[];
   activities: Activity[];
-  /** Nights 1–6 are spent at the hostel; the last day has none */
-  overnight?: boolean;
 };
 
 const days: Day[] = [
@@ -104,7 +101,6 @@ const days: Day[] = [
         icon: FootprintsIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Fly & Sail",
@@ -147,7 +143,6 @@ const days: Day[] = [
         icon: SailboatIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Discover Lisbon",
@@ -187,7 +182,6 @@ const days: Day[] = [
         icon: SparklesIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Lisbon Through the Lens",
@@ -228,7 +222,6 @@ const days: Day[] = [
         icon: SparklesIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Aerial Training, Lyra Photoshoot & Relax",
@@ -277,7 +270,6 @@ const days: Day[] = [
         icon: SunIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Surf, Beach & Atlantic Vibes",
@@ -332,7 +324,6 @@ const days: Day[] = [
         icon: UtensilsIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Até Logo, Lisbon",
@@ -358,7 +349,7 @@ const summary = [
   "Lisbon",
 ];
 
-function DayPanel({ day, index }: { day: Day; index: number }) {
+function DayPanel({ day }: { day: Day }) {
   const media = day.media ?? [];
   const single = media.length === 1;
   const sizes = single
@@ -432,22 +423,6 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
         )}
       </ul>
 
-      {day.overnight && (
-        <div className="mt-4 rounded-2xl  bg-card p-4">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-            <div className="flex min-w-0 items-center gap-3">
-              <BedDoubleIcon className="size-5 shrink-0 text-forest" />
-              <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
-                {HOSTEL}
-              </h3>
-            </div>
-            <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
-              Night {index + 1}/{NIGHTS}
-            </span>
-          </div>
-          <p className="mt-2 pl-8 text-sm text-muted">Overnight in Lisbon.</p>
-        </div>
-      )}
     </>
   );
 }
@@ -516,7 +491,7 @@ export function ItinerarySection() {
                     date={day.date}
                     defaultOpen={i === 0}
                   >
-                    <DayPanel day={day} index={i} />
+                    <DayPanel day={day} />
                   </ItineraryDay>
                 </div>
               ))}
