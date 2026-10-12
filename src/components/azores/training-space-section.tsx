@@ -50,16 +50,12 @@ const amenities: { label: string; Icon: LucideIcon }[] = [
 /* The studio, from the poles installed for the retreat to the room itself. */
 const studio: Photo[] = [
   {
-    src: withBasePath("/images/azores/studio-empty.jpg"),
-    alt: "The empty studio under its timber roof, lit by side windows",
-  },
-  {
     src: withBasePath("/images/azores/studio-group.jpg"),
     alt: "A group sitting together in the studio between sessions",
   },
   {
-    src: withBasePath("/images/azores/studio.jpg"),
-    alt: "The pole stages installed in the studio",
+    src: withBasePath("/images/azores/studio-empty.jpg"),
+    alt: "The empty studio under its timber roof, lit by side windows",
   },
 ];
 
