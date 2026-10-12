@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CardVideo } from "@/components/card-video";
 import { SparkleIcon } from "@/components/icons";
 import { InstagramBadge, PAMELA_INSTAGRAM } from "@/components/instagram-badge";
 import { withBasePath } from "@/lib/base-path";
@@ -10,7 +10,10 @@ const bio = [
   "Rather than simply learning individual tricks, we will explore transitions, fluid movement and combinations on both hoop and silks, learning how to connect different elements naturally and transform them into beautiful sequences.",
 ];
 
-const classes = ["5 Aerial Classes : Aerial Silks & Aerial Hoop", "1 Aerial Studio Photoshoot"];
+const classes = [
+  "5 Aerial Classes : Aerial Silks & Aerial Hoop",
+  "1 Aerial Studio Photoshoot",
+];
 
 function ItalianFlag() {
   return (
@@ -46,26 +49,35 @@ export function InstructorSection() {
       className="bg-white"
     >
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0">
-        {/* On desktop the photo stretches to the height of the text column */}
+        {/* Her vertical video, shown whole: on desktop as tall as the text
+            column, and as wide as that height allows */}
         <div data-reveal className="lg:h-full">
-          <a
-            href={PAMELA_INSTAGRAM.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-            className="group group/ig relative block aspect-[4/5] overflow-hidden rounded-3xl bg-ink lg:aspect-auto lg:h-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
-          >
-            <Image
-              src={withBasePath("/images/pamela-aerial-silks.jpg")}
-              alt="Pamela Mariotto performing a split on white aerial silks against a clear blue sky"
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover object-[50%_45%] transition-transform duration-700 ease-out group-hover:scale-105"
+          <div className="relative mx-auto aspect-[9/16] max-w-sm lg:h-full lg:max-w-none">
+            <CardVideo
+              sources={[
+                {
+                  src: withBasePath("/videos/lisbon/pamela-aerial.av1.mp4"),
+                  type: 'video/mp4; codecs="av01.0.05M.08"',
+                },
+                {
+                  src: withBasePath("/videos/lisbon/pamela-aerial.mp4"),
+                  type: "video/mp4",
+                },
+              ]}
+              poster={withBasePath("/videos/lisbon/pamela-aerial-poster.webp")}
+              label="Pamela Mariotto introducing the Lisbon aerial retreat, on the hoop and silks"
+              className="size-full rounded-3xl"
             />
-            <span className="absolute right-6 top-6 sm:right-8 sm:top-8">
+            <a
+              href={PAMELA_INSTAGRAM.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
+              className="group/ig absolute right-4 top-4 z-10 rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-white sm:right-6 sm:top-6"
+            >
               <InstagramBadge handle={PAMELA_INSTAGRAM.handle} />
-            </span>
-          </a>
+            </a>
+          </div>
         </div>
 
         <div className="lg:pt-2">
