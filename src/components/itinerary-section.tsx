@@ -343,13 +343,6 @@ const days: Day[] = [
   },
 ];
 
-const summary = [
-  "5–11 June 2027",
-  `${NIGHTS} nights`,
-  "5 × 90 min aerial classes",
-  "Lisbon",
-];
-
 function DayPanel({ day }: { day: Day }) {
   const media = day.media ?? [];
   const single = media.length === 1;
@@ -461,21 +454,6 @@ export function ItinerarySection() {
                 A day-by-day look at the week. Open any day to see the
                 experiences planned, from studio sessions to sunsets on the
                 water.
-              </p>
-              <p
-                data-reveal
-                className="mt-4 font-mono text-[0.7rem] uppercase leading-loose tracking-[0.2em] text-forest"
-              >
-                {summary.map((item, i) => (
-                  <span key={item}>
-                    {i > 0 && (
-                      <span aria-hidden="true" className="mx-3 text-muted">
-                        ·
-                      </span>
-                    )}
-                    {item}
-                  </span>
-                ))}
               </p>
               <div data-reveal className="mt-8 max-w-xl">
                 <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
