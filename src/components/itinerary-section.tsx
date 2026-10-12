@@ -460,10 +460,7 @@ export function ItinerarySection() {
               >
                 A day-by-day look at the week. Open any day to see the
                 experiences planned, from studio sessions to sunsets on the
-                water.{" "}
-                <strong className="font-bold text-forest">
-                  Lisbon transport pass included
-                </strong>
+                water.
               </p>
               <p
                 data-reveal
@@ -480,6 +477,18 @@ export function ItinerarySection() {
                   </span>
                 ))}
               </p>
+              <div data-reveal className="mt-8 max-w-xl">
+                <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
+                  Transportation
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  Airport transfers are not included, and participants are
+                  responsible for arranging their own arrival at the
+                  accommodation. However, everyone will receive a preloaded
+                  public transport card covering our planned group journeys
+                  during the retreat, including the train to the beach.
+                </p>
+              </div>
             </header>
 
             {/* The reveal sits on a wrapper so its transition doesn't override the card's hover one */}
