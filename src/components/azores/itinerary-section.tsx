@@ -151,7 +151,7 @@ const days: Day[] = [
         kind: "Pole training",
         title: "Pole Class 01",
         description:
-          "Our first 90-minute pole session takes place at our partner studio, with four pole stages installed specifically for the retreat. All scheduled transfers are included, and the studio is only a 5–10 minute drive from our accommodation.",
+          "Our first 90-minute pole session takes place at our partner studio, with four pole stages installed specifically for the retreat. The studio is only a 5–10 minute drive from our accommodation.",
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
