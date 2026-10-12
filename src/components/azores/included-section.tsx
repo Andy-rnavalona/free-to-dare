@@ -22,7 +22,6 @@ const notIncluded = [
   "Personal expenses",
   "Travel insurance",
   "Optional activities outside the programme",
-  "Anything not specifically listed as included",
 ];
 
 export function IncludedSection() {
