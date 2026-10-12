@@ -158,8 +158,7 @@ const azoresStays: StayPackage[] = [
 
 const azores: BookingRetreat = {
   deposit: AZORES.deposit,
-  // TODO: confirm with the client
-  fullPaymentDiscount: 50,
+  fullPaymentDiscount: 0,
   instalments: {
     count: 3,
     dates: ["Date to be confirmed", "Date to be confirmed", "Date to be confirmed"],

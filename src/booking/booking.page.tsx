@@ -78,6 +78,9 @@ export function BookingPage({
 }) {
   const retreat = BOOKING_RETREATS[retreatId];
   const { deposit, fullPaymentDiscount } = retreat;
+  // No discount for paying in full: no "Save €…" badge, struck price or discount line
+  const discounted = fullPaymentDiscount > 0;
+  const saving = discounted ? ` and save ${formatEuro(fullPaymentDiscount)}` : "";
   const labels = planLabels(deposit);
   const [stay, setStay] = useState(initialStay);
   const [plan, setPlan] = useState(initialStay ? initialPlan : null);
@@ -402,22 +405,24 @@ export function BookingPage({
                     featured
                     active={plan === "full"}
                     onSelect={() => goToStep(2, { plan: "full" })}
-                    badge={`Save ${formatEuro(fullPaymentDiscount)}`}
+                    badge={discounted ? `Save ${formatEuro(fullPaymentDiscount)}` : undefined}
                     title={labels.full}
-                    strike={formatEuro(pkg.price)}
+                    strike={discounted ? formatEuro(pkg.price) : undefined}
                     big={`${formatEuro(planTotal(retreat, "full", pkg.price))} today`}
                     text={
                       requestedByEmail(retreat, "full")
-                        ? `Pay your retreat in full and save ${formatEuro(fullPaymentDiscount)}. Send us your request by email and we'll reply with how to pay.`
-                        : `Pay your retreat in full today and save ${formatEuro(fullPaymentDiscount)}.`
+                        ? `Pay your retreat in full${saving}. Send us your request by email and we'll reply with how to pay.`
+                        : `Pay your retreat in full today${saving}.`
                     }
                     rows={[
-                      ["Standard price", formatEuro(pkg.price)],
-                      ["Full payment discount", `− ${formatEuro(fullPaymentDiscount)}`],
+                      ["Retreat total", formatEuro(pkg.price)],
+                      ...(discounted
+                        ? ([["Full payment discount", `− ${formatEuro(fullPaymentDiscount)}`]] as [string, string][])
+                        : []),
                       ["Remaining", formatEuro(0)],
                     ]}
                     note="Nothing left to pay later."
-                    cta={`Pay in full & save ${formatEuro(fullPaymentDiscount)}`}
+                    cta={`Pay in full${saving ? ` & save ${formatEuro(fullPaymentDiscount)}` : ""}`}
                   />
                 )}
                 {offered("instalments") && (

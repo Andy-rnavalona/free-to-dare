@@ -20,7 +20,7 @@ export const RETREAT = {
 export const DEPOSIT = 500;
 
 /** Taken off the retreat price when it is paid in full today */
-export const FULL_PAYMENT_DISCOUNT = 50;
+export const FULL_PAYMENT_DISCOUNT = 0;
 
 /** Price per person for each stay. The keys are also the `?stay=` values of the booking page. */
 export const STAY_PRICES = {
@@ -122,7 +122,10 @@ export function paymentSchedule(
       {
         when: "Today",
         amount: planTotal(pricing, "full", price),
-        note: `Full retreat payment (saves ${formatEuro(pricing.fullPaymentDiscount)})`,
+        note:
+          pricing.fullPaymentDiscount > 0
+            ? `Full retreat payment (saves ${formatEuro(pricing.fullPaymentDiscount)})`
+            : "Full retreat payment",
       },
     ];
   }
