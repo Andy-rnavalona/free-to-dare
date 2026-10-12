@@ -13,10 +13,11 @@ import {
   SunIcon,
   UtensilsIcon,
   WavesIcon,
+  WineIcon,
 } from "@/components/icons";
 import {
   DEPOSIT,
-  PRICE_FROM,
+  STAY_PRICES,
   formatEuro,
 } from "@/booking/booking-config";
 import { CardVideo } from "@/components/card-video";
@@ -27,7 +28,6 @@ import { LISBON_BOOKING } from "@/lib/routes";
 // The booking page opens on step 01, no stay chosen yet
 const RESERVE_URL = LISBON_BOOKING;
 const NIGHTS = 6;
-const HOSTEL = "Living Lounge Hostel";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -36,8 +36,6 @@ type Activity = {
   title: string;
   description: string;
   icon: Icon;
-  /** Adds the “return group transfer included” line */
-  transfer?: boolean;
 };
 
 type Photo = {
@@ -65,8 +63,6 @@ type Day = {
   /** Photos and videos shown above the intro; a day may have none */
   media?: (Photo | Video)[];
   activities: Activity[];
-  /** Nights 1–6 are spent at the hostel; the last day has none */
-  overnight?: boolean;
 };
 
 const days: Day[] = [
@@ -85,18 +81,17 @@ const days: Day[] = [
         av1: withBasePath("/images/jour1/rooftop-dinner.av1.mp4"),
         mp4: withBasePath("/images/jour1/rooftop-dinner.mp4"),
         poster: withBasePath("/images/jour1/rooftop-dinner.jpg"),
-        label: "Rooftop dinner with live music in Lisbon",
+        label: "Rooftop drinks with live music in Lisbon",
         hasAudio: true,
       },
     ],
     activities: [
       {
         kind: "Social",
-        title: "Welcome Community Dinner",
+        title: "Welcome Rooftop Drinks",
         description:
-          "Our first evening is all about meeting each other. We’ll gather for a relaxed community dinner in Lisbon and officially begin our Urban Escape together.",
-        icon: UtensilsIcon,
-        transfer: true,
+          "Let’s kick off with drinks and beautiful views over Lisbon at The Art INN Rooftop! A glass of wine, beer, or a soft drink is included. If you’d like to stay for dinner, you can order food at your own expense. The rooftop is just a short walk from our accommodation, Living Lounge Hostel.",
+        icon: WineIcon,
       },
       {
         kind: "City",
@@ -104,10 +99,8 @@ const days: Day[] = [
         description:
           "After dinner, those who wish can join a relaxed walk through central Lisbon and enjoy the atmosphere of the city at night.",
         icon: FootprintsIcon,
-        transfer: true,
       },
     ],
-    overnight: true,
   },
   {
     title: "Fly & Sail",
@@ -134,7 +127,6 @@ const days: Day[] = [
         description:
           "Our first 90-minute aerial hoop training takes place at JAYA Aerial Lab – Studio 1.",
         icon: SparklesIcon,
-        transfer: true,
       },
       {
         kind: "Free time",
@@ -149,10 +141,8 @@ const days: Day[] = [
         description:
           "In the evening, we head to the Tagus River for a sunset sailing experience. See Lisbon from the water as the city turns golden and sail past some of its iconic riverside landmarks.",
         icon: SailboatIcon,
-        transfer: true,
       },
     ],
-    overnight: true,
   },
   {
     title: "Discover Lisbon",
@@ -190,10 +180,8 @@ const days: Day[] = [
         description:
           "Return to JAYA Aerial Lab for another 90-minute training session.",
         icon: SparklesIcon,
-        transfer: true,
       },
     ],
-    overnight: true,
   },
   {
     title: "Lisbon Through the Lens",
@@ -232,10 +220,8 @@ const days: Day[] = [
         description:
           "Continue our aerial journey with the third 90-minute hoop class at JAYA.",
         icon: SparklesIcon,
-        transfer: true,
       },
     ],
-    overnight: true,
   },
   {
     title: "Aerial Training, Lyra Photoshoot & Relax",
@@ -268,7 +254,6 @@ const days: Day[] = [
         description:
           "Today we transform the studio into our creative playground for a dedicated aerial hoop photoshoot. Participants will have the opportunity to capture beautiful images on the hoop.",
         icon: CameraIcon,
-        transfer: true,
       },
       {
         kind: "Aerial training",
@@ -276,7 +261,6 @@ const days: Day[] = [
         description:
           "Continue directly with our fourth 90-minute aerial hoop training.",
         icon: SparklesIcon,
-        transfer: true,
       },
       {
         kind: "Free time",
@@ -286,7 +270,6 @@ const days: Day[] = [
         icon: SunIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Surf, Beach & Atlantic Vibes",
@@ -312,7 +295,6 @@ const days: Day[] = [
         description:
           "Begin the day with our fifth and final 90-minute aerial hoop session at JAYA Aerial Lab.",
         icon: SparklesIcon,
-        transfer: true,
       },
       {
         kind: "Evening",
@@ -320,15 +302,13 @@ const days: Day[] = [
         description:
           "After training, we leave Lisbon and travel towards Carcavelos Beach.",
         icon: MoonIcon,
-        transfer: true,
       },
       {
         kind: "Ocean",
         title: "Surf Experience",
         description:
-          "Swap the hoop for a surfboard and experience Portugal from the water. The surf session is designed to be accessible and fun, including instruction and equipment.",
+          "Swap the hoop for a surfboard and experience Portugal from the water! The surf session is designed to be accessible and fun, with instruction and equipment included. Not into surfing? No problem! You can simply relax on the beach and enjoy the atmosphere. Drinks are on us!",
         icon: WavesIcon,
-        transfer: true,
       },
       {
         kind: "Evening",
@@ -336,16 +316,15 @@ const days: Day[] = [
         description:
           "After surfing, enjoy time by the ocean to relax, have a drink and soak up the Portuguese coastline before returning to Lisbon.",
         icon: MoonIcon,
-        transfer: true,
       },
       {
         kind: "Social",
         title: "Farewell Evening",
-        description: "Celebrate our final evening together in Lisbon.",
+        description:
+          "Celebrate our final evening together in Lisbon, share your favorite memories, and enjoy one last moment with the group. The final drink is on us!",
         icon: UtensilsIcon,
       },
     ],
-    overnight: true,
   },
   {
     title: "Até Logo, Lisbon",
@@ -355,23 +334,16 @@ const days: Day[] = [
     activities: [
       {
         kind: "Travel",
-        title: "GROUP TRANSFER TO THE AIRPORT",
+        title: "Departure",
         description:
-          "We organise group transfers based on participants’ flight departure times.",
+          "Check out after breakfast and head to the airport in your own time.",
         icon: PlaneIcon,
       },
     ],
   },
 ];
 
-const summary = [
-  "5–11 June 2027",
-  `${NIGHTS} nights`,
-  "5 × 90 min aerial classes",
-  "Lisbon",
-];
-
-function DayPanel({ day, index }: { day: Day; index: number }) {
+function DayPanel({ day }: { day: Day }) {
   const media = day.media ?? [];
   const single = media.length === 1;
   const sizes = single
@@ -424,7 +396,7 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
 
       <ul className="mt-4 divide-y divide-line/60">
         {day.activities.map(
-          ({ kind, title, description, icon: Icon, transfer }) => (
+          ({ kind, title, description, icon: Icon }) => (
             <li key={title} className="py-3.5 first:pt-0 last:pb-0">
               <div className="flex min-w-0 items-start gap-3">
                 <Icon className="mt-0.5 size-5 shrink-0 text-forest" />
@@ -439,36 +411,12 @@ function DayPanel({ day, index }: { day: Day; index: number }) {
               </div>
               <p className="mt-2 pl-8 text-sm leading-relaxed text-muted">
                 {description}
-                {transfer && (
-                  <>
-                    {" "}
-                    <strong className="font-bold text-forest">
-                      Return group transfer is included.
-                    </strong>
-                  </>
-                )}
               </p>
             </li>
           ),
         )}
       </ul>
 
-      {day.overnight && (
-        <div className="mt-4 rounded-2xl  bg-card p-4">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-            <div className="flex min-w-0 items-center gap-3">
-              <BedDoubleIcon className="size-5 shrink-0 text-forest" />
-              <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
-                {HOSTEL}
-              </h3>
-            </div>
-            <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
-              Night {index + 1}/{NIGHTS}
-            </span>
-          </div>
-          <p className="mt-2 pl-8 text-sm text-muted">Overnight in Lisbon.</p>
-        </div>
-      )}
     </>
   );
 }
@@ -505,28 +453,20 @@ export function ItinerarySection() {
               >
                 A day-by-day look at the week. Open any day to see the
                 experiences planned, from studio sessions to sunsets on the
-                water.{" "}
-                <strong className="font-bold text-forest">
-                  TRANSPORT INCLUDED · Group airport transfers · Lisbon
-                  transport pass · Transport to scheduled classes &amp;
-                  activities
-                </strong>
+                water.
               </p>
-              <p
-                data-reveal
-                className="mt-4 font-mono text-[0.7rem] uppercase leading-loose tracking-[0.2em] text-forest"
-              >
-                {summary.map((item, i) => (
-                  <span key={item}>
-                    {i > 0 && (
-                      <span aria-hidden="true" className="mx-3 text-muted">
-                        ·
-                      </span>
-                    )}
-                    {item}
-                  </span>
-                ))}
-              </p>
+              <div data-reveal className="mt-8 max-w-xl">
+                <h3 className="font-display text-lg uppercase leading-tight tracking-[-0.01em] text-forest">
+                  Transportation
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  Airport transfers are not included, and participants are
+                  responsible for arranging their own arrival at the
+                  accommodation. However, everyone will receive a preloaded
+                  public transport card covering our planned group journeys
+                  during the retreat, including the train to the beach.
+                </p>
+              </div>
             </header>
 
             {/* The reveal sits on a wrapper so its transition doesn't override the card's hover one */}
@@ -539,7 +479,7 @@ export function ItinerarySection() {
                     date={day.date}
                     defaultOpen={i === 0}
                   >
-                    <DayPanel day={day} index={i} />
+                    <DayPanel day={day} />
                   </ItineraryDay>
                 </div>
               ))}
@@ -570,9 +510,27 @@ export function ItinerarySection() {
                   From
                 </p>
                 <p className="mt-1 font-display text-4xl leading-none text-forest">
-                  {formatEuro(PRICE_FROM)}
+                  {formatEuro(STAY_PRICES.shared)}
+                  <span className="ml-2 inline-block font-sans text-base font-medium text-muted">
+                    / person
+                  </span>
                 </p>
-                <p className="mt-3">
+                <p className="mt-2 text-sm text-muted">
+                  Retreat + {NIGHTS} nights accommodation
+                </p>
+                <div className="mt-4 flex items-center gap-3 rounded-xl bg-forest/[0.06] px-4 py-3">
+                  <BedDoubleIcon aria-hidden="true" className="size-5 shrink-0 text-forest" />
+                  <p className="text-sm leading-snug text-muted">
+                    Retreat only (without accommodation):
+                    <span className="block">
+                      <span className="font-display text-base text-forest">
+                        {formatEuro(STAY_PRICES.none)}
+                      </span>{" "}
+                      / person
+                    </span>
+                  </p>
+                </div>
+                <p className="mt-4">
                   <span className="inline-block bg-sun px-2.5 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-forest">
                     {formatEuro(DEPOSIT)} deposit to reserve
                   </span>
@@ -604,7 +562,8 @@ export function ItinerarySection() {
               From
             </p>
             <p className="font-display text-2xl leading-none text-forest">
-              {formatEuro(PRICE_FROM)}
+              {formatEuro(STAY_PRICES.shared)}
+              <span className="ml-1.5 font-sans text-sm font-medium text-muted">/ person</span>
             </p>
           </div>
           <Link

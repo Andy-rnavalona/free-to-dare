@@ -20,13 +20,13 @@ export const RETREAT = {
 export const DEPOSIT = 500;
 
 /** Taken off the retreat price when it is paid in full today */
-export const FULL_PAYMENT_DISCOUNT = 50;
+export const FULL_PAYMENT_DISCOUNT = 0;
 
 /** Price per person for each stay. The keys are also the `?stay=` values of the booking page. */
 export const STAY_PRICES = {
-  shared: 2050,
-  private: 2150,
-  none: 1750,
+  shared: 1870,
+  private: 1950,
+  none: 1490,
 } as const;
 
 export type StayId = keyof typeof STAY_PRICES;
@@ -40,26 +40,24 @@ export const INSTALMENTS = {
 /* ─── Stripe Payment Links ───
    One link per stay and payment plan. A missing link must stay a "TODO" string:
    the booking page then refuses to redirect and asks to contact us instead.
-   Links from the payment mockup: the deposit and instalment plans all go through
-   the same €500 deposit link, whatever the stay. */
+   Links from the payment mockup: the instalment plan goes through the €500
+   deposit link, whatever the stay. The deposit-only plan is not offered: you
+   pay in full or in instalments. */
 
 export type PaymentPlan = "deposit" | "full" | "instalments";
 
 const DEPOSIT_LINK = "https://buy.stripe.com/8x24gAcQA9ysa7zbYyg362C";
 
-export const STRIPE_LINKS: Record<StayId, Record<PaymentPlan, string>> = {
+export const STRIPE_LINKS: Record<StayId, Partial<Record<PaymentPlan, string>>> = {
   shared: {
-    deposit: DEPOSIT_LINK,
     instalments: DEPOSIT_LINK,
-    full: "https://buy.stripe.com/7sY00kcQAaCw7Zre6Gg362F",
+    full: "https://buy.stripe.com/dRmeVe5o8aCwfrTd2Cg362G",
   },
   private: {
-    deposit: DEPOSIT_LINK,
     instalments: DEPOSIT_LINK,
-    full: "https://buy.stripe.com/3cI7sM9EodOIfrT3s2g362E",
+    full: "https://buy.stripe.com/eVqdRa2bWeSM0wZ2nYg362H",
   },
   none: {
-    deposit: DEPOSIT_LINK,
     instalments: DEPOSIT_LINK,
     full: "https://buy.stripe.com/8x2bJ2g2Mh0U3Jb6Eeg362D",
   },
@@ -124,7 +122,10 @@ export function paymentSchedule(
       {
         when: "Today",
         amount: planTotal(pricing, "full", price),
-        note: `Full retreat payment (saves ${formatEuro(pricing.fullPaymentDiscount)})`,
+        note:
+          pricing.fullPaymentDiscount > 0
+            ? `Full retreat payment (saves ${formatEuro(pricing.fullPaymentDiscount)})`
+            : "Full retreat payment",
       },
     ];
   }

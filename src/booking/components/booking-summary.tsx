@@ -24,6 +24,7 @@ export function BookingSummary({
   children?: ReactNode;
 }) {
   const full = plan === "full";
+  const discounted = full && retreat.fullPaymentDiscount > 0;
   const remaining = plan ? remainingBalance(retreat, plan, pkg.price) : pkg.price - dueToday;
 
   return (
@@ -40,7 +41,7 @@ export function BookingSummary({
               {planLabel}
             </p>
           )}
-          {full && (
+          {discounted && (
             <p className="label-mono inline-block rounded-full bg-accent px-3 py-1 text-accent-foreground">
               You save {formatEuro(retreat.fullPaymentDiscount)}
             </p>
@@ -52,7 +53,7 @@ export function BookingSummary({
           <dt className="label-mono text-muted-foreground">Total retreat price</dt>
           <dd className="font-display text-lg">{formatEuro(pkg.price)}</dd>
         </div>
-        {full && (
+        {discounted && (
           <div className="flex items-center justify-between">
             <dt className="label-mono text-muted-foreground">Full payment discount</dt>
             <dd className="font-display text-lg text-primary">

@@ -7,6 +7,7 @@ import {
   dueToday as dueTodayFor,
   formatEuro,
   isPaymentPlan,
+  PAYMENT_PLANS,
   planTotal,
   type PaymentPlan,
 } from "@/booking/booking-config";
@@ -19,7 +20,11 @@ import { PlanCard } from "@/booking/components/plan-card";
 import { StayCard } from "@/booking/components/stay-card";
 import {
   BOOKING_RETREATS,
+  CONTACT_EMAIL,
+  emailRequestLink,
   findStay,
+  planOffered,
+  requestedByEmail,
   stripeLink,
   type BookingRetreatId,
 } from "@/booking/retreats";
@@ -46,7 +51,7 @@ export function BookingPageFromUrl({ retreatId }: { retreatId: BookingRetreatId 
       initialStay: stay?.id ?? null,
       // A plan this stay does not offer is not chosen
       initialPlan:
-        stay && isPaymentPlan(plan) && stripeLink(retreat, stay.id, plan) ? plan : null,
+        stay && isPaymentPlan(plan) && planOffered(retreat, stay.id, plan) ? plan : null,
     };
   });
 
@@ -73,6 +78,9 @@ export function BookingPage({
 }) {
   const retreat = BOOKING_RETREATS[retreatId];
   const { deposit, fullPaymentDiscount } = retreat;
+  // No discount for paying in full: no "Save €…" badge, struck price or discount line
+  const discounted = fullPaymentDiscount > 0;
+  const saving = discounted ? ` and save ${formatEuro(fullPaymentDiscount)}` : "";
   const labels = planLabels(deposit);
   const [stay, setStay] = useState(initialStay);
   const [plan, setPlan] = useState(initialStay ? initialPlan : null);
@@ -80,13 +88,15 @@ export function BookingPage({
   const [accepted, setAccepted] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [emailOpened, setEmailOpened] = useState(false);
   const content = useRef<HTMLElement>(null);
   const summary = useRef<HTMLDivElement>(null);
 
   const pkg = findStay(retreat, stay);
   const dueToday = pkg && plan ? dueTodayFor(retreat, plan, pkg.price) : deposit;
-  // Only the plans whose Payment Link exists for the chosen stay are offered
-  const offered = (p: PaymentPlan) => !!pkg && !!stripeLink(retreat, pkg.id, p);
+  // Only the plans whose Payment Link exists for the chosen stay, or asked for by email, are offered
+  const offered = (p: PaymentPlan) => !!pkg && planOffered(retreat, pkg.id, p);
+  const byEmail = !!plan && requestedByEmail(retreat, plan);
 
   const reachable = (i: Step) => i === 0 || (i === 1 && !!stay) || (i === 2 && !!stay && !!plan);
 
@@ -154,10 +164,15 @@ export function BookingPage({
       setShowError(true);
       return;
     }
+    if (byEmail) {
+      window.location.assign(emailRequestLink(retreat, pkg, dueToday));
+      setEmailOpened(true);
+      return;
+    }
     const link = stripeLink(retreat, pkg.id, plan);
     if (!link) {
       window.alert(
-        `Online payment for this option is not available yet. Please choose the ${formatEuro(deposit)} deposit or contact us.`,
+        `Online payment for this option is not available yet. Please choose another payment plan or contact us.`,
       );
       return;
     }
@@ -168,7 +183,9 @@ export function BookingPage({
 
   const payLabel = redirecting
     ? "Redirecting to secure payment…"
-    : plan === "full"
+    : byEmail
+      ? "Send my request by email"
+      : plan === "full"
       ? `Pay ${formatEuro(dueToday)} & confirm my booking`
       : `Pay ${formatEuro(dueToday)} & reserve my place`;
 
@@ -229,10 +246,23 @@ export function BookingPage({
           {payLabel}
           {redirecting ? "" : " →"}
         </button>
-        <p className="mt-3 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
-          <Lock className="size-3.5 shrink-0" />
-          Secure payment via our payment provider&apos;s checkout.
-        </p>
+        {byEmail ? (
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            {emailOpened ? "Your email app should have opened. If not, write" : "Write"} to us at{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="font-medium underline underline-offset-2 hover:text-primary"
+            >
+              {CONTACT_EMAIL}
+            </a>{" "}
+            and we&apos;ll reply with how to pay.
+          </p>
+        ) : (
+          <p className="mt-3 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
+            <Lock className="size-3.5 shrink-0" />
+            Secure payment via our payment provider&apos;s checkout.
+          </p>
+        )}
       </div>
     ) : null;
 
@@ -346,7 +376,11 @@ export function BookingPage({
                 method in the final step.
               </p>
               <div
-                className={`mt-8 grid gap-4 ${offered("full") ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+                className={`mt-8 grid gap-4 ${
+                  ["md:max-w-md", "md:max-w-md", "md:grid-cols-2", "md:grid-cols-3"][
+                    PAYMENT_PLANS.filter(offered).length
+                  ]
+                }`}
               >
                 {offered("deposit") && (
                   <PlanCard
@@ -371,18 +405,24 @@ export function BookingPage({
                     featured
                     active={plan === "full"}
                     onSelect={() => goToStep(2, { plan: "full" })}
-                    badge={`Save ${formatEuro(fullPaymentDiscount)}`}
+                    badge={discounted ? `Save ${formatEuro(fullPaymentDiscount)}` : undefined}
                     title={labels.full}
-                    strike={formatEuro(pkg.price)}
+                    strike={discounted ? formatEuro(pkg.price) : undefined}
                     big={`${formatEuro(planTotal(retreat, "full", pkg.price))} today`}
-                    text={`Pay your retreat in full today and save ${formatEuro(fullPaymentDiscount)}.`}
+                    text={
+                      requestedByEmail(retreat, "full")
+                        ? `Pay your retreat in full${saving}. Send us your request by email and we'll reply with how to pay.`
+                        : `Pay your retreat in full today${saving}.`
+                    }
                     rows={[
-                      ["Standard price", formatEuro(pkg.price)],
-                      ["Full payment discount", `− ${formatEuro(fullPaymentDiscount)}`],
+                      ["Retreat total", formatEuro(pkg.price)],
+                      ...(discounted
+                        ? ([["Full payment discount", `− ${formatEuro(fullPaymentDiscount)}`]] as [string, string][])
+                        : []),
                       ["Remaining", formatEuro(0)],
                     ]}
                     note="Nothing left to pay later."
-                    cta={`Pay in full & save ${formatEuro(fullPaymentDiscount)}`}
+                    cta={`Pay in full${saving ? ` & save ${formatEuro(fullPaymentDiscount)}` : ""}`}
                   />
                 )}
                 {offered("instalments") && (

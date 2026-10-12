@@ -45,7 +45,7 @@ const withAccommodation = [
   "Accommodation",
   "Breakfast",
   "Retreat activities",
-  "Local transportation included in the programme",
+  "Preloaded public transport pass included for scheduled retreat activities",
   "Social dinner",
 ];
 
@@ -137,7 +137,7 @@ export const STAYS: StayPackage[] = [
       "Full retreat programme",
       "Aerial training",
       "Retreat activities",
-      "Local transportation included in the programme",
+      "Preloaded public transport pass included for scheduled retreat activities",
       "Social dinner",
     ],
   },

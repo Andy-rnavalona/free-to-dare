@@ -5,8 +5,8 @@ import { withBasePath } from "@/lib/base-path";
 
 /**
  * “Hear it from the women who came” — the same section as the Open Air page,
- * redrawn with this page's palette and typography: a pull quote, then the
- * tilted prints drifting past in the same carousel as the experiences.
+ * redrawn with this page's palette and typography: the tilted prints
+ * drifting past in the same carousel as the experiences.
  */
 
 type Story = {
@@ -142,28 +142,9 @@ export function TestimonialsSection() {
           who came.
         </h2>
 
-        <blockquote
-          data-reveal
-          className="mt-10 max-w-3xl font-serif text-xl italic leading-relaxed text-ink md:text-2xl xl:text-2xl"
-        >
-          The most transformative week of my life. I arrived a stranger and left
-          with a family — the city, the hoop, the women.{" "}
-          <span className="inline-block  bg-sun px-3 py-1 font-display text-base uppercase not-italic tracking-[-0.01em] text-forest shadow-sm md:text-lg">
-            I came home a different dancer — and a different person.
-          </span>{" "}
-          Every moment still lives in me.
-        </blockquote>
-
         <p
           data-reveal
-          className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted"
-        >
-          Marta, Porto — Lisbon retreat
-        </p>
-
-        <p
-          data-reveal
-          className="mt-16 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted"
+          className="mt-10 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted"
         >
           More from past retreats
         </p>

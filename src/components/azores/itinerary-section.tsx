@@ -51,7 +51,8 @@ type Day = {
 };
 
 type Media =
-  | { src: string; alt: string }
+  /** `portrait`: taller on phones, where a wide crop would cut the subject */
+  | { src: string; alt: string; portrait?: boolean }
   | {
       av1: string;
       mp4: string;
@@ -60,9 +61,10 @@ type Media =
       hasAudio?: boolean;
     };
 
-const photo = (src: string, alt: string) => ({
+const photo = (src: string, alt: string, portrait?: boolean) => ({
   src: withBasePath(`/images/azores/${src}`),
   alt,
+  portrait,
 });
 
 const SETE_CIDADES_LAKE = photo(
@@ -103,7 +105,7 @@ const SANTA_BARBARA_BEACH = photo(
   "santa-barbara-beach.avif",
   "Atlantic waves along Santa Bárbara Beach on São Miguel’s north coast",
 );
-const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast");
+const PHOTOSHOOT = photo("photoshoot.webp", "Pole photoshoot on the Azores coast", true);
 const AIRPORT = photo("airport.webp", "Ponta Delgada airport by the ocean");
 const WELCOME_DINNER = {
   av1: withBasePath("/videos/azores/welcome-dinner.av1.mp4"),
@@ -115,7 +117,7 @@ const WELCOME_DINNER = {
 const days: Day[] = [
   {
     title: "Welcome to São Miguel",
-    date: "Tuesday, 30 June",
+    date: "Wednesday, 30 June",
     gallery: [AIRPORT, WELCOME_DINNER],
     intro:
       "Welcome to São Miguel! Arrive, settle into your stay and meet the group. We intentionally keep the first day relaxed, with no complex activities planned, giving everyone time to arrive, unpack and get comfortable. In the evening, we’ll take an easy walk through Ponta Delgada city centre before coming together for our first dinner at a local restaurant.",
@@ -140,16 +142,16 @@ const days: Day[] = [
   },
   {
     title: "Pole & the north coast",
-    date: "Wednesday, 1 July",
+    date: "Thursday, 1 July",
     gallery: [NORTH_COAST_TEA, NORTH_COAST_WATERFALL],
     intro:
-      "Our first full day starts in the studio before discovering the island’s capital together.",
+      "Our first full day starts in the studio before exploring São Miguel’s lush north coast together.",
     activities: [
       {
         kind: "Pole training",
         title: "Pole Class 01",
         description:
-          "Our first 90-minute pole session takes place at our partner studio, with four pole stages installed specifically for the retreat. All scheduled transfers are included, and the studio is only a 5–10 minute drive from our accommodation.",
+          "Our first 90-minute pole session takes place at our partner studio, with four pole stages installed specifically for the retreat. The studio is only a 5–10 minute drive from our accommodation.",
         note: TRANSFERS_INCLUDED,
         Icon: Sparkles,
       },
@@ -165,7 +167,7 @@ const days: Day[] = [
   },
   {
     title: "Sete Cidades",
-    date: "Thursday, 2 July",
+    date: "Friday, 2 July",
     gallery: [SETE_CIDADES_LAKE, SETE_CIDADES_QUAD],
     intro:
       "Today we head west for the island’s most iconic volcanic landscapes before returning to the studio for training.",
@@ -190,7 +192,7 @@ const days: Day[] = [
   },
   {
     title: "Into the Atlantic",
-    date: "Friday, 3 July",
+    date: "Saturday, 3 July",
     gallery: [WHALE, POLE_CLASS_03],
     intro: "A day on the water, between Atlantic air, whales and training.",
     activities: [
@@ -229,7 +231,7 @@ const days: Day[] = [
   },
   {
     title: "Lagoa do Fogo & Santa Bárbara Beach",
-    date: "Saturday, 4 July",
+    date: "Sunday, 4 July",
     gallery: [LAGOA_DO_FOGO, SANTA_BARBARA_BEACH],
     intro:
       "The wildest day of the week: volcanic fire, tea fields and warm thermal waters.",
@@ -269,7 +271,7 @@ const days: Day[] = [
   },
   {
     title: "Training & Hydrangea Photoshoot",
-    date: "Sunday, 5 July",
+    date: "Monday, 5 July",
     gallery: [POLE_TRAINING, PHOTOSHOOT],
     intro:
       "A final pole session, time to rest and an outdoor photoshoot among São Miguel’s hydrangeas.",
@@ -302,7 +304,7 @@ const days: Day[] = [
   },
   {
     title: "Last flight & goodbye",
-    date: "Monday, 6 July",
+    date: "Tuesday, 6 July",
     gallery: [COMMUNITY, BREAKFAST],
     intro: "Our last morning together before flying home.",
     activities: [
@@ -357,7 +359,9 @@ function DayPanel({ day }: { day: Day }) {
               width={1024}
               height={768}
               sizes="(min-width: 1280px) 22rem, (min-width: 640px) 30vw, 90vw"
-              className="h-40 w-full rounded-2xl object-cover sm:h-[17rem]"
+              className={`w-full rounded-2xl object-cover sm:h-[17rem] ${
+                item.portrait ? "h-96" : "h-40"
+              }`}
             />
           ),
         )}
@@ -508,6 +512,17 @@ export function ItinerarySection() {
                 </ItineraryDay>
               </div>
             ))}
+
+            {/* With the gap of the list, 2rem below the last day */}
+            <p
+              data-reveal
+              className="mt-5 rounded-xl bg-white p-5 text-sm leading-relaxed text-muted shadow-sm"
+            >
+              The activity order is indicative. The final schedule may be
+              adjusted according to local conditions, weather and operational
+              requirements, and partners for each experience are confirmed
+              closer to the retreat.
+            </p>
           </div>
 
           {/* Booking card: first on mobile, follows the scroll on desktop */}

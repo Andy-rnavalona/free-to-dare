@@ -6,6 +6,7 @@
  */
 
 import {
+  formatEuro,
   LISBON_PRICING,
   RETREAT,
   STRIPE_LINKS,
@@ -34,6 +35,8 @@ export type BookingRetreat = Pricing & {
   stays: StayPackage[];
   /** One Payment Link per stay and plan; a plan with no link is not offered */
   links: Record<string, Partial<Record<PaymentPlan, string>>>;
+  /** Plans asked for by email instead of paid online, whatever the stay */
+  requestByEmail?: PaymentPlan[];
   /** For a stay without accommodation */
   ownStayNote: string;
   /** Shown in place of a stay's photo when it has none; without it, the card has no side */
@@ -70,11 +73,11 @@ const lisbon: BookingRetreat = {
 
 /* ─── Azores Into The Wild ─── */
 
-/* Only the deposit has its Payment Link for now: the deposit and instalment
-   plans both go through it, whatever the stay, and paying in full is not
-   offered until its links exist. */
+/* You pay in full or in instalments, not a deposit alone. The instalment plan
+   goes through the deposit Payment Link, whatever the stay. Paying in full is
+   asked for by email: Stripe's fees on the whole amount are too high. */
 const AZORES_DEPOSIT_LINK = "https://buy.stripe.com/14A14o9Eo4e8djL7Iig362B";
-const azoresLinks = { deposit: AZORES_DEPOSIT_LINK, instalments: AZORES_DEPOSIT_LINK };
+const azoresLinks = { instalments: AZORES_DEPOSIT_LINK };
 
 const azoresProgramme = [
   "5 pole classes (90 min)",
@@ -155,8 +158,7 @@ const azoresStays: StayPackage[] = [
 
 const azores: BookingRetreat = {
   deposit: AZORES.deposit,
-  // TODO: confirm with the client once paying in full is offered
-  fullPaymentDiscount: 50,
+  fullPaymentDiscount: 0,
   instalments: {
     count: 3,
     dates: ["Date to be confirmed", "Date to be confirmed", "Date to be confirmed"],
@@ -167,6 +169,7 @@ const azores: BookingRetreat = {
   destination: "the Azores",
   stays: azoresStays,
   links: Object.fromEntries(azoresStays.map((stay) => [stay.id, azoresLinks])),
+  requestByEmail: ["full"],
   ownStayNote: `You book and pay for your own place to stay in São Miguel, at the hotel or any hotel nearby. Breakfast is not included either — everything else in the programme is exactly the same.`,
   homeSection: false,
   routes: {
@@ -185,6 +188,8 @@ export type BookingRetreatId = keyof typeof BOOKING_RETREATS;
 
 /* ─── Helpers ─── */
 
+export const CONTACT_EMAIL = "contact@freetodare.com";
+
 export function findStay(retreat: BookingRetreat, id: string | null | undefined) {
   return retreat.stays.find((stay) => stay.id === id) ?? null;
 }
@@ -193,4 +198,33 @@ export function findStay(retreat: BookingRetreat, id: string | null | undefined)
 export function stripeLink(retreat: BookingRetreat, stay: string, plan: PaymentPlan) {
   const link = retreat.links[stay]?.[plan];
   return link?.startsWith("https://") ? link : null;
+}
+
+/** Whether a plan is asked for by email rather than paid online */
+export function requestedByEmail(retreat: BookingRetreat, plan: PaymentPlan) {
+  return !!retreat.requestByEmail?.includes(plan);
+}
+
+/** Whether a stay can be booked with a plan: online, or by email */
+export function planOffered(retreat: BookingRetreat, stay: string, plan: PaymentPlan) {
+  return requestedByEmail(retreat, plan) || !!stripeLink(retreat, stay, plan);
+}
+
+/** The prefilled email asking to pay a stay in full */
+export function emailRequestLink(retreat: BookingRetreat, stay: StayPackage, amount: number) {
+  const subject = `Full payment request — ${retreat.name}`;
+  const body = [
+    "Hello,",
+    "",
+    `I would like to book the ${retreat.name} (${retreat.dates}) and pay in full.`,
+    "",
+    `Stay: ${stay.title}`,
+    `Amount: ${formatEuro(amount)}`,
+    "",
+    "Name:",
+    "Phone:",
+    "",
+    "Thank you!",
+  ].join("\n");
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

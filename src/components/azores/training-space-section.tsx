@@ -1,14 +1,50 @@
-// import Image from "next/image";
+import type { LucideIcon } from "lucide-react";
+import {
+  Clock,
+  House,
+  ShowerHead,
+  User,
+  Users,
+  Utensils,
+  Volume2,
+} from "lucide-react";
+import type { SVGProps } from "react";
 import { StayGallery, type Photo } from "@/components/stay-gallery";
 import { withBasePath } from "@/lib/base-path";
-import { AZORES } from "@/components/azores/retreat";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 
-const stats = [
-  { value: "5 × 90", label: "min pole classes" },
-  { value: "4", label: "pole stages" },
-  { value: String(AZORES.groupMax), label: "participants max" },
-  { value: "2", label: "people per pole" },
+/** Three poles on their stages, for the "pole stages" figure */
+function PolesIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M6 3v16M12 3v16M18 3v16" />
+      <path d="M4 21h4M10 21h4M16 21h4" />
+    </svg>
+  );
+}
+
+const PER_CLASS_MAX = 8;
+
+const stats: { value: string; label: string; Icon: LucideIcon | typeof PolesIcon }[] = [
+  { value: "5 × 90", label: "min pole classes", Icon: Clock },
+  { value: "4", label: "pole stages", Icon: PolesIcon },
+  { value: String(PER_CLASS_MAX), label: "participants max", Icon: Users },
+  { value: "2", label: "people per pole", Icon: User },
+];
+
+const amenities: { label: string; Icon: LucideIcon }[] = [
+  { label: "Indoor studio", Icon: House },
+  { label: "Sound system & speakers", Icon: Volume2 },
+  { label: "Kitchen on site", Icon: Utensils },
+  { label: "Toilets & showers", Icon: ShowerHead },
 ];
 
 /* The studio, from the poles installed for the retreat to the room itself. */
@@ -23,12 +59,6 @@ const studio: Photo[] = [
   },
 ];
 
-const included = [
-  "Training / studio space",
-  "Sound system & speakers",
-  "Toilets & showers",
-];
-
 export function TrainingSpaceSection() {
   return (
     <section
@@ -38,113 +68,61 @@ export function TrainingSpaceSection() {
       className="scroll-mt-28 bg-white"
     >
       <div className={CONTAINER}>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <h2
-            id="training-space-title"
-            data-reveal
-            className={`${DISPLAY} text-[clamp(2.25rem,4.2vw,3.5rem)] leading-[0.92] text-forest`}
-          >
-            <span className="block">Here is your</span>
-            <span className="block">Training space</span>
-          </h2>
-          <p
-            data-reveal
-            className="max-w-md text-sm leading-relaxed text-muted lg:mb-2"
-          >
-            A dedicated indoor studio in São Miguel will become our pole home for
-            the week.
-          </p>
-        </div>
+        <div
+          data-reveal
+          className="grid gap-8 bg-white lg:grid-cols-[1.05fr_1fr] lg:gap-12"
+        >
+          <StayGallery
+            photos={studio}
+            // On desktop, as tall as the details beside it
+            className="aspect-[4/3] rounded-2xl lg:aspect-auto lg:h-full lg:min-h-[24rem]"
+            sizes="(min-width: 1024px) 45vw, 100vw"
+          />
 
-        <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-          <div
-            data-reveal
-            className="relative overflow-hidden rounded-3xl bg-ink"
-          >
-            <StayGallery
-              photos={studio}
-              // On desktop, as tall as the details beside it
-              className="aspect-[4/5] lg:aspect-auto lg:h-full"
-              sizes="(min-width: 1024px) 45vw, 100vw"
-            />
-            <span
-              className={`${MICRO} pointer-events-none absolute left-5 top-5 z-20 rounded-full bg-paper/90 px-4 py-2 text-[0.65rem] text-ink sm:left-6 sm:top-6`}
-            >
-              The studio
-            </span>
-          </div>
-
-          <div className="lg:pt-6">
-            <h3
-              data-reveal
-              className="text-[clamp(1.6rem,2.3vw,2rem)] font-extrabold uppercase leading-tight tracking-tight text-forest"
+          <div className="flex flex-col justify-center lg:py-2">
+            <p className={`${MICRO} text-[0.65rem] text-ink`}>The studio</p>
+            <h2
+              id="training-space-title"
+              className={`${DISPLAY} mt-3 text-[clamp(2rem,3.4vw,3rem)] text-forest`}
             >
               Everything you need to train
-            </h3>
-            <p
-              data-reveal
-              className="mt-4 max-w-xl text-sm leading-relaxed text-muted"
-            >
-              We install four pole stages specifically for the retreat, giving us
-              a reliable training environment regardless of the weather outside.
+            </h2>
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted">
+              The retreat includes 5 × 90-minute pole classes in a private
+              indoor studio. With 4 pole stages and a maximum of{" "}
+              {PER_CLASS_MAX} participants per class, there are only 2 people
+              per pole, giving you plenty of time to train and practise. The
+              studio also has a kitchen and toilets, so everything you need is
+              available on site.
             </p>
 
-            <dl className="mt-2 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
-              {stats.map(({ value, label }) => (
-                <div
-                  key={label}
-                  data-reveal
-                  className="flex flex-col-reverse justify-end border-b border-forest/20 py-3"
-                >
-                  <dt className={`${MICRO} mt-2 text-[0.55rem] tracking-[0.15em] text-muted`}>
-                    {label}
-                  </dt>
-                  <dd className="font-display text-xl text-forest sm:text-xl">
-                    {value}
-                  </dd>
+            <dl className="mt-7 grid grid-cols-2 gap-y-5 sm:grid-cols-4 sm:divide-x sm:divide-line">
+              {stats.map(({ value, label, Icon }) => (
+                <div key={label} className="flex items-center gap-2.5 sm:px-3 sm:first:pl-0">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-forest/[0.07] text-forest">
+                    <Icon className="size-5" />
+                  </span>
+                  <div className="flex min-w-0 flex-col-reverse">
+                    <dt className="mt-0.5 text-[0.6rem] font-semibold uppercase leading-tight text-muted">
+                      {label}
+                    </dt>
+                    <dd className="font-display text-xl leading-none text-forest">{value}</dd>
+                  </div>
                 </div>
               ))}
             </dl>
 
-            <ul className="mt-2">
-              {included.map((item) => (
+            <ul className="mt-7 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-line pt-5 xl:flex xl:gap-0 xl:divide-x xl:divide-line">
+              {amenities.map(({ label, Icon }) => (
                 <li
-                  key={item}
-                  data-reveal
-                  className="border-b border-line py-3 font-semibold text-forest"
+                  key={label}
+                  className="flex items-center gap-2 text-xs text-ink xl:whitespace-nowrap xl:px-3 xl:first:pl-0"
                 >
-                  {item}
+                  <Icon aria-hidden="true" className="size-4 shrink-0 text-forest" />
+                  {label}
                 </li>
               ))}
             </ul>
-
-            <div className="grid items-center gap-8 pt-6 sm:grid-cols-[minmax(0,1fr)_auto]">
-              <div data-reveal>
-                <p className={`${MICRO} text-[0.65rem] text-muted`}>
-                  Outside the studio
-                </p>
-                <h3 className="mt-2 text-[clamp(1.4rem,1.8vw,1.75rem)] font-extrabold uppercase leading-tight tracking-tight text-forest">
-                  Indoor studio  Small groups, more training time
-                </h3>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
-            The retreat includes 5 × 90-minute pole classes in a private indoor studio. With 4 pole stages and a maximum of 8 participants per class, there are only 2 people per pole, giving you plenty of time to train and practise.
-
-The studio also has a kitchen and toilets, so everything you need is available on site.
-                </p>
-              </div>
-              {/* <div
-                data-reveal
-                className="relative aspect-square w-full overflow-hidden rounded-2xl bg-ink sm:w-60 xl:w-64"
-              >
-                <Image
-                  src={withBasePath("/images/azores/pool.jpg")}
-                  alt="Garden and patio beside the studio"
-                  fill
-                  sizes="(min-width: 640px) 16rem, 100vw"
-                  className="object-cover"
-                />
-              </div> */}
-            </div>
           </div>
         </div>
       </div>
