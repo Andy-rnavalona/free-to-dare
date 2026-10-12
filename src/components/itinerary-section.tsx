@@ -307,7 +307,7 @@ const days: Day[] = [
         kind: "Ocean",
         title: "Surf Experience",
         description:
-          "Swap the hoop for a surfboard and experience Portugal from the water. The surf session is designed to be accessible and fun, including instruction and equipment.",
+          "Swap the hoop for a surfboard and experience Portugal from the water! The surf session is designed to be accessible and fun, with instruction and equipment included. Not into surfing? No problem! You can simply relax on the beach and enjoy the atmosphere. Drinks are on us!",
         icon: WavesIcon,
       },
       {
