@@ -13,6 +13,7 @@ import {
   SunIcon,
   UtensilsIcon,
   WavesIcon,
+  WineIcon,
 } from "@/components/icons";
 import {
   DEPOSIT,
@@ -85,18 +86,17 @@ const days: Day[] = [
         av1: withBasePath("/images/jour1/rooftop-dinner.av1.mp4"),
         mp4: withBasePath("/images/jour1/rooftop-dinner.mp4"),
         poster: withBasePath("/images/jour1/rooftop-dinner.jpg"),
-        label: "Rooftop dinner with live music in Lisbon",
+        label: "Rooftop drinks with live music in Lisbon",
         hasAudio: true,
       },
     ],
     activities: [
       {
         kind: "Social",
-        title: "Welcome Community Dinner",
+        title: "Welcome Rooftop Drinks",
         description:
-          "Our first evening is all about meeting each other. We’ll gather for a relaxed community dinner in Lisbon and officially begin our Urban Escape together.",
-        icon: UtensilsIcon,
-        transfer: true,
+          "Let’s kick off with drinks and beautiful views over Lisbon at The Art INN Rooftop! A glass of wine, beer, or a soft drink is included. If you’d like to stay for dinner, you can order food at your own expense. The rooftop is just a short walk from our accommodation, Living Lounge Hostel.",
+        icon: WineIcon,
       },
       {
         kind: "City",
