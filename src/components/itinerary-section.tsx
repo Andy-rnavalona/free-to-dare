@@ -320,7 +320,8 @@ const days: Day[] = [
       {
         kind: "Social",
         title: "Farewell Evening",
-        description: "Celebrate our final evening together in Lisbon.",
+        description:
+          "Celebrate our final evening together in Lisbon, share your favorite memories, and enjoy one last moment with the group. The final drink is on us!",
         icon: UtensilsIcon,
       },
     ],
