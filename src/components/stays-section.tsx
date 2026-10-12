@@ -32,7 +32,6 @@ const options: {
       "Activities",
       "Daily breakfast",
       "Welcome dinner",
-      "Airport & activity transfers",
     ],
   },
   {
@@ -46,7 +45,6 @@ const options: {
       "Activities",
       "Daily breakfast",
       "Welcome dinner",
-      "Airport & activity transfers",
     ],
   },
   {
@@ -60,7 +58,6 @@ const options: {
       "5 aerial classes",
       "Activities",
       "Welcome dinner",
-      "Airport & activity transfers",
     ],
   },
 ];
