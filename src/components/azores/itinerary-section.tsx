@@ -117,7 +117,7 @@ const WELCOME_DINNER = {
 const days: Day[] = [
   {
     title: "Welcome to São Miguel",
-    date: "Tuesday, 30 June",
+    date: "Wednesday, 30 June",
     gallery: [AIRPORT, WELCOME_DINNER],
     intro:
       "Welcome to São Miguel! Arrive, settle into your stay and meet the group. We intentionally keep the first day relaxed, with no complex activities planned, giving everyone time to arrive, unpack and get comfortable. In the evening, we’ll take an easy walk through Ponta Delgada city centre before coming together for our first dinner at a local restaurant.",
@@ -142,7 +142,7 @@ const days: Day[] = [
   },
   {
     title: "Pole & the north coast",
-    date: "Wednesday, 1 July",
+    date: "Thursday, 1 July",
     gallery: [NORTH_COAST_TEA, NORTH_COAST_WATERFALL],
     intro:
       "Our first full day starts in the studio before exploring São Miguel’s lush north coast together.",
@@ -167,7 +167,7 @@ const days: Day[] = [
   },
   {
     title: "Sete Cidades",
-    date: "Thursday, 2 July",
+    date: "Friday, 2 July",
     gallery: [SETE_CIDADES_LAKE, SETE_CIDADES_QUAD],
     intro:
       "Today we head west for the island’s most iconic volcanic landscapes before returning to the studio for training.",
@@ -192,7 +192,7 @@ const days: Day[] = [
   },
   {
     title: "Into the Atlantic",
-    date: "Friday, 3 July",
+    date: "Saturday, 3 July",
     gallery: [WHALE, POLE_CLASS_03],
     intro: "A day on the water, between Atlantic air, whales and training.",
     activities: [
@@ -231,7 +231,7 @@ const days: Day[] = [
   },
   {
     title: "Lagoa do Fogo & Santa Bárbara Beach",
-    date: "Saturday, 4 July",
+    date: "Sunday, 4 July",
     gallery: [LAGOA_DO_FOGO, SANTA_BARBARA_BEACH],
     intro:
       "The wildest day of the week: volcanic fire, tea fields and warm thermal waters.",
@@ -271,7 +271,7 @@ const days: Day[] = [
   },
   {
     title: "Training & Hydrangea Photoshoot",
-    date: "Sunday, 5 July",
+    date: "Monday, 5 July",
     gallery: [POLE_TRAINING, PHOTOSHOOT],
     intro:
       "A final pole session, time to rest and an outdoor photoshoot among São Miguel’s hydrangeas.",
@@ -304,7 +304,7 @@ const days: Day[] = [
   },
   {
     title: "Last flight & goodbye",
-    date: "Monday, 6 July",
+    date: "Tuesday, 6 July",
     gallery: [COMMUNITY, BREAKFAST],
     intro: "Our last morning together before flying home.",
     activities: [
