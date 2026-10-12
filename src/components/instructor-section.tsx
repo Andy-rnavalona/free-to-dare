@@ -21,7 +21,7 @@ function ItalianFlag() {
       viewBox="0 0 3 2"
       role="img"
       aria-label="Italy"
-      className="ml-3 inline-block h-[0.62em] w-auto -translate-y-[0.08em] rounded-[0.08em] align-baseline"
+      className="ml-2 inline-block h-[0.3em] w-auto rounded-[0.08em] align-super"
     >
       <rect width="1" height="2" fill="#009246" />
       <rect x="1" width="1" height="2" fill="#f1f2f1" />
@@ -68,15 +68,6 @@ export function InstructorSection() {
               label="Pamela Mariotto introducing the Lisbon aerial retreat, on the hoop and silks"
               className="size-full rounded-3xl"
             />
-            <a
-              href={PAMELA_INSTAGRAM.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-              className="group/ig absolute right-4 top-4 z-10 rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-white sm:right-6 sm:top-6"
-            >
-              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} />
-            </a>
           </div>
         </div>
 
@@ -89,17 +80,29 @@ export function InstructorSection() {
             Instructors
           </p>
 
-          <h2
-            id="instructors-title"
-            data-reveal
-            className="mt-8 font-display text-[clamp(2.5rem,4.4vw,4.75rem)] leading-[0.95] tracking-[-0.01em] xl:text-[3.5rem]"
-          >
-            <span className="block text-forest">Meet Pamela</span>
-            <span className="block text-forest">
-              Mariotto
-              <ItalianFlag />
-            </span>
-          </h2>
+          <div className="mt-8 flex items-start justify-between gap-4">
+            <h2
+              id="instructors-title"
+              data-reveal
+              className="font-display text-[clamp(2.5rem,4.4vw,4.75rem)] leading-[0.95] tracking-[-0.01em] xl:text-[3.5rem]"
+            >
+              <span className="block text-forest">
+                Meet Pamela
+                <ItalianFlag />
+              </span>
+              <span className="block text-forest">Mariotto</span>
+            </h2>
+            <a
+              data-reveal
+              href={PAMELA_INSTAGRAM.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
+              className="group/ig shrink-0 rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-forest"
+            >
+              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} size="sm" />
+            </a>
+          </div>
 
           <div className="mt-10 max-w-2xl space-y-3 text-sm leading-relaxed text-muted flex flex-col">
             {bio.map((paragraph) => (
