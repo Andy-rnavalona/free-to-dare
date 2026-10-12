@@ -145,7 +145,7 @@ const days: Day[] = [
     date: "Wednesday, 1 July",
     gallery: [NORTH_COAST_TEA, NORTH_COAST_WATERFALL],
     intro:
-      "Our first full day starts in the studio before discovering the island’s capital together.",
+      "Our first full day starts in the studio before exploring São Miguel’s lush north coast together.",
     activities: [
       {
         kind: "Pole training",
