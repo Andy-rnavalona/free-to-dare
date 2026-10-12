@@ -51,11 +51,11 @@ const DEPOSIT_LINK = "https://buy.stripe.com/8x24gAcQA9ysa7zbYyg362C";
 export const STRIPE_LINKS: Record<StayId, Partial<Record<PaymentPlan, string>>> = {
   shared: {
     instalments: DEPOSIT_LINK,
-    full: "https://buy.stripe.com/7sY00kcQAaCw7Zre6Gg362F",
+    full: "https://buy.stripe.com/dRmeVe5o8aCwfrTd2Cg362G",
   },
   private: {
     instalments: DEPOSIT_LINK,
-    full: "https://buy.stripe.com/3cI7sM9EodOIfrT3s2g362E",
+    full: "https://buy.stripe.com/eVqdRa2bWeSM0wZ2nYg362H",
   },
   none: {
     instalments: DEPOSIT_LINK,
