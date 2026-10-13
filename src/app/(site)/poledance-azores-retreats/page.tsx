@@ -11,6 +11,7 @@ import { PricingSection } from "@/components/azores/pricing-section";
 import { TrainingSpaceSection } from "@/components/azores/training-space-section";
 import { FaqSection } from "@/components/faq-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
+import { AZORES_SHARE } from "@/lib/share-images";
 
 export const metadata: Metadata = {
   title: "Azores Into The Wild — Pole Dance Escape | Free to Dare",
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
     title: "Azores Into The Wild — Pole Dance Escape | Free to Dare",
     description:
       "A 7-day pole dance retreat in São Miguel, Azores (30 June – 6 July 2027): 5 pole classes, volcanic lakes, thermal waters, whale watching and a small community of 16.",
+    images: AZORES_SHARE.images,
   },
+  twitter: AZORES_SHARE.twitter,
 };
 
 export default function Home() {
