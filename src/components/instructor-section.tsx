@@ -48,11 +48,12 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20 lg:px-14 min-[88rem]:px-0">
-        {/* Her vertical video, shown whole: on desktop as tall as the text
-            column, and as wide as that height allows */}
-        <div data-reveal className="lg:h-full">
-          <div className="relative mx-auto aspect-[9/16] max-w-sm lg:h-full lg:max-w-none">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-16 lg:px-14 min-[88rem]:px-0">
+        {/* Her vertical video, shown whole: on desktop it is taken out of the
+            flow so the text column sets the row height, and the video takes
+            that height with its width following the 9/16 ratio */}
+        <div data-reveal className="lg:relative lg:h-full">
+          <div className="relative mx-auto aspect-[9/16] max-w-sm lg:absolute lg:inset-y-0 lg:left-0 lg:mx-0 lg:h-full lg:w-auto lg:max-w-none">
             <CardVideo
               sources={[
                 {
