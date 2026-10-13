@@ -14,6 +14,7 @@ import { StaysSection } from "@/components/stays-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { TrainingSpaceSection } from "@/components/training-space-section";
 import { CheckIcon, SparkleIcon } from "@/components/icons";
+import { LISBON_SHARE } from "@/lib/share-images";
 
 const highlights = [
   "City exploration",
@@ -35,7 +36,9 @@ export const metadata: Metadata = {
     title: "Free to Dare — Lisbon Aerial Urban Escape",
     description:
       "Train every day, explore Lisbon during jacaranda season and share the week with people who love aerial as much as you do. 5 – 11 June 2027.",
+    images: LISBON_SHARE.images,
   },
+  twitter: LISBON_SHARE.twitter,
 };
 
 export default function Home() {

@@ -29,7 +29,7 @@ export function CommunitySection() {
       className="scroll-mt-28 bg-white"
     >
       <div
-        className={`${CONTAINER} grid items-center gap-12 lg:grid-cols-2 lg:gap-16`}
+        className={`${CONTAINER} grid items-center gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-16`}
       >
         <div>
           <p data-reveal className={`${MICRO} flex items-center gap-2.5`}>
@@ -61,15 +61,17 @@ export function CommunitySection() {
           </div>
         </div>
 
-        <div
-          data-reveal
-          className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl bg-ink lg:max-w-lg"
-        >
-          <StayGallery
-            photos={moments}
-            className="aspect-[4/5]"
-            sizes="(min-width: 1024px) 32rem, 28rem"
-          />
+        {/* On desktop the gallery leaves the flow so the text column sets the
+            row height: the frame keeps the column width and is as tall as the
+            text, the photos filling it (object-cover). */}
+        <div data-reveal className="lg:relative lg:h-full">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl bg-ink lg:absolute lg:inset-0 lg:mx-0 lg:aspect-auto lg:max-w-none">
+            <StayGallery
+              photos={moments}
+              className="size-full"
+              sizes="(min-width: 1024px) 32rem, 28rem"
+            />
+          </div>
         </div>
       </div>
     </section>

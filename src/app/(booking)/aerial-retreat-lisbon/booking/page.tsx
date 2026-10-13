@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { DEPOSIT, RETREAT, formatEuro } from "@/booking/booking-config";
 import { BookingPage, BookingPageFromUrl } from "@/booking/booking.page";
-import { withBasePath } from "@/lib/base-path";
+import { LISBON_SHARE } from "@/lib/share-images";
 
 export const metadata: Metadata = {
   title: `Book Your Escape — ${RETREAT.name} | Free to Dare`,
@@ -10,16 +10,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Book Your Escape — ${RETREAT.name}`,
     description: `Choose your room, choose how you pay, and secure your spot in Lisbon with a ${formatEuro(DEPOSIT)} deposit.`,
-    // This openGraph replaces the root one, image included: point back to
-    // app/opengraph-image.jpg (a copy in this route group is exported under
-    // another name than the one in the page)
-    images: {
-      url: withBasePath("/opengraph-image.jpg"),
-      width: 1200,
-      height: 630,
-      alt: "Aerial hoop pose against a black studio background — Free to Dare, Lisbon Aerial Urban Escape",
-    },
+    images: LISBON_SHARE.images,
   },
+  twitter: LISBON_SHARE.twitter,
 };
 
 // Static export: ?stay= / ?plan= are read in the browser; the HTML holds step 01
