@@ -49,12 +49,13 @@ export function InstructorSection() {
       className="bg-white"
     >
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)] lg:gap-10 lg:px-14 min-[88rem]:px-0">
-        {/* Her vertical video, shown whole: on desktop it is taken out of the
-            flow so the text column sets the row height, and the video takes
-            that height with its width following the 9/16 ratio. It starts on
-            the line of her name (below the eyebrow) and hugs the text column */}
-        <div data-reveal className="lg:relative lg:h-full">
-          <div className="relative mx-auto aspect-[9/16] max-w-76 sm:max-w-xs lg:absolute lg:top-14 lg:right-0 lg:mx-0 lg:h-[calc(100%-3.5rem)] lg:w-auto lg:max-w-none">
+        {/* Her vertical video, as wide as the reels below (InstructorReels:
+            20rem, shown at 95% from sm). On mobile it is their size exactly
+            (5/8, cropping a little top and bottom), from sm its own 9/16 ratio.
+            On desktop it starts on the line of her name (below the eyebrow)
+            and hugs the text column */}
+        <div data-reveal>
+          <div className="relative mx-auto aspect-[5/8] w-full sm:aspect-[9/16] max-w-80 sm:max-w-76 lg:mr-0 lg:mt-14">
             <CardVideo
               sources={[
                 {
@@ -68,16 +69,16 @@ export function InstructorSection() {
               ]}
               poster={withBasePath("/videos/lisbon/pamela-aerial-poster.webp")}
               label="Pamela Mariotto introducing the Lisbon aerial retreat, on the hoop and silks"
-              className="size-full rounded-3xl"
+              className="size-full rounded-xl"
             />
             <a
               href={PAMELA_INSTAGRAM.url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Pamela Mariotto on Instagram (opens in a new tab)"
-              className="group/ig absolute right-4 top-4 z-10 rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-white sm:right-6 sm:top-6"
+              className="group/ig absolute right-3 top-3 z-10 rounded-full outline-offset-2 focus-visible:outline-2 focus-visible:outline-white"
             >
-              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} />
+              <InstagramBadge handle={PAMELA_INSTAGRAM.handle} size="sm" />
             </a>
           </div>
         </div>
