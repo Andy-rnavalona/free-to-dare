@@ -48,12 +48,13 @@ export function InstructorSection() {
       aria-labelledby="instructors-title"
       className="bg-white"
     >
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-16 lg:px-14 min-[88rem]:px-0">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-10 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)] lg:gap-10 lg:px-14 min-[88rem]:px-0">
         {/* Her vertical video, shown whole: on desktop it is taken out of the
             flow so the text column sets the row height, and the video takes
-            that height with its width following the 9/16 ratio */}
+            that height with its width following the 9/16 ratio. It starts on
+            the line of her name (below the eyebrow) and hugs the text column */}
         <div data-reveal className="lg:relative lg:h-full">
-          <div className="relative mx-auto aspect-[9/16] max-w-sm lg:absolute lg:inset-y-0 lg:left-0 lg:mx-0 lg:h-full lg:w-auto lg:max-w-none">
+          <div className="relative mx-auto aspect-[9/16] max-w-76 sm:max-w-xs lg:absolute lg:top-14 lg:right-0 lg:mx-0 lg:h-[calc(100%-3.5rem)] lg:w-auto lg:max-w-none">
             <CardVideo
               sources={[
                 {
@@ -90,7 +91,7 @@ export function InstructorSection() {
             Instructors
           </p>
 
-          <div className="mt-8 flex items-start justify-between gap-4">
+          <div className="mt-8 flex items-start gap-4">
             <h2
               id="instructors-title"
               data-reveal
