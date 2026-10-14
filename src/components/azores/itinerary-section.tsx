@@ -499,7 +499,7 @@ export function ItinerarySection() {
         >
           {/* Days. The reveal sits on a wrapper so its transition doesn't
               override the card's hover one */}
-          <div className="order-last min-w-0 space-y-3 lg:order-none">
+          <div className="min-w-0 space-y-3">
             {days.map((day, i) => (
               <div key={day.title} data-reveal>
                 <ItineraryDay
@@ -525,8 +525,8 @@ export function ItinerarySection() {
             </p>
           </div>
 
-          {/* Booking card: first on mobile, follows the scroll on desktop */}
-          <aside data-reveal className="order-first lg:order-none">
+          {/* Booking card: desktop only, follows the scroll */}
+          <aside data-reveal className="hidden lg:block">
             <div className="lg:sticky lg:top-32">
               <BookingCard />
             </div>
