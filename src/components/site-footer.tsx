@@ -26,12 +26,12 @@ const supportLinks = [
 const socialLinks = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/madeiracreativevillage/",
+    href: "https://www.instagram.com/freetodare/",
     Icon: InstagramIcon,
   },
   {
     label: "TikTok",
-    href: "https://www.tiktok.com/@madeira_creative_village",
+    href: "https://www.tiktok.com/@free_todare",
     Icon: TikTokIcon,
   },
 ];
