@@ -13,6 +13,9 @@ export const AZORES_RETREAT = "/poledance-azores-retreats";
 /** Landing page of the Lisbon Aerial Urban Escape */
 export const LISBON_RETREAT = "/aerial-retreat-lisbon";
 
+/** Landing page of the Valencia Aerial Escape */
+export const VALENCIA_RETREAT = "/aerial-retreat-valencia";
+
 /** Its booking flow, its confirmation page and its legal pages */
 export const LISBON_BOOKING = `${LISBON_RETREAT}/booking`;
 export const LISBON_CONFIRMATION = `${LISBON_BOOKING}/confirmation`;

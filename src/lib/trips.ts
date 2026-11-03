@@ -7,7 +7,7 @@
  * of that page.
  */
 
-import { AZORES_RETREAT, LISBON_RETREAT } from "@/lib/routes";
+import { AZORES_RETREAT, LISBON_RETREAT, VALENCIA_RETREAT } from "@/lib/routes";
 
 export type Trip = {
   /** Where the retreat takes place */
@@ -61,7 +61,7 @@ export const TRIPS: Trip[] = [
     country: "Spain",
     discipline: "Aerial",
     name: "Aerial Retreat",
-    soon: true,
+    href: VALENCIA_RETREAT,
     image: "/images/trips/valencia-aerial.jpg",
     alt: "Rooftops of central Valencia",
   },

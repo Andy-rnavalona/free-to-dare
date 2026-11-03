@@ -46,6 +46,29 @@
   --color-lime: #d4ea6a;
 }
 
+/* Valencia Aerial Escape, from its mockup: the colours of the tags of its
+   experience cards. The rest of that page goes through .theme-valencia. */
+@theme {
+  --color-saffron: #f4c72d;
+  --color-olive: #526b42;
+  --color-azulejo: #478ead;
+}
+
+/* The Valencia page is built like the Azores one; only the colours change.
+   Inside this class the tokens those sections — and the shared FAQ and
+   testimonials — are drawn with take the Valencia values: forest becomes the
+   Spanish red, sun the saffron, and the white sections cream. */
+.theme-valencia {
+  --background: #fff9e9;
+  --color-forest: #eb4937;
+  --color-sun: #f4c72d;
+  --color-sand: #eb4937;
+  --color-ink: #191919;
+  --color-muted: #5e5a52;
+  --color-line: #e3dfd6;
+  --color-card: #fbf1da;
+}
+
 /* Design tokens for the booking pages (/booking and its confirmation), copied
    from the payment mockup. Only the names the landing page doesn't use are
    declared here; the surfaces (secondary included) and card, ink, muted and
