@@ -56,7 +56,7 @@ export function FaqSection({
       id="faq"
       aria-labelledby="faq-title"
       data-reveal-group
-      className="scroll-mt-28 bg-white"
+      className="scroll-mt-28 bg-background"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">

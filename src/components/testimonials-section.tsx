@@ -119,7 +119,7 @@ export function TestimonialsSection() {
       id="testimonials"
       aria-labelledby="testimonials-title"
       data-reveal-group
-      className="bg-white"
+      className="bg-background"
     >
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <p

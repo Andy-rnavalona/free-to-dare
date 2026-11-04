@@ -26,6 +26,14 @@ const AZORES: ShareImage = {
   alt: "Twin crater lakes under the clouds in São Miguel — Free to Dare, Azores Into The Wild",
 };
 
+/** Crop of the Vaivé aerial studio (public/images/valencia/fly-studio.webp) */
+const VALENCIA: ShareImage = {
+  url: withBasePath("/images/valencia/share.jpg"),
+  width: 1200,
+  height: 630,
+  alt: "Aerial studio with hoops, trapezes and silks — Free to Dare, Valencia Aerial Escape",
+};
+
 function shareImage(image: ShareImage) {
   return {
     images: image,
@@ -35,3 +43,4 @@ function shareImage(image: ShareImage) {
 
 export const LISBON_SHARE = shareImage(LISBON);
 export const AZORES_SHARE = shareImage(AZORES);
+export const VALENCIA_SHARE = shareImage(VALENCIA);
