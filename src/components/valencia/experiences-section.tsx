@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CardCarousel } from "@/components/card-carousel";
+import { CardVideo } from "@/components/card-video";
 import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 import { VALENCIA } from "@/components/valencia/retreat";
@@ -19,11 +20,13 @@ type Experience = {
   tone: Tone;
   title: string;
   items: string[];
-  /** In public/images/valencia */
-  image: string;
+  /** In public/images/valencia; omitted when the card plays a video */
+  image?: string;
   alt: string;
   /** Stock photo standing in for the real experience: says so on the card */
   illustrative?: boolean;
+  /** Loop with sound playing in place of the still; `image` is ignored */
+  video?: { av1: string; mp4: string; poster: string };
 };
 
 const experiences: Experience[] = [
@@ -46,8 +49,8 @@ const experiences: Experience[] = [
     tone: "saffron",
     title: "Chase the Mediterranean sunset",
     items: ["Mediterranean sunset catamaran experience"],
-    image: "sail.webp",
-    alt: "A catamaran on the Mediterranean at sunset",
+    image: "bateau.webp",
+    alt: "A group of women smiling on a sailboat out at sea",
     illustrative: true,
   },
   {
@@ -55,8 +58,8 @@ const experiences: Experience[] = [
     tone: "olive",
     title: "A taste of Spain",
     items: ["Traditional paella cooking class", "Spanish wine and cheese tasting"],
-    image: "taste.webp",
-    alt: "A Valencian paella",
+    image: "taste-of-spain.webp",
+    alt: "Women cooking a paella together in a cooking class",
     illustrative: true,
   },
   {
@@ -71,24 +74,28 @@ const experiences: Experience[] = [
   {
     tag: "Discover",
     tone: "blue",
-    title: "Fall in love with Valencia",
+    title: "Guided Valencia City tour",
     items: ["Guided Valencia city tour", "Local discoveries and exploration"],
-    image: "discover.webp",
-    alt: "Valencia's City of Arts and Sciences",
+    image: "guided-valencia.webp",
+    alt: "A guided group tour on Plaza de la Virgen in Valencia",
     illustrative: true,
   },
   {
     tag: "Connect",
     tone: "olive",
-    title: "Arrive solo. Leave with friends.",
+    title: "Welcome dinner",
     items: [
       "Social dinners in local restaurants",
       "International aerial community",
       "Shared experiences and new friendships",
     ],
-    image: "connect.webp",
-    alt: "A shared Spanish dinner table",
-    illustrative: true,
+    alt: "The group sharing dinner at long tables under a pergola",
+    // Same evening footage as the Azores and Lisbon retreat pages
+    video: {
+      av1: "/videos/experience-social.av1.mp4",
+      mp4: "/videos/experience-social.mp4",
+      poster: "/videos/experience-social.jpg",
+    },
   },
 ];
 
@@ -149,13 +156,30 @@ export function ExperiencesSection() {
                   className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line/70 bg-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-forest can-hover:grid can-hover:aspect-3/4 can-hover:h-auto can-hover:grid-rows-[minmax(0,1fr)_auto]"
                 >
                   <div className="relative aspect-4/3 overflow-hidden bg-ink can-hover:aspect-auto">
-                    <Image
-                      src={withBasePath(`/images/valencia/${exp.image}`)}
-                      alt={exp.alt}
-                      fill
-                      sizes="(min-width: 1024px) 23rem, (min-width: 640px) 47vw, 82vw"
-                      className={`object-cover ${mediaZoom}`}
-                    />
+                    {exp.video ? (
+                      <div className="absolute inset-0">
+                        <CardVideo
+                          sources={[
+                            {
+                              src: withBasePath(exp.video.av1),
+                              type: 'video/mp4; codecs="av01.0.08M.08"',
+                            },
+                            { src: withBasePath(exp.video.mp4), type: "video/mp4" },
+                          ]}
+                          poster={withBasePath(exp.video.poster)}
+                          label={exp.alt}
+                          className="size-full"
+                        />
+                      </div>
+                    ) : (
+                      <Image
+                        src={withBasePath(`/images/valencia/${exp.image}`)}
+                        alt={exp.alt}
+                        fill
+                        sizes="(min-width: 1024px) 23rem, (min-width: 640px) 47vw, 82vw"
+                        className={`object-cover ${mediaZoom}`}
+                      />
+                    )}
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-black/20 to-transparent"
