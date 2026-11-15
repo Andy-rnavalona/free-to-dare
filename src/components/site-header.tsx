@@ -45,6 +45,8 @@ type Palette = {
   /** Mobile menu panel, and the rules between its rows */
   menu: string;
   divide: string;
+  /** Keyboard focus ring of the links and buttons, instead of the browser's blue */
+  focus: string;
 };
 
 /* Colours of the header. Night over the dark heroes of Azores and Lisbon;
@@ -65,6 +67,7 @@ const PALETTES: Record<"night" | "cream", Palette> = {
     shadow: "shadow-[0_24px_40px_-12px_rgb(17_26_41/0.35)]",
     menu: "border-white/10 bg-night",
     divide: "divide-white/10",
+    focus: "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sun",
   },
   cream: {
     theme: "theme-valencia",
@@ -80,6 +83,7 @@ const PALETTES: Record<"night" | "cream", Palette> = {
     shadow: "shadow-[0_16px_32px_-16px_rgb(17_26_41/0.2)]",
     menu: "border-line bg-background",
     divide: "divide-line",
+    focus: "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest",
   },
 };
 
@@ -93,7 +97,7 @@ function Logo({ href, palette }: { href: string; palette: Palette }) {
     <Link
       href={href}
       aria-label="Free to Dare — home"
-      className="relative inline-block pb-2 font-display text-[1.35rem] uppercase leading-[0.95] tracking-[-0.01em] sm:text-[1.6rem]"
+      className={`relative inline-block pb-2 font-display text-[1.35rem] uppercase leading-[0.95] tracking-[-0.01em] sm:text-[1.6rem] ${palette.focus}`}
     >
       <span className={`block ${palette.logo}`}>Free</span>
       <span
@@ -143,7 +147,7 @@ function NavLink({
       href={href}
       onClick={onClick}
       aria-current={active ? "page" : undefined}
-      className={`group relative font-mono font-bold uppercase tracking-[0.18em] transition-colors ${palette.link} ${
+      className={`group relative font-mono font-bold uppercase tracking-[0.18em] transition-colors ${palette.link} ${palette.focus} ${
         inline ? "flex items-center gap-3 py-1 text-sm" : "py-2 text-[0.72rem]"
       }`}
     >
@@ -186,8 +190,9 @@ function Chevron({
 
 /* The tabs are a light surface under the dark header, so everything inside
    them is drawn on paper rather than on night. */
-const TAB_LINK =
-  "text-ink transition-colors hover:text-forest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
+const PAPER_FOCUS =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
+const TAB_LINK = `text-ink transition-colors hover:text-forest ${PAPER_FOCUS}`;
 
 /* A trip, named the way the tab it appears in names it. One without a page of
    its own is shown but not linked, and says so. */
@@ -416,7 +421,7 @@ function TripTabs({ onPick }: { onPick: () => void }) {
             aria-controls={panelId(t.id)}
             tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
-            className={`-mb-px whitespace-nowrap border-b-2 pb-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.2em] transition-colors ${
+            className={`-mb-px whitespace-nowrap border-b-2 pb-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.2em] transition-colors ${PAPER_FOCUS} ${
               tab === t.id
                 ? "border-sun text-ink"
                 : "border-transparent text-muted hover:text-ink"
@@ -508,7 +513,7 @@ function TripsTrigger({
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`group relative flex items-center gap-1.5 py-2 font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors ${palette.link}`}
+        className={`group relative flex items-center gap-1.5 py-2 font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors ${palette.link} ${palette.focus}`}
       >
         <span
           aria-hidden="true"
@@ -575,7 +580,7 @@ function MobileTrips({
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`flex w-full items-center gap-3 py-1 font-mono text-sm font-bold uppercase tracking-[0.18em] transition-colors ${palette.link}`}
+        className={`flex w-full items-center gap-3 py-1 font-mono text-sm font-bold uppercase tracking-[0.18em] transition-colors ${palette.link} ${palette.focus}`}
       >
         <span
           aria-hidden="true"
@@ -694,7 +699,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
         >
           <Link
             href={to("#join")}
-            className={`rounded-full px-4 py-3 font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] transition hover:brightness-105 hover:-translate-y-px ${palette.cta}`}
+            className={`rounded-full px-4 py-3 font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] transition hover:brightness-105 hover:-translate-y-px ${palette.cta} ${palette.focus}`}
           >
             Join the club
           </Link>
@@ -722,7 +727,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
         <div className="ml-auto flex items-center gap-3 lg:hidden">
           <Link
             href={to("#join")}
-            className={`hidden rounded-full px-4 py-2.5 font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] min-[420px]:inline-block ${palette.cta}`}
+            className={`hidden rounded-full px-4 py-2.5 font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] min-[420px]:inline-block ${palette.cta} ${palette.focus}`}
           >
             Join the club
           </Link>
@@ -732,7 +737,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className={`grid size-11 place-items-center rounded-full border transition ${palette.burger}`}
+            className={`grid size-11 place-items-center rounded-full border transition ${palette.burger} ${palette.focus}`}
           >
             <span className="relative block h-3 w-5">
               <span
@@ -786,7 +791,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
         <Link
           href={to("#join")}
           onClick={close}
-          className={`mt-6 block rounded-full py-4 text-center font-mono text-xs font-bold uppercase tracking-[0.2em] ${palette.cta}`}
+          className={`mt-6 block rounded-full py-4 text-center font-mono text-xs font-bold uppercase tracking-[0.2em] ${palette.cta} ${palette.focus}`}
         >
           Join the club
         </Link>

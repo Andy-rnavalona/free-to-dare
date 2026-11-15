@@ -37,7 +37,7 @@ export function IncludedSection() {
       <div className={CONTAINER}>
         <div className="grid gap-10 rounded-3xl bg-card p-7 sm:p-10 md:grid-cols-2 md:gap-12 lg:p-14">
           <div>
-            <p data-reveal className={`${MICRO} text-[0.65rem] text-forest`}>
+            <p data-reveal className={`${MICRO} text-[0.65rem] text-ink`}>
               Included
             </p>
             <h2

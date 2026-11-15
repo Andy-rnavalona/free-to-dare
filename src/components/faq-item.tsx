@@ -27,7 +27,8 @@ export function FaqItem({
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="min-w-0 flex-1 font-display text-sm uppercase leading-snug tracking-[-0.01em] text-forest sm:text-base">
+        {/* Black on the Valencia page, where forest is its red */}
+        <span className="min-w-0 flex-1 font-display text-sm uppercase leading-snug tracking-[-0.01em] text-forest in-[.theme-valencia]:text-ink sm:text-base">
           {question}
         </span>
         <span

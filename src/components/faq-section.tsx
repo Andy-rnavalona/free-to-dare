@@ -61,11 +61,15 @@ export function FaqSection({
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-10 lg:px-14 min-[88rem]:px-0">
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
           <div className="@container lg:w-80 lg:shrink-0">
+            {/* Black on the Valencia page, where forest and sand are its red */}
             <p
               data-reveal
-              className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-forest"
+              className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.25em] text-forest in-[.theme-valencia]:text-ink"
             >
-              <span aria-hidden="true" className="h-px w-10 bg-sand" />
+              <span
+                aria-hidden="true"
+                className="h-px w-10 bg-sand in-[.theme-valencia]:bg-ink"
+              />
               FAQ
             </p>
 

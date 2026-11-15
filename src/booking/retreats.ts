@@ -15,6 +15,7 @@ import {
 } from "@/booking/booking-config";
 import { STAYS, type StayPackage } from "@/booking/stays";
 import { AZORES } from "@/components/azores/retreat";
+import { VALENCIA, VALENCIA_INCLUDES } from "@/components/valencia/retreat";
 import {
   AZORES_BOOKING,
   AZORES_CONFIRMATION,
@@ -24,6 +25,9 @@ import {
   LISBON_CONFIRMATION,
   LISBON_RETREAT,
   LISBON_TERMS,
+  VALENCIA_BOOKING,
+  VALENCIA_CONFIRMATION,
+  VALENCIA_RETREAT,
 } from "@/lib/routes";
 
 export type BookingRetreat = Pricing & {
@@ -43,6 +47,8 @@ export type BookingRetreat = Pricing & {
   noPhotoTagline?: [string, string];
   /** Shows "Your Lisbon home" under the stays */
   homeSection: boolean;
+  /** Class recolouring its booking pages (booking.css); without it, the mockup's green */
+  theme?: string;
   routes: {
     landing: string;
     booking: string;
@@ -182,7 +188,72 @@ const azores: BookingRetreat = {
   },
 };
 
-export const BOOKING_RETREATS = { lisbon, azores };
+/* ─── Valencia Aerial Escape ─── */
+
+/* As for the Azores: the instalment plan goes through the deposit Payment
+   Link, whatever the stay, and paying in full is asked for by email until it
+   has Payment Links of its own. The rooms have no photos yet. */
+const VALENCIA_DEPOSIT_LINK = "https://buy.stripe.com/5kQ3cw4k4h0U6Vn5Aag362L";
+
+const valenciaStays: StayPackage[] = [
+  {
+    id: "shared",
+    index: "01",
+    label: "Shared stay",
+    title: "Shared room — 2 people",
+    price: VALENCIA.priceShared,
+    description: `Share a room with one other retreat participant at the ${VALENCIA.hotel}, a 4-star hotel in a restored 18th-century palace in the old town.`,
+    accommodationIncluded: true,
+    availability: "Spots available",
+    cta: "Select shared room",
+    includes: VALENCIA_INCLUDES.shared,
+  },
+  {
+    id: "none",
+    index: "02",
+    label: "Retreat only",
+    title: "Without accommodation",
+    price: VALENCIA.priceRetreatOnly,
+    description:
+      "Join the full retreat experience while organising your own stay in Valencia.",
+    accommodationIncluded: false,
+    availability: "Spots available",
+    cta: "Select retreat only",
+    includes: VALENCIA_INCLUDES.none,
+  },
+];
+
+const valencia: BookingRetreat = {
+  deposit: VALENCIA.deposit,
+  fullPaymentDiscount: 0,
+  instalments: {
+    count: 3,
+    dates: ["Date to be confirmed", "Date to be confirmed", "Date to be confirmed"],
+  },
+  name: VALENCIA.name,
+  dates: VALENCIA.dates,
+  datesShort: VALENCIA.dates,
+  destination: "Valencia",
+  stays: valenciaStays,
+  links: Object.fromEntries(
+    valenciaStays.map((stay) => [stay.id, { instalments: VALENCIA_DEPOSIT_LINK }]),
+  ),
+  requestByEmail: ["full"],
+  ownStayNote:
+    "You book and pay for your own place to stay in Valencia. Breakfast and airport transfers are not included either — everything else in the programme is exactly the same.",
+  homeSection: false,
+  theme: "bk-theme-valencia",
+  routes: {
+    landing: VALENCIA_RETREAT,
+    booking: VALENCIA_BOOKING,
+    confirmation: VALENCIA_CONFIRMATION,
+    // The legal pages are the same for every retreat
+    terms: LISBON_TERMS,
+    cancellation: LISBON_CANCELLATION,
+  },
+};
+
+export const BOOKING_RETREATS = { lisbon, azores, valencia };
 
 export type BookingRetreatId = keyof typeof BOOKING_RETREATS;
 
