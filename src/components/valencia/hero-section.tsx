@@ -21,6 +21,10 @@ const facts = [
   { label: "All levels welcome", Icon: Sparkles },
 ];
 
+/** Keyboard focus in the page's red, as in the header, instead of the browser's blue */
+const FOCUS =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
+
 /**
  * Unlike the photo heroes of Azores and Lisbon, Valencia opens on cream, as
  * in its mockup: the title and the facts on the left, the teachers' vertical
@@ -71,7 +75,7 @@ export function HeroSection() {
           <div data-reveal className="mt-10 flex flex-wrap items-center gap-8">
             <a
               href={PRICING_ANCHOR}
-              className="inline-flex items-center gap-3 rounded bg-forest px-5 py-3.5 text-sm font-extrabold uppercase tracking-tight text-white transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-forest/30 lg:gap-4 lg:px-6 lg:py-4 lg:text-base"
+              className={`inline-flex items-center gap-3 rounded bg-forest px-5 py-3.5 text-sm font-extrabold uppercase tracking-tight text-white transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-forest/30 lg:gap-4 lg:px-6 lg:py-4 lg:text-base ${FOCUS}`}
             >
               Reserve your spot
               <ArrowRightIcon className="size-4" />
@@ -82,8 +86,8 @@ export function HeroSection() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              // As tall as "Reserve your spot" beside it
-              className="inline-flex h-12 max-w-full items-center gap-2.5 rounded border border-ink bg-background px-3 transition hover:bg-ink/[0.03] lg:h-14 lg:px-4"
+              // As tall and as rounded as "Reserve your spot" beside it; a soft warm-grey outline
+              className={`inline-flex h-12 max-w-full items-center gap-2.5 rounded border-[1.5px] border-ink/40 bg-background px-3 transition hover:border-ink/60 hover:bg-ink/[0.03] lg:h-14 lg:px-4 ${FOCUS}`}
             >
               <span
                 aria-hidden="true"

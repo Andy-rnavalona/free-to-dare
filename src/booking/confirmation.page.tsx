@@ -99,7 +99,7 @@ export function ConfirmationPage({
   const query = search.toString();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${retreat.theme ?? ""}`}>
       <div className="bg-primary text-primary-foreground">
         <div className="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
           <span className="label-mono inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1.5 text-accent-foreground">

@@ -46,14 +46,6 @@
   --color-lime: #d4ea6a;
 }
 
-/* Valencia Aerial Escape, from its mockup: the colours of the tags of its
-   experience cards. The rest of that page goes through .theme-valencia. */
-@theme {
-  --color-saffron: #f4c72d;
-  --color-olive: #526b42;
-  --color-azulejo: #478ead;
-}
-
 /* The Valencia page is built like the Azores one; only the colours change.
    Inside this class the tokens those sections — and the shared FAQ and
    testimonials — are drawn with take the Valencia values: forest becomes the

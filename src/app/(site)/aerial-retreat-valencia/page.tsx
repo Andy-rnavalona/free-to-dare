@@ -6,6 +6,7 @@ import { VALENCIA_FAQ } from "@/components/valencia/faq";
 import { HeroSection } from "@/components/valencia/hero-section";
 import { IncludedSection } from "@/components/valencia/included-section";
 import { PricingSection } from "@/components/valencia/pricing-section";
+import { StaysSection } from "@/components/valencia/stays-section";
 import { TrainingSpaceSection } from "@/components/valencia/training-space-section";
 import { VALENCIA_SHARE } from "@/lib/share-images";
 
@@ -23,14 +24,16 @@ export const metadata: Metadata = {
 };
 
 /* The same sections as the Azores landing, in the same order, recoloured by
-   .theme-valencia (globals.css). Intro, community, accommodation and
-   itinerary will join them once their Valencia content exists. */
+   .theme-valencia (globals.css), plus the stays section of the Lisbon one.
+   Intro, community and itinerary will join them once their Valencia content
+   exists. */
 export default function Valencia() {
   return (
     <main className="theme-valencia section-stack flex w-full flex-1 flex-col gap-(--section-gap) bg-background pb-(--section-gap) text-ink">
       <HeroSection />
       <ExperiencesSection />
       <TrainingSpaceSection />
+      <StaysSection />
       <TestimonialsSection />
       <IncludedSection />
       <PricingSection />

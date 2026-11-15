@@ -5,19 +5,7 @@ import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 import { VALENCIA } from "@/components/valencia/retreat";
 
-/** Colour of a card's tag, as in the mockup: Spanish red, saffron, olive, blue */
-type Tone = "red" | "saffron" | "olive" | "blue";
-
-const TAG_TONES: Record<Tone, string> = {
-  red: "bg-forest text-white",
-  saffron: "bg-saffron text-ink",
-  olive: "bg-olive text-white",
-  blue: "bg-azulejo text-white",
-};
-
 type Experience = {
-  tag: string;
-  tone: Tone;
   title: string;
   items: string[];
   /** In public/images/valencia; omitted when the card plays a video */
@@ -31,22 +19,17 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
-    tag: "Fly",
-    tone: "red",
     title: "Take your aerial skills higher",
+    // Three lines, like the other cards: on touch screens the details always show
     items: [
-      `${VALENCIA.trainingHours} hours of aerial training per participant`,
-      `Small groups, maximum ${VALENCIA.groupMax} participants`,
-      "Lyra tricks, spinning, dynamics and creative flow",
-      "Doubles lyra, partner acrobatics and contemporary movement",
+      `${VALENCIA.trainingHours} hours of aerial training, max. ${VALENCIA.groupMax} per group`,
+      "Lyra tricks, doubles lyra and partner acrobatics",
       "Professional aerial photoshoot",
     ],
     image: "fly-studio.webp",
     alt: "Vaivé aerial studio with hoops, trapezes and silks",
   },
   {
-    tag: "Sail",
-    tone: "saffron",
     title: "Chase the Mediterranean sunset",
     items: ["Mediterranean sunset catamaran experience"],
     image: "bateau.webp",
@@ -54,8 +37,6 @@ const experiences: Experience[] = [
     illustrative: true,
   },
   {
-    tag: "Taste",
-    tone: "olive",
     title: "A taste of Spain",
     items: ["Traditional paella cooking class", "Spanish wine and cheese tasting"],
     image: "taste-of-spain.webp",
@@ -63,8 +44,6 @@ const experiences: Experience[] = [
     illustrative: true,
   },
   {
-    tag: "Feel the rhythm",
-    tone: "red",
     title: "Spanish nights",
     items: ["Authentic flamenco show", "Sangria evening"],
     image: "rhythm.webp",
@@ -72,8 +51,6 @@ const experiences: Experience[] = [
     illustrative: true,
   },
   {
-    tag: "Discover",
-    tone: "blue",
     title: "Guided Valencia City tour",
     items: ["Guided Valencia city tour", "Local discoveries and exploration"],
     image: "guided-valencia.webp",
@@ -81,8 +58,6 @@ const experiences: Experience[] = [
     illustrative: true,
   },
   {
-    tag: "Connect",
-    tone: "olive",
     title: "Welcome dinner",
     items: [
       "Social dinners in local restaurants",
@@ -119,10 +94,10 @@ export function ExperiencesSection() {
       <div className={CONTAINER}>
         <p
           data-reveal
-          className={`${MICRO} flex items-center gap-3 text-[0.65rem] text-forest`}
+          className={`${MICRO} flex items-center gap-3 text-[0.65rem] text-ink`}
         >
           Valencia
-          <span aria-hidden="true" className="h-px w-8 bg-forest" />
+          <span aria-hidden="true" className="h-px w-8 bg-ink" />
           More than an aerial retreat
         </p>
 
@@ -148,7 +123,9 @@ export function ExperiencesSection() {
             {experiences.map((exp, i) => (
               <li
                 key={exp.title}
-                className="shrink-0 basis-[82%] sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
+                // Touch screens show every card's details: each card keeps its own
+                // height instead of stretching to the tallest one
+                className="shrink-0 self-start can-hover:self-stretch basis-[82%] sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
               >
                 <article
                   tabIndex={0}
@@ -184,12 +161,7 @@ export function ExperiencesSection() {
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-black/20 to-transparent"
                     />
-                    <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between p-5">
-                      <span
-                        className={`rounded-full px-3 py-1.5 font-mono text-[0.6rem] font-bold uppercase tracking-[0.08em] ${TAG_TONES[exp.tone]}`}
-                      >
-                        {exp.tag}
-                      </span>
+                    <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-end p-5">
                       <span className="font-mono text-[0.65rem] font-bold text-white drop-shadow">
                         {pad(i + 1)}
                       </span>
@@ -205,7 +177,7 @@ export function ExperiencesSection() {
 
                   {/* As on the Azores cards, the details expand while the media row shrinks. */}
                   <div className="p-5 sm:p-6">
-                    <h3 className={`${DISPLAY} text-lg text-forest sm:text-xl`}>
+                    <h3 className={`${DISPLAY} text-lg text-ink sm:text-xl`}>
                       {exp.title}
                     </h3>
                     <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] can-hover:grid-rows-[0fr] can-hover:group-hover:grid-rows-[1fr] can-hover:group-focus-within:grid-rows-[1fr] motion-reduce:transition-none">

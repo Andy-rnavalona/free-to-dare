@@ -267,9 +267,10 @@ export function BookingPage({
     ) : null;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${retreat.theme ?? ""}`}>
 
-      <div className=" border-border bg-card">
+      {/* On the page's background, like the steps below it */}
+      <div>
         <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 ">
           <span className="label-mono text-muted-foreground">{retreat.name}</span>
           <h1 className="display-xl mt-3 text-5xl md:text-7xl">Book your escape</h1>

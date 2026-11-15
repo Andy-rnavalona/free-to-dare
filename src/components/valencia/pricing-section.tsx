@@ -1,5 +1,6 @@
 import { House, Wallet } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { formatEuro } from "@/booking/booking-config";
 import {
@@ -8,9 +9,16 @@ import {
   DISPLAY,
   MICRO,
 } from "@/components/azores/ui";
-import { VALENCIA, whatsappLink } from "@/components/valencia/retreat";
+import {
+  VALENCIA,
+  VALENCIA_INCLUDES,
+  type ValenciaStayId,
+} from "@/components/valencia/retreat";
+import { VALENCIA_BOOKING } from "@/lib/routes";
 
 type Plan = {
+  /** The stay the booking page opens on */
+  stay: ValenciaStayId;
   label: string;
   price: number;
   title: string;
@@ -21,24 +29,14 @@ type Plan = {
   cta: string;
 };
 
-const EXPERIENCES =
-  "Sunset catamaran, paella class, wine & cheese tasting, flamenco show, sangria evening and city tour";
-
 const plans: Plan[] = [
   {
+    stay: "shared",
     label: "Full Package",
     price: VALENCIA.priceShared,
     title: "Shared hotel room",
     subtitle: "Per person, in a 4-star hotel",
-    includes: [
-      `${VALENCIA.nights} nights in a 4-star hotel (shared room)`,
-      "Daily breakfast",
-      `${VALENCIA.trainingHours} hours of aerial training`,
-      "Professional aerial photoshoot",
-      EXPERIENCES,
-      "Airport transfers & transportation for scheduled activities",
-      "On-site organisation and support",
-    ],
+    includes: VALENCIA_INCLUDES.shared,
     callout: {
       Icon: Wallet,
       title: "Flexible payment plans",
@@ -47,17 +45,12 @@ const plans: Plan[] = [
     cta: "Reserve your spot",
   },
   {
+    stay: "none",
     label: "Retreat Only",
     price: VALENCIA.priceRetreatOnly,
     title: "Retreat without accommodation",
     subtitle: "Accommodation not included",
-    includes: [
-      `${VALENCIA.trainingHours} hours of aerial training`,
-      "Professional aerial photoshoot",
-      EXPERIENCES,
-      "Transportation for scheduled activities",
-      "On-site organisation and support",
-    ],
+    includes: VALENCIA_INCLUDES.none,
     callout: {
       Icon: House,
       title: "Accommodation not included",
@@ -90,18 +83,13 @@ export function PricingSection() {
             <PlanCard key={plan.label} plan={plan} number={i + 1} />
           ))}
         </div>
-
-        <p data-reveal className="mt-6 text-sm text-muted">
-          Online booking opens soon — until then, the organiser reserves your
-          spot over WhatsApp.
-        </p>
       </div>
     </section>
   );
 }
 
 function PlanCard({ plan, number }: { plan: Plan; number: number }) {
-  const { label, price, title, subtitle, includes, callout, cta } = plan;
+  const { stay, label, price, title, subtitle, includes, callout, cta } = plan;
 
   return (
     <article
@@ -157,17 +145,11 @@ function PlanCard({ plan, number }: { plan: Plan; number: number }) {
         {formatEuro(VALENCIA.deposit)} deposit to reserve
       </p>
       <div className="p-7">
-        <a
-          href={whatsappLink(
-            `Hi! I'd like to reserve a spot on the ${VALENCIA.name} (${label}, ${formatEuro(price)}).`,
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={BUTTON_DARK}
-        >
+        {/* Opens the booking page with this stay already chosen */}
+        <Link href={`${VALENCIA_BOOKING}?stay=${stay}`} className={BUTTON_DARK}>
           {cta}
           <ArrowRightIcon className="size-3.5" />
-        </a>
+        </Link>
       </div>
     </article>
   );

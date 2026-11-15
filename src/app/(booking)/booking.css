@@ -44,6 +44,32 @@ html:has(.ftd-booking-root) {
   font-family: var(--font-bk-sans), system-ui, sans-serif;
 }
 
+/* Valencia's booking pages, in the colours of its landing (.theme-valencia in
+   globals.css): the Spanish red for the mockup's green, saffron for its
+   yellow, white cards on cream. Set by `theme` in src/booking/retreats.ts. */
+.ftd-booking-root .bk-theme-valencia {
+  --background: #fff9e9;
+  --foreground: #191919;
+  --color-card: #fff;
+  --color-secondary: #fff9e9;
+  --color-ink: #191919;
+  --color-primary: #eb4937;
+  --color-primary-foreground: #fff;
+  --color-accent: #f4c72d;
+  --color-accent-foreground: #191919;
+  --color-muted-foreground: #5e5a52;
+  --color-border: #e3dfd6;
+  --color-ring: #eb4937;
+
+  /* The text colour was resolved on the root, in the mockup's green */
+  color: var(--foreground);
+}
+
+/* Also around the page: above the header, and when the page bounces */
+html:has(.bk-theme-valencia) {
+  background-color: #fff9e9;
+}
+
 @layer base {
   .ftd-booking-root *,
   .ftd-booking-root ::before,

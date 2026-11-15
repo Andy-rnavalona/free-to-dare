@@ -1,8 +1,8 @@
 /*
  * VALENCIA AERIAL ESCAPE — the numbers and dates of the retreat shown on its
- * landing, in one place, as given by its mockup. There is no booking flow yet:
- * the hero's button scrolls to the pricing, and the plans open a WhatsApp chat
- * with the organiser.
+ * landing and its booking pages, in one place, as given by its mockup. The
+ * hero's button scrolls to the pricing, whose plans open the booking page
+ * (src/booking/retreats.ts).
  */
 
 export const VALENCIA = {
@@ -20,7 +20,35 @@ export const VALENCIA = {
   priceShared: 2650,
   /** Retreat without accommodation, per person */
   priceRetreatOnly: 1950,
+  /** Where the group stays */
+  hotel: "SH Inglés Boutique Hotel",
 } as const;
+
+const EXPERIENCES =
+  "Sunset catamaran, paella class, wine & cheese tasting, flamenco show, sangria evening and city tour";
+
+/** What each way to stay includes, on the pricing plans and the booking page.
+    The keys are the `?stay=` values of the booking page. */
+export const VALENCIA_INCLUDES = {
+  shared: [
+    `${VALENCIA.nights} nights in a 4-star hotel (shared room)`,
+    "Daily breakfast",
+    `${VALENCIA.trainingHours} hours of aerial training`,
+    "Professional aerial photoshoot",
+    EXPERIENCES,
+    "Airport transfers & transportation for scheduled activities",
+    "On-site organisation and support",
+  ],
+  none: [
+    `${VALENCIA.trainingHours} hours of aerial training`,
+    "Professional aerial photoshoot",
+    EXPERIENCES,
+    "Transportation for scheduled activities",
+    "On-site organisation and support",
+  ],
+};
+
+export type ValenciaStayId = keyof typeof VALENCIA_INCLUDES;
 
 /** Where the hero's button leads */
 export const PRICING_ANCHOR = "#pricing";
