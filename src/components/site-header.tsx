@@ -87,6 +87,7 @@ const PALETTES: Record<"night" | "cream", Palette> = {
   },
 };
 
+/** Section links beside Trips; the Valencia header has none */
 const navLinks = [
   { label: "Stays", href: "#stays" },
   { label: "Networking", href: "#networking" },
@@ -618,6 +619,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
   const onLanding = overHero;
   const palette =
     PALETTES[landing === VALENCIA_RETREAT ? "cream" : "night"];
+  const sectionLinks = landing === VALENCIA_RETREAT ? [] : navLinks;
   const to = (href: string) =>
     href.startsWith("#") && !onLanding ? `${landing}${href}` : href;
   const [open, setOpen] = useState(false);
@@ -712,7 +714,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
               hover={tripsHover}
               palette={palette}
             />
-            {navLinks.map((link) => (
+            {sectionLinks.map((link) => (
               <li key={link.href}>
                 <NavLink {...link} href={to(link.href)} palette={palette} />
               </li>
@@ -776,7 +778,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
           <li className="py-3">
             <MobileTrips onPick={close} palette={palette} />
           </li>
-          {[...navLinks, { label: "Contact", href: "#contact" }].map((link) => (
+          {[...sectionLinks, { label: "Contact", href: "#contact" }].map((link) => (
             <li key={link.href} className="py-3">
               <NavLink
                 {...link}
