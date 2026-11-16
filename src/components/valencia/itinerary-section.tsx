@@ -95,8 +95,11 @@ const days: Day[] = [
     date: "Saturday, 19 June",
     media: [
       {
-        src: withBasePath(`${IMG}/studio-hall.webp`),
-        alt: "Vaivé's aerial hall, rigged with hoops, trapezes and silks",
+        av1: withBasePath("/videos/valencia/day2-lyra.av1.mp4"),
+        mp4: withBasePath("/videos/valencia/day2-lyra.mp4"),
+        poster: withBasePath("/videos/valencia/day2-lyra-poster.webp"),
+        label: "An aerialist in pink flowing through tricks and transitions on the lyra",
+        hasAudio: false,
       },
       {
         src: withBasePath(`${IMG}/taste-of-spain.webp`),
@@ -194,8 +197,11 @@ const days: Day[] = [
         illustrative: true,
       },
       {
-        src: withBasePath(`${IMG}/hotel/04.webp`),
-        alt: "A street of Valencia's old town lined with café terraces",
+        av1: withBasePath("/videos/valencia/day4-stretch.av1.mp4"),
+        mp4: withBasePath("/videos/valencia/day4-stretch.mp4"),
+        poster: withBasePath("/videos/valencia/day4-stretch-poster.webp"),
+        label: "A woman stretching on a mat in a park",
+        hasAudio: false,
       },
     ],
     activities: [
@@ -232,6 +238,14 @@ const DEPOSIT_BADGE =
 const BUTTON =
   "items-center justify-center gap-3 rounded-full bg-forest font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
+function IllustrativeLabel() {
+  return (
+    <p className="pointer-events-none absolute bottom-2 right-2 z-10 rounded-full bg-black/70 px-2.5 py-1 text-[0.65rem] leading-snug text-white backdrop-blur-sm sm:bottom-3 sm:right-3 sm:px-3 sm:py-1.5 sm:text-xs">
+      Illustrative photo
+    </p>
+  );
+}
+
 function DayPanel({ day }: { day: Day }) {
   const frame = "relative h-40 w-full overflow-hidden rounded-2xl sm:h-[280px]";
 
@@ -240,17 +254,18 @@ function DayPanel({ day }: { day: Day }) {
       <div className="mb-4 grid grid-cols-2 gap-3">
         {day.media.map((item) =>
           "mp4" in item ? (
-            <CardVideo
-              key={item.mp4}
-              sources={[
-                { src: item.av1, type: 'video/mp4; codecs="av01.0.08M.08"' },
-                { src: item.mp4, type: "video/mp4" },
-              ]}
-              poster={item.poster}
-              label={item.label}
-              hasAudio={item.hasAudio}
-              className={frame}
-            />
+            <div key={item.mp4} className={frame}>
+              <CardVideo
+                sources={[
+                  { src: item.av1, type: 'video/mp4; codecs="av01.0.08M.08"' },
+                  { src: item.mp4, type: "video/mp4" },
+                ]}
+                poster={item.poster}
+                label={item.label}
+                hasAudio={item.hasAudio}
+                className="size-full"
+              />
+            </div>
           ) : (
             <div key={item.src} className={`${frame} bg-line`}>
               <Image
@@ -260,11 +275,7 @@ function DayPanel({ day }: { day: Day }) {
                 sizes="(min-width: 1280px) 25rem, (min-width: 1024px) 30vw, 45vw"
                 className="object-cover"
               />
-              {item.illustrative && (
-                <p className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2.5 py-1 text-[0.65rem] leading-snug text-white backdrop-blur-sm sm:bottom-3 sm:right-3 sm:px-3 sm:py-1.5 sm:text-xs">
-                  Illustrative photo
-                </p>
-              )}
+              {item.illustrative && <IllustrativeLabel />}
             </div>
           ),
         )}
