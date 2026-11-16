@@ -16,11 +16,16 @@ import { CardVideo } from "@/components/card-video";
 import { ItineraryDay } from "@/components/itinerary-day";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 import { VALENCIA } from "@/components/valencia/retreat";
+import {
+  PaymentReassurance,
+  StayOptions,
+} from "@/components/valencia/stays-section";
 import { withBasePath } from "@/lib/base-path";
 import { VALENCIA_BOOKING } from "@/lib/routes";
 
 /* "The week", built like the Lisbon itinerary: the days on the left, a
-   booking card following the scroll on the right, a booking bar on mobile.
+   booking card following the scroll on the right; on mobile, the ways to stay
+   and their prices after the days.
    The photos are the ones the page already has, until the week's own. */
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
@@ -37,8 +42,6 @@ type Activity = {
 type Photo = {
   src: string;
   alt: string;
-  /** Stock photo standing in for the real experience: says so on the photo */
-  illustrative?: boolean;
 };
 
 type Video = {
@@ -70,7 +73,6 @@ const days: Day[] = [
       {
         src: withBasePath(`${IMG}/itinerary/day1-tapas-bar.webp`),
         alt: "A Spanish tapas bar with tiled counter, wine bottles and chalkboard menus",
-        illustrative: true,
       },
       {
         av1: withBasePath("/videos/valencia/old-town.av1.mp4"),
@@ -104,7 +106,6 @@ const days: Day[] = [
       {
         src: withBasePath(`${IMG}/taste-of-spain.webp`),
         alt: "Women cooking a paella together in a cooking class",
-        illustrative: true,
       },
     ],
     activities: [
@@ -149,7 +150,6 @@ const days: Day[] = [
       {
         src: withBasePath(`${IMG}/bateau.webp`),
         alt: "A group of women smiling on a sailboat out at sea",
-        illustrative: true,
       },
     ],
     activities: [
@@ -194,7 +194,6 @@ const days: Day[] = [
       {
         src: withBasePath(`${IMG}/guided-valencia.webp`),
         alt: "A guided group tour on Plaza de la Virgen in Valencia",
-        illustrative: true,
       },
       {
         av1: withBasePath("/videos/valencia/day4-stretch.av1.mp4"),
@@ -238,14 +237,6 @@ const DEPOSIT_BADGE =
 const BUTTON =
   "items-center justify-center gap-3 rounded-full bg-forest font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white transition hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
-function IllustrativeLabel() {
-  return (
-    <p className="pointer-events-none absolute bottom-2 right-2 z-10 rounded-full bg-black/70 px-2.5 py-1 text-[0.65rem] leading-snug text-white backdrop-blur-sm sm:bottom-3 sm:right-3 sm:px-3 sm:py-1.5 sm:text-xs">
-      Illustrative photo
-    </p>
-  );
-}
-
 function DayPanel({ day }: { day: Day }) {
   const frame = "relative h-40 w-full overflow-hidden rounded-2xl sm:h-[280px]";
 
@@ -275,7 +266,6 @@ function DayPanel({ day }: { day: Day }) {
                 sizes="(min-width: 1280px) 25rem, (min-width: 1024px) 30vw, 45vw"
                 className="object-cover"
               />
-              {item.illustrative && <IllustrativeLabel />}
             </div>
           ),
         )}
@@ -385,6 +375,12 @@ export function ItinerarySection() {
               requirements, and partners for each experience are confirmed
               closer to the retreat.
             </p>
+
+            {/* Mobile: the ways to stay and their prices, after the programme */}
+            <div className="mt-10 lg:hidden">
+              <StayOptions />
+              <PaymentReassurance className="mt-6" />
+            </div>
           </div>
 
           {/* Booking card, follows the scroll on desktop */}
@@ -439,25 +435,6 @@ export function ItinerarySection() {
               </p>
             </div>
           </aside>
-        </div>
-      </div>
-
-      {/* Mobile booking bar: sticky rather than fixed, so it only shows while the itinerary is on screen */}
-      <div className="sticky bottom-0 z-40 border-t border-line/60 bg-background px-4 py-3 lg:hidden">
-        <div className="mx-auto flex max-w-xl items-center justify-between gap-4">
-          <div className="min-w-0">
-            <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
-              From
-            </p>
-            <p className="font-display text-2xl leading-none text-ink">
-              {formatEuro(VALENCIA.priceShared)}
-              <span className="ml-1.5 font-sans text-sm font-medium text-muted">/ person</span>
-            </p>
-          </div>
-          <Link href={VALENCIA_BOOKING} className={`inline-flex shrink-0 px-5 py-2.5 ${BUTTON}`}>
-            Book your spot
-            <ArrowRightIcon className="size-3.5" />
-          </Link>
         </div>
       </div>
     </section>

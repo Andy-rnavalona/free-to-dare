@@ -129,6 +129,89 @@ function Photo({
   );
 }
 
+/**
+ * The ways to stay and their prices. Beside the hotel photos on desktop; on
+ * mobile they come after the week's programme instead (itinerary-section.tsx).
+ */
+export function StayOptions({ className = "" }: { className?: string }) {
+  return (
+    <ul className={`flex flex-col gap-4 ${className}`}>
+      {options.map((option, i) => (
+        <li
+          key={option.title}
+          data-reveal
+          className="rounded-2xl bg-white p-6 shadow-sm"
+        >
+          <div className="flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted">
+            <span>{option.kicker}</span>
+            <span>{pad(i + 1)}</span>
+          </div>
+
+          {/* Title, and the price behind a rule as in the mockup */}
+          <div className="mt-4 flex items-start justify-between gap-5">
+            <h3 className="font-display text-xl uppercase leading-tight tracking-[-0.01em] text-ink sm:text-2xl">
+              {option.title}
+            </h3>
+            <p className="shrink-0 border-l border-line pl-5 text-ink">
+              {option.from && (
+                <span className="block text-sm text-muted">From</span>
+              )}
+              <span className="block font-display text-2xl leading-none sm:text-3xl">
+                {formatEuro(option.price)}
+              </span>
+              <span className="mt-1 block text-sm text-muted">/ person</span>
+            </p>
+          </div>
+          <p className="mt-3 text-sm text-muted">{option.description}</p>
+
+          {/* What the price buys */}
+          <p className="mt-4 flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+            <span aria-hidden="true" className="h-px w-5 shrink-0 bg-sun" />
+            {option.ticket}
+          </p>
+          <p className="mt-1.5 text-sm text-muted">
+            {option.includes.join(" · ")}
+          </p>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
+            <span className={DEPOSIT_BADGE}>
+              {formatEuro(VALENCIA.deposit)} deposit to reserve
+            </span>
+            {/* Opens the booking page with this stay already chosen */}
+            <Link
+              href={`${VALENCIA_BOOKING}?stay=${option.stay}`}
+              className={BUTTON_DARK}
+            >
+              Reserve your spot
+              <ArrowRightIcon className="size-3.5" />
+            </Link>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** What paying the deposit means, under the ways to stay */
+export function PaymentReassurance({ className = "" }: { className?: string }) {
+  return (
+    <ul
+      data-reveal
+      className={`flex flex-col gap-4 rounded-2xl bg-card px-6 py-6 sm:flex-row sm:flex-wrap sm:justify-around ${className}`}
+    >
+      {reassurances.map((item) => (
+        <li
+          key={item}
+          className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink"
+        >
+          <CheckIcon className="size-4 shrink-0" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function StaysSection() {
   const [main, ...rest] = hotelPhotos;
   const side = rest.slice(0, 2);
@@ -144,8 +227,8 @@ export function StaysSection() {
       <div className={CONTAINER}>
         {/* Desktop: the section heading and the hotel's side by side, then the
             ways to stay and the hotel photos starting and ending together, the
-            address under the photos. Mobile, in reading order: heading, ways
-            to stay, then the hotel. */}
+            address under the photos. Mobile: heading and the hotel only; the
+            ways to stay and their prices follow the week's programme. */}
         <div className="grid lg:grid-cols-2 lg:gap-x-12">
           {/* Heading */}
           <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
@@ -171,66 +254,10 @@ export function StaysSection() {
             </p>
           </div>
 
-          {/* Ways to stay */}
-          <ul className="mt-12 flex flex-col gap-4 lg:col-start-1 lg:row-start-2 lg:mt-14">
-            {options.map((option, i) => (
-              <li
-                key={option.title}
-                data-reveal
-                className="rounded-2xl bg-white p-6 shadow-sm"
-              >
-                <div className="flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-[0.25em] text-muted">
-                  <span>{option.kicker}</span>
-                  <span>{pad(i + 1)}</span>
-                </div>
-
-                {/* Title, and the price behind a rule as in the mockup */}
-                <div className="mt-4 flex items-start justify-between gap-5">
-                  <h3 className="font-display text-xl uppercase leading-tight tracking-[-0.01em] text-ink sm:text-2xl">
-                    {option.title}
-                  </h3>
-                  <p className="shrink-0 border-l border-line pl-5 text-ink">
-                    {option.from && (
-                      <span className="block text-sm text-muted">From</span>
-                    )}
-                    <span className="block font-display text-2xl leading-none sm:text-3xl">
-                      {formatEuro(option.price)}
-                    </span>
-                    <span className="mt-1 block text-sm text-muted">/ person</span>
-                  </p>
-                </div>
-                <p className="mt-3 text-sm text-muted">{option.description}</p>
-
-                {/* What the price buys */}
-                <p className="mt-4 flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-                  <span aria-hidden="true" className="h-px w-5 shrink-0 bg-sun" />
-                  {option.ticket}
-                </p>
-                <p className="mt-1.5 text-sm text-muted">
-                  {option.includes.join(" · ")}
-                </p>
-
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-                  <span className={DEPOSIT_BADGE}>
-                    {formatEuro(VALENCIA.deposit)} deposit to reserve
-                  </span>
-                  {/* Opens the booking page with this stay already chosen */}
-                  <Link
-                    href={`${VALENCIA_BOOKING}?stay=${option.stay}`}
-                    className={BUTTON_DARK}
-                  >
-                    Reserve your spot
-                    <ArrowRightIcon className="size-3.5" />
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
-
           {/* The hotel, next to the section heading on desktop */}
           <div
             data-reveal
-            className="mt-10 lg:col-start-2 lg:row-start-1 lg:mt-0 lg:self-end"
+            className="mt-12 lg:col-start-2 lg:row-start-1 lg:mt-0 lg:self-end"
           >
             <p className={`${MICRO} flex items-center gap-3 text-[0.65rem] text-ink`}>
               <BedDouble aria-hidden="true" className="size-5" />
@@ -316,23 +343,12 @@ export function StaysSection() {
               </a>
             )}
           </div>
+
+          <StayOptions className="max-lg:hidden lg:col-start-1 lg:row-start-2 lg:mt-14" />
         </div>
 
         {/* Payment reassurance */}
-        <ul
-          data-reveal
-          className="mt-12 flex flex-col gap-4 rounded-2xl bg-card px-6 py-6 sm:flex-row sm:flex-wrap sm:justify-around lg:mt-10"
-        >
-          {reassurances.map((item) => (
-            <li
-              key={item}
-              className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink"
-            >
-              <CheckIcon className="size-4 shrink-0" />
-              {item}
-            </li>
-          ))}
-        </ul>
+        <PaymentReassurance className="mt-10 max-lg:hidden" />
       </div>
     </section>
   );

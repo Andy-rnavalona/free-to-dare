@@ -11,8 +11,6 @@ type Experience = {
   /** In public/images/valencia; omitted when the card plays a video */
   image?: string;
   alt: string;
-  /** Stock photo standing in for the real experience: says so on the card */
-  illustrative?: boolean;
   /** Loop with sound playing in place of the still; `image` is ignored */
   video?: { av1: string; mp4: string; poster: string };
 };
@@ -20,11 +18,9 @@ type Experience = {
 const experiences: Experience[] = [
   {
     title: "Take your aerial skills higher",
-    // Three lines, like the other cards: on touch screens the details always show
+    // Short like the other cards: on touch screens the details always show
     items: [
       `${VALENCIA.trainingHours} hours of aerial training, max. ${VALENCIA.groupMax} per group`,
-      "Lyra tricks, doubles lyra and partner acrobatics",
-      "Professional aerial photoshoot",
     ],
     image: "fly-studio.webp",
     alt: "Vaivé aerial studio with hoops, trapezes and silks",
@@ -34,28 +30,24 @@ const experiences: Experience[] = [
     items: ["Mediterranean sunset catamaran experience"],
     image: "bateau.webp",
     alt: "A group of women smiling on a sailboat out at sea",
-    illustrative: true,
   },
   {
     title: "A taste of Spain",
     items: ["Traditional paella cooking class", "Spanish wine and cheese tasting"],
     image: "taste-of-spain.webp",
     alt: "Women cooking a paella together in a cooking class",
-    illustrative: true,
   },
   {
     title: "Spanish nights",
     items: ["Authentic flamenco show", "Sangria evening"],
     image: "rhythm.webp",
     alt: "A flamenco dress and dancing shoes",
-    illustrative: true,
   },
   {
     title: "Guided Valencia City tour",
     items: ["Guided Valencia city tour", "Local discoveries and exploration"],
     image: "guided-valencia.webp",
     alt: "A guided group tour on Plaza de la Virgen in Valencia",
-    illustrative: true,
   },
   {
     title: "Welcome dinner",
@@ -123,9 +115,7 @@ export function ExperiencesSection() {
             {experiences.map((exp, i) => (
               <li
                 key={exp.title}
-                // Touch screens show every card's details: each card keeps its own
-                // height instead of stretching to the tallest one
-                className="shrink-0 self-start can-hover:self-stretch basis-[82%] sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
+                className="shrink-0 basis-[82%] sm:basis-[calc((100%-1rem)/2.15)] lg:basis-[calc((100%-2rem)/3.2)]"
               >
                 <article
                   tabIndex={0}
@@ -166,13 +156,6 @@ export function ExperiencesSection() {
                         {pad(i + 1)}
                       </span>
                     </div>
-                    {exp.illustrative && (
-                      <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 text-right">
-                        <p className="inline-block rounded-full bg-black/70 px-3 py-1.5 text-xs leading-snug text-white backdrop-blur-sm">
-                          Illustrative photo
-                        </p>
-                      </div>
-                    )}
                   </div>
 
                   {/* As on the Azores cards, the details expand while the media row shrinks. */}
