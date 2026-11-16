@@ -1,7 +1,7 @@
 /*
  * VALENCIA AERIAL ESCAPE — the numbers and dates of the retreat shown on its
  * landing and its booking pages, in one place, as given by its mockup. The
- * hero's button scrolls to the pricing, whose plans open the booking page
+ * hero's button scrolls to the stays, whose cards open the booking page
  * (src/booking/retreats.ts).
  */
 
@@ -27,8 +27,8 @@ export const VALENCIA = {
 const EXPERIENCES =
   "Sunset catamaran, paella class, wine & cheese tasting, flamenco show, sangria evening and city tour";
 
-/** What each way to stay includes, on the pricing plans and the booking page.
-    The keys are the `?stay=` values of the booking page. */
+/** What each way to stay includes, on the booking page.
+    The keys are its `?stay=` values. */
 export const VALENCIA_INCLUDES = {
   shared: [
     `${VALENCIA.nights} nights in a 4-star hotel (shared room)`,
@@ -50,8 +50,8 @@ export const VALENCIA_INCLUDES = {
 
 export type ValenciaStayId = keyof typeof VALENCIA_INCLUDES;
 
-/** Where the hero's button leads */
-export const PRICING_ANCHOR = "#pricing";
+/** Where the hero's button leads: the ways to stay and their prices */
+export const STAYS_ANCHOR = "#stays";
 
 /** The organiser's WhatsApp, as given in the FAQ of the other retreats */
 const WHATSAPP_NUMBER = "351934921930";

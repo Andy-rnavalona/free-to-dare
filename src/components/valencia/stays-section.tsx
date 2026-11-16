@@ -6,7 +6,6 @@ import Link from "next/link";
 import { formatEuro } from "@/booking/booking-config";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import {
-  BADGE_SUN,
   BUTTON_DARK,
   CONTAINER,
   DISPLAY,
@@ -108,6 +107,10 @@ const reassurances = [
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
+/** The deposit badge, in a lighter saffron than the Azores one, with black text */
+const DEPOSIT_BADGE =
+  "bg-sun/50 px-2.5 py-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-ink";
+
 function Photo({
   src,
   alt,
@@ -183,10 +186,10 @@ export function StaysSection() {
 
                 {/* Title, and the price behind a rule as in the mockup */}
                 <div className="mt-4 flex items-start justify-between gap-5">
-                  <h3 className="font-display text-xl uppercase leading-tight tracking-[-0.01em] text-forest sm:text-2xl">
+                  <h3 className="font-display text-xl uppercase leading-tight tracking-[-0.01em] text-ink sm:text-2xl">
                     {option.title}
                   </h3>
-                  <p className="shrink-0 border-l border-line pl-5 text-forest">
+                  <p className="shrink-0 border-l border-line pl-5 text-ink">
                     {option.from && (
                       <span className="block text-sm text-muted">From</span>
                     )}
@@ -208,7 +211,7 @@ export function StaysSection() {
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-                  <span className={BADGE_SUN}>
+                  <span className={DEPOSIT_BADGE}>
                     {formatEuro(VALENCIA.deposit)} deposit to reserve
                   </span>
                   {/* Opens the booking page with this stay already chosen */}
@@ -323,7 +326,7 @@ export function StaysSection() {
           {reassurances.map((item) => (
             <li
               key={item}
-              className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest"
+              className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink"
             >
               <CheckIcon className="size-4 shrink-0" />
               {item}

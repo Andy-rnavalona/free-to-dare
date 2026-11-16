@@ -4,7 +4,7 @@ import { formatEuro } from "@/booking/booking-config";
 import { withBasePath } from "@/lib/base-path";
 import { CONTAINER, DISPLAY, MICRO } from "@/components/azores/ui";
 import {
-  PRICING_ANCHOR,
+  STAYS_ANCHOR,
   VALENCIA,
   whatsappLink,
 } from "@/components/valencia/retreat";
@@ -74,7 +74,7 @@ export function HeroSection() {
 
           <div data-reveal className="mt-10 flex flex-wrap items-center gap-8">
             <a
-              href={PRICING_ANCHOR}
+              href={STAYS_ANCHOR}
               className={`inline-flex items-center gap-3 rounded bg-forest px-5 py-3.5 text-sm font-extrabold uppercase tracking-tight text-white transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-forest/30 lg:gap-4 lg:px-6 lg:py-4 lg:text-base ${FOCUS}`}
             >
               Reserve your spot

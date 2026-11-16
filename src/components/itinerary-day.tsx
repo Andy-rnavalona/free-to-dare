@@ -36,11 +36,12 @@ export function ItineraryDay({
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:gap-5 sm:px-7 sm:py-5"
       >
-        <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest">
+        {/* On the Valencia page: light saffron and black, like its other badges and titles */}
+        <span className="shrink-0 bg-sun px-2.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-forest in-[.theme-valencia]:bg-sun/50 in-[.theme-valencia]:text-ink">
           Day {day}
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-display text-xl uppercase leading-tight tracking-[-0.01em] text-forest sm:text-2xl">
+          <span className="block font-display text-xl uppercase leading-tight tracking-[-0.01em] text-forest in-[.theme-valencia]:text-ink sm:text-2xl">
             {title}
           </span>
           <span className="mt-1 block text-sm text-muted">{date}</span>
