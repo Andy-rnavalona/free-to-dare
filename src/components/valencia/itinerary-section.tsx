@@ -237,8 +237,8 @@ const days: Day[] = [
       "After several days of training and adventures, it’s time to slow down and recharge! Today is all about giving your body a well-deserved break, enjoying Valencia at your own pace, and ending the day with an unforgettable evening of Spanish culture and flamenco.",
     media: [
       {
-        src: withBasePath(`${IMG}/hotel/02.webp`),
-        alt: "View from a hotel balcony onto the Palace of the Marqués de Dos Aguas",
+        src: withBasePath(`${IMG}/itinerary/day5-city-of-arts.webp`),
+        alt: "Aerial view of the Palau de les Arts in Valencia's City of Arts and Sciences",
       },
       {
         src: withBasePath(`${IMG}/rhythm.webp`),
