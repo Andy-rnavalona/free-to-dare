@@ -5,6 +5,7 @@ import { formatEuro } from "@/booking/booking-config";
 import {
   ArrowRightIcon,
   BedDoubleIcon,
+  CameraIcon,
   FootprintsIcon,
   MoonIcon,
   SailboatIcon,
@@ -305,6 +306,47 @@ const days: Day[] = [
         title: "Guided Valencia Tapas Crawl",
         description:
           "Tonight, we’re heading out to discover Valencia through its food! Together with our local guide, we’ll visit several traditional tapas bars, sampling a variety of delicious Spanish dishes along the way. From local specialties to hidden culinary gems, it’s a chance to experience the city’s food culture, discover new flavors, and enjoy a fun evening together.",
+        icon: WineIcon,
+      },
+    ],
+  },
+  {
+    title: "Photoshoot Preparation & Farewell Celebration",
+    date: "Thursday, 24 June",
+    intro:
+      "Our last full day in Valencia! Today is all about preparing for our special photoshoot, capturing beautiful aerial memories, and celebrating an unforgettable week together with Spanish wine and cheese.",
+    media: [
+      {
+        src: withBasePath(`${IMG}/itinerary/day7-photoshoot.webp`),
+        alt: "An aerialist in a split on the lyra against a black background",
+      },
+      {
+        src: withBasePath(`${IMG}/itinerary/day7-wine.webp`),
+        alt: "Friends raising glasses of red wine over tapas",
+      },
+    ],
+    activities: [
+      {
+        kind: "Aerial",
+        time: "Morning",
+        title: "Photoshoot Preparation",
+        description:
+          "We’ll spend the morning practicing our favorite Lyra poses, refining beautiful lines, and working on expressions and transitions. A relaxed session to help everyone feel confident and ready to shine in front of the camera!",
+        icon: SparklesIcon,
+      },
+      {
+        kind: "Photoshoot",
+        title: "Capture Your Magic",
+        description:
+          "Time to shine! We’ll capture your favorite aerial poses and beautiful shapes, creating special memories to take home from our Valencia adventure.",
+        icon: CameraIcon,
+      },
+      {
+        kind: "Food & culture",
+        time: "Evening",
+        title: "Spanish Wine & Cheese Tasting — Farewell Evening",
+        description:
+          "It’s our last night together, so let’s get a little crazy, Spanish style! Delicious local wines, amazing cheeses, and great company. Time to celebrate everything we’ve achieved, the friendships we’ve made, and all the unforgettable moments we’ve shared. Cheers to us!",
         icon: WineIcon,
       },
     ],
