@@ -138,10 +138,11 @@ function Newsletter() {
 
 export function SiteFooter() {
   return (
+    // The deep green of the Madeira Creative Village footer (its --color-green-1)
     <footer
       id="contact"
       data-reveal-group
-      className="scroll-mt-28 bg-night text-white"
+      className="scroll-mt-28 bg-[#1b3022] text-white"
     >
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-5 py-16 sm:px-10 lg:px-14 lg:py-24 min-[88rem]:px-0">
         {/* Newsletter */}
