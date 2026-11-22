@@ -54,8 +54,9 @@ export function HeroSection() {
             data-reveal
             className="mt-8 max-w-3xl border-l-2 border-forest pl-6 font-serif text-xl italic leading-tight tracking-tight text-ink/85 sm:pl-8 md:text-2xl lg:text-[1.5rem]"
           >
-            Discover Valencia through aerial arts, Spanish culture and shared
-            experiences with people who love aerial as much as you do.
+            Aerial arts meet Spanish food and culture! From Lyra and acrobatics
+            to paella, tapas, flamenco and wine tasting — experience the best of
+            Valencia with fellow aerial lovers.
           </p>
 
           <ul data-reveal className="mt-10 flex max-w-5xl flex-wrap items-center gap-3">

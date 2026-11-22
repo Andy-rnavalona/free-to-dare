@@ -5,12 +5,15 @@ import { formatEuro } from "@/booking/booking-config";
 import {
   ArrowRightIcon,
   BedDoubleIcon,
+  CameraIcon,
   FootprintsIcon,
+  MoonIcon,
   SailboatIcon,
   SparklesIcon,
   SunIcon,
   UtensilsIcon,
   WavesIcon,
+  WineIcon,
 } from "@/components/icons";
 import { CardVideo } from "@/components/card-video";
 import { ItineraryDay } from "@/components/itinerary-day";
@@ -225,6 +228,126 @@ const days: Day[] = [
         description:
           "We’ll finish the day with a gentle stretching and flexibility session, focusing on mobility, muscle recovery, and improving our range of motion. The session will most probably be outside rather than in the studio; this will be confirmed close to or during the retreat.",
         icon: WavesIcon,
+      },
+    ],
+  },
+  {
+    title: "Rest, Recharge & Flamenco",
+    date: "Tuesday, 22 June",
+    intro:
+      "After several days of training and adventures, it’s time to slow down and recharge! Today is all about giving your body a well-deserved break, enjoying Valencia at your own pace, and ending the day with an unforgettable evening of Spanish culture and flamenco.",
+    media: [
+      {
+        src: withBasePath(`${IMG}/itinerary/day5-city-of-arts.webp`),
+        alt: "Aerial view of the Palau de les Arts in Valencia's City of Arts and Sciences",
+      },
+      {
+        src: withBasePath(`${IMG}/rhythm.webp`),
+        alt: "A flamenco dress and dancing shoes",
+      },
+    ],
+    activities: [
+      {
+        kind: "Free time",
+        time: "Morning & afternoon",
+        title: "Your Day, Your Pace",
+        description:
+          "Sleep in, enjoy a slow breakfast, head to the beach, explore Valencia’s charming streets, or simply relax by the pool. The entire day is yours to spend however you wish! There are no scheduled training sessions today, so take this opportunity to rest your muscles, recover your energy, and enjoy a little holiday time.",
+        icon: SunIcon,
+      },
+      {
+        kind: "Culture",
+        time: "Evening",
+        title: "Flamenco Night — Live Performance",
+        description:
+          "In the evening, we’ll come together for a beautiful experience of Spanish culture! Get ready for an authentic flamenco performance filled with passionate dancing, powerful rhythms, and captivating music. A perfect way to end our relaxing day and experience the vibrant spirit of Spain together.",
+        icon: MoonIcon,
+      },
+    ],
+  },
+  {
+    title: "Acrobatics, Teamwork & Tapas",
+    date: "Wednesday, 23 June",
+    intro:
+      "Today is all about connection, creativity, and teamwork as we explore doubles Lyra and partner acrobatics. In the evening, we’ll swap our training outfits for a delicious adventure through Valencia’s tapas bars!",
+    media: [
+      {
+        av1: withBasePath("/videos/valencia/day6-partner-acro.av1.mp4"),
+        mp4: withBasePath("/videos/valencia/day6-partner-acro.mp4"),
+        poster: withBasePath("/videos/valencia/day6-partner-acro-poster.webp"),
+        label: "Two acrobats performing a partner act with balances and lifts",
+        hasAudio: false,
+      },
+      {
+        src: withBasePath(`${IMG}/itinerary/day6-tapas.webp`),
+        alt: "Spanish tapas in terracotta dishes on a wooden table",
+      },
+    ],
+    activities: [
+      {
+        kind: "Aerial",
+        time: "10:00–12:00",
+        title: "Doubles Lyra",
+        description:
+          "Two people, one hoop, endless possibilities! We’ll explore doubles Lyra techniques, combining strength, balance, coordination, and trust. Learn beautiful shapes, transitions, and creative combinations while discovering how to move together in harmony.",
+        icon: SparklesIcon,
+      },
+      {
+        kind: "Acrobatics",
+        time: "13:30–15:30",
+        title: "Partner Acrobatics",
+        description:
+          "Get ready for a fun and dynamic session focused on partner balances, acrobatic movements, and teamwork! We’ll challenge our coordination, build trust, and explore creative ways to support and lift each other. Expect new skills, shared achievements, and plenty of laughter along the way!",
+        icon: SparklesIcon,
+      },
+      {
+        kind: "Food & culture",
+        time: "Evening",
+        title: "Guided Valencia Tapas Crawl",
+        description:
+          "Tonight, we’re heading out to discover Valencia through its food! Together with our local guide, we’ll visit several traditional tapas bars, sampling a variety of delicious Spanish dishes along the way. From local specialties to hidden culinary gems, it’s a chance to experience the city’s food culture, discover new flavors, and enjoy a fun evening together.",
+        icon: WineIcon,
+      },
+    ],
+  },
+  {
+    title: "Photoshoot Preparation & Farewell Celebration",
+    date: "Thursday, 24 June",
+    intro:
+      "Our last full day in Valencia! Today is all about preparing for our special photoshoot, capturing beautiful aerial memories, and celebrating an unforgettable week together with Spanish wine and cheese.",
+    media: [
+      {
+        src: withBasePath(`${IMG}/itinerary/day7-photoshoot.webp`),
+        alt: "An aerialist in a split on the lyra against a black background",
+      },
+      {
+        src: withBasePath(`${IMG}/itinerary/day7-wine.webp`),
+        alt: "Friends raising glasses of red wine over tapas",
+      },
+    ],
+    activities: [
+      {
+        kind: "Aerial",
+        time: "Morning",
+        title: "Photoshoot Preparation",
+        description:
+          "We’ll spend the morning practicing our favorite Lyra poses, refining beautiful lines, and working on expressions and transitions. A relaxed session to help everyone feel confident and ready to shine in front of the camera!",
+        icon: SparklesIcon,
+      },
+      {
+        kind: "Photoshoot",
+        title: "Capture Your Magic",
+        description:
+          "Time to shine! We’ll capture your favorite aerial poses and beautiful shapes, creating special memories to take home from our Valencia adventure.",
+        icon: CameraIcon,
+      },
+      {
+        kind: "Food & culture",
+        time: "Evening",
+        title: "Spanish Wine & Cheese Tasting — Farewell Evening",
+        description:
+          "It’s our last night together, so let’s get a little crazy, Spanish style! Delicious local wines, amazing cheeses, and great company. Time to celebrate everything we’ve achieved, the friendships we’ve made, and all the unforgettable moments we’ve shared. Cheers to us!",
+        icon: WineIcon,
       },
     ],
   },
